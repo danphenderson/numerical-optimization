@@ -10,10 +10,10 @@ When my notebooks do contain information from other sources, I do my best to cit
 _The aforehand mentioned citation:_  
 
 @Book{NoceWrig06,
-  Title                    = {Numerical Optimization},
-  Author                   = {Jorge Nocedal and Stephen J. Wright},
-  Publisher                = {Springer},
-  Year                     = {2006},
-  Address                  = {New York, NY, USA},
-  Edition                  = {second}
-}
+  Title                    = {Numerical Optimization},  
+  Author                   = {Jorge Nocedal and Stephen J. Wright},  
+  Publisher                = {Springer},  
+  Year                     = {2006},  
+  Address                  = {New York, NY, USA},  
+  Edition                  = {second}. 
+}. 
