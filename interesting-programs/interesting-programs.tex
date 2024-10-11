@@ -1,0 +1,439 @@
+\documentclass[10pt]{article}
+
+% Packages
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{lipsum} % For filler text
+\usepackage{array} % For better table formatting
+\usepackage{float} % For forcing table placement
+\usepackage{cite} % For citation
+\usepackage{setspace} % For adjusting line spacing
+\usepackage{amsthm}
+
+% Define theorem environment
+\newtheorem{theorem}{Theorem}[section]
+
+% Define definition environment
+\newtheorem{definition}{Definition}[section]
+
+% Page setup
+\geometry{letterpaper, margin=1in}
+
+% Remove paragraph indentation
+\setlength{\parindent}{0pt}
+
+% Page Header
+\title{Unconstrained Optimization Test Functions}
+\author{Daniel Henderson}
+
+\begin{document}
+\begin{enumerate}
+    \item \textbf{Extended Trigonometric function:}
+    \[
+    f(x) = \sum_{i=1}^{n} \left( (n - \sum_{j=1}^{n} \cos(x_j)) + i \left( 1 - \cos(x_i) \right) - \sin(x_i) \right)^2,
+    \]
+    \[
+    x_0 = [0.2, 0.2, \dots, 0.2].
+    \]
+
+
+    \item \textbf{Generalized Rosenbrock function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( c(x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right),
+    \]
+    \[
+    x_0 = [-1.2, 1, -1.2, 1, \dots, -1.2, 1], \quad c = 100.
+    \]
+
+    \item \textbf{Extended Penalty function:}
+    \[
+    f(x) =  \sum_{i=1}^{n-1} (x_i - 1)^2 + \left(\sum_{j=1}^{n}  x_j^2 - 0.25 \right)^2,
+    \]
+    \[
+    x_0 = [1, 2, \dots, n].
+    \]
+
+    \item \textbf{Perturbed Quadratic function:}
+    \[
+    f(x) = \sum_{i=1}^{n} i x_i^2 + \frac{1}{100}\left(\sum_{i=1}^{n} x_i \right)^2
+    \]
+    \[
+    x_0 = [0.5, 0.5, \dots, 0.5].
+    \]
+
+
+    \item \textbf{Generalized White \& Holst function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} c(x_{i+1} - x_i^3)^2 + (1 - x_i)^2 , \quad c = 100,
+    \]
+    \[
+    x_0 = [-1.2, 1, -1.2, 1, \dots, -1.2, 1].
+    \]
+
+    \item \textbf{Generalized PSC1 function:}
+
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( x_i^2 + x_{i+1}^2 + x_{i} x_{i+1} \right)^2 + \sin^2(x_{i}) + \cos^2(x_{i}),
+    \]
+    
+    \[
+    x_0 = [3, 0.1, \ldots, 3, 0.1].
+    \]
+
+    \item \textbf{Full Hessian FH1 function:}
+    \[
+    f(x) = (x_1 - 3)^2 + \sum_{i=2}^n \left( x_1 - 3 - 2\left( \sum_{j=1}^i x_j \right)^2 \right)^2,
+    \]
+
+    \[
+    x_0 = [0.01, 0.01, \ldots, 0.01].
+    \]
+
+    \item \textbf{Full Hessian FH2 function:}
+    \[
+    f(x) = (x_1 - 5)^2 + \sum_{i=2}^n \left(\sum_{j=1}^i x_j - 1 \right)^2,
+    \]
+
+    \[
+    x_0 = [0.01, 0.01, \ldots, 0.01].
+    \]
+
+    \item \textbf{Perturbed Quadratic Diagonal function:}
+    \[
+    f(x) = \left(\sum_{i=1}^{n}  x_i\right)^2 + \sum_{i=1}^n \frac{i}{100} x_i^2,
+    \]
+    \[
+    x_0 = [0.5, 0.5, \dots, 0.5].
+    \]
+
+    \item \textbf{Quadratic QF1 function:}
+    \[
+    f(x) = \frac{1}{2} \sum_{i=1}^{n} i x_i^2 - x_n,
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{Extended quadratic penalty QP1 function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left(x_i^2 - 2\right)^2 + \sum_{i=1}^{n} \left(x_i^2 - 0.5\right)^2
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{Extended quadratic penalty QP2 function:}
+    \[
+    f(x) =\left( \sum_{i=1}^{n} x_i^2 - 100\right)^2 + \sum_{i=1}^{n-1} \left(x_i^2 - \sin x_i \right)^2
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{Quadratic QF2 function:}
+    \[
+    f(x) =  \frac{1}{2} \sum_{i=1}^{n} i\left( x_i^2 - 1\right)^2 - x_n
+    \]
+    \[
+    x_0 = [0.5, 0.5, 0.5, \dots, 0.5]
+    \]
+
+    \item \textbf{Extended Tridiagonal 2 function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1}(x_ix_{i+1} - 1)^2 + c(x_i + 1)(x_{i+1} + 1)
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1], \quad c = 0.1
+    \]
+
+    \item \textbf{FLETCBV3 function (CUTE):}
+    \[
+    f(x) = \frac{1}{2}p(x_1^2 + x_n^2) + \sum_{i=1}^{n-1} (x_i - x_{i+1})^2 - \sum_{i=1}^{n} \left( \frac{p(h^2 + 2)}{h^2} x_i + \frac{c p}{h^2} \cos(x_i) \right),
+    \]
+
+    where:
+
+    \[
+    p = \frac{1}{10^8}, \quad h = \frac{1}{n + 1}, \quad c = 1,
+    \]
+
+    \[
+    x_0 = [h, 2h, \ldots, n h].
+    \]
+
+    \item \textbf{FLETCHCR function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1}  c (x_{i+1} - x_i + 1 - x_i^2)^2 
+    \]
+    \[
+    x_0 = [0, 0, 0, \dots, 0], \quad c = 100
+    \]
+
+    \item \textbf{BDQRTIC function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-4} (-4 x_i + 3)^2 + \left( x_1^2 + 2 x_{i+1}^2 + 3 x_{i+2}^2 + 4 x_{i+3}^2 + 5 x_n^2 \right)^2,
+    \]
+
+    \[
+    x_0 = [1, 1, \ldots, 1].
+    \]
+
+
+    \item \textbf{TRIDIA function (CUTE):}
+    \[
+    f(x) = \gamma(\delta x_1 - 1)^2 + \sum_{i=2}^{n} i \left( \alpha x_i - \beta x_{i-1}\right)^2 
+    \]
+    where:
+    \[
+        \alpha = 2, \quad \beta = 1, \quad \gamma = 1, \quad \delta = 1
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{ARWHEAD function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( -4x_i + 3 \right) + \sum_{i=1}^{n-1} \left(x_i^2 + x_n^2\right)^2
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{NONDIA function (CUTE):}
+    \[
+    f(x) = (x_1 - 1)^2 + \sum_{i=2}^{n} 100\left(x_1 -  x_{i-1}^2\right)^2,
+    \]
+    \[
+    x_0 = [-1, -1, -1, \dots, -1]
+    \]
+
+    \item \textbf{NONDQUAR function (CUTE):}
+    \[
+    f(x) = \left(x_1 - x_2\right)^2 + \sum_{i=1}^{n-2} \left( x_i + x_{i+1} + x_n \right)^4 + (x_{n+1} + x_n)^2,
+    \]
+    \[
+    x_0 = [1, -1,, \dots, 1, -1]
+    \]
+
+    \item \textbf{EG2 function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \sin(x_1 + x_i^2 -1) + \frac{1}{2}\sin(x_n^2)
+    \]
+    \[
+    x_0 = [1, 1, 1, \dots, 1]
+    \]
+
+    \item \textbf{CURLY20 function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n} \left( q_i^4 -20q_i - 0.1q_i \right)
+    \]
+    where:
+    \[
+    q_i = 
+    \begin{cases} 
+        x_i + x_{i+1} + x_{i+2} + \dots + x_{i+k}, & \text{if } i \leq n-k \\
+        x_i + x_{i+1} + x_{i+2} + \dots + x_n, & \text{if } i > n-k
+    \end{cases}
+    \]
+    \[
+    k = 20, \quad x_0 = \left[ \frac{0.001}{n+1}, \ldots, \frac{0.001}{n+1} \right].
+    \]
+
+    \item \textbf{Partially Perturbed Quadratic function:}
+    \[
+    f(x) = x_1^2 + \sum_{i=1}^n \left[ i x_i^2 + \frac{1}{100} \left( \sum_{j=1}^i x_j \right)^2 \right],
+    \]
+    
+    \[
+    x_0 = [0.5, 0.5, \ldots, 0.5].
+    \]
+
+    \item \textbf{Broyden Tridiagonal function:}
+    \[
+    f(x) = \left( 3x_1 - 2x_1^2 \right)^2 + \sum_{i=2}^{n-1} \left( 3x_i - 2x_i^2 - x_{i-1} - 2x_{i+1} + 1 \right)^2 + \left( 3x_n - 2x_n^2 - x_{n-1} + 1 \right)^2,
+    \]
+
+    \[
+    x_0 = [-1, -1, \ldots, -1].
+    \]
+
+    \item \textbf{Perturbed Tridiagonal Quadratic function:}
+    \[
+    f(x) = x_1^2 + \sum_{i=2}^{n-1} i x_i^2 -  (x_{i-1} +  x_i + x_{i+1})^2,
+    \]
+    \[
+    x_0 = [0.5, 0.5, \dots, 0.5].
+    \]
+
+    \item \textbf{Staircase 1 function:}
+    \[
+    f(x) = \sum_{i=1}^{n} \left( \sum_{j=1}^{i} x_j \right)^2,
+    \]
+    \[
+    x_0 = [1, 1, \dots, 1].
+    \]
+
+    \item \textbf{Staircase 2 function:}
+    \[
+    f(x) = \sum_{i=1}^{n}\left[\left( \sum_{j=1}^{i}  x_j\right) - i \right]^2,
+    \]
+    \[
+    x_0 = [0, 0, \dots, 0].
+    \]
+
+    \item \textbf{LIARWHD function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^n 4(-x_1 + x_i^2)^2 + \sum_{i=1}^n(x_i - 1)^2
+    \]
+    \[
+    x_0 = [4, 4, \dots, 4].
+    \]
+
+
+    \item \textbf{ENGVAL1 function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( x_i^2 + x_{i+1}^2\right)^2 + \sum_{i=1}^{n-1} \left( -4 x_i + 3 \right),
+    \]
+    \[
+    x_0 = [2, 2, \dots, 2].
+    \]
+
+
+    \item \textbf{EDENSCH function (CUTE):}
+    \[
+    f(x) = 16 + \sum_{i=1}^{n-1} \left[ (x_i - 2)^4 + (x_i x_{i+1} - 2x_{i+1})^2 + (x_{i+1} + 1)^2\right]
+    \]
+    \[
+    x_0 = [0, 0, \dots, 0].
+    \]
+
+    \item \textbf{INDEF function (CUTE):}
+    \[
+    f(x) = \sum_{i=2}^{n-1} \cos(2x_i - x_n - x_1) + \sum_{i=1}^{n} x_i,
+    \]
+    \[
+    x_0 = \left[ \frac{1}{n+1}, \frac{2}{n+1}, \dots, \frac{n}{n+1} \right].
+    \]
+
+    \item \textbf{CUBE function (CUTE):}
+    \[
+    f(x) = (x_1 - 1)^2 + \sum_{i=2}^{n} 100 \left( x_i - x_{i-1}^3 \right)^2,
+    \]
+    \[
+    x_0 = [-1.2, 1, -1.2, 1, \dots].
+    \]
+
+    \item \textbf{EXPLIN1 function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n} \exp(0.1 x_ix_{i+1}) - 101 \sum_{i=1}^n ix_i,
+    \]
+    \[
+    x_0 = [0, 0, \dots, 0].
+    \]
+
+
+    \item \textbf{BDEXP function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-2} (x_i + x_{i+1}) \exp(-x_{i+2}(x_i + x_{i+1}))
+    \]
+    \[
+    x_0 = [1, 1, \dots, 1].
+    \]
+
+    \item \textbf{HARKERP2 function (CUTE):}
+    \[
+    f(x) = \left(\sum_{i=1}^{n} x_i \right)^2 - \sum_{i=1}^{n} ( x_i + \frac{1}{2} x_i^2 ) + 2 \sum_{i=2}^{n} \left(\sum_{i=j}^n x_i \right)^2,
+    \]
+    \[
+    x_0 = \left[ 1, 2, ..., n \right].
+    \]
+
+    \item \textbf{GENHUMPS function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( \sin(2x_i)^2 \sin(2x_{i+1})^2 + 0.05 (x_i^2 + x_{i+1}^2)^2 \right),
+    \]
+    \[
+    x_0 = [-506, 506.2, \dots, 506.2].
+    \]
+
+    \item \textbf{MCCORMCK function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left(-1.5x_i + 2.5 x_{i+1} + 1 + (x_i - x_{i+1})^2 + \sin(x_i + x_{i+1}) \right)
+    \]
+    \[
+    x_0 = [1, 1, \dots].
+    \]
+
+    \item \textbf{NONSCOMP function (CUTE):}
+    \[
+    f(x) = (x_1 - 1)^2 + \sum_{i=2}^{n} 4 (x_i - x_{i-1}^2)^2 
+    \]
+    \[
+    x_0 = [3, 3, \dots].
+    \]
+
+    \item \textbf{SINQUAD function (CUTE):}
+    \[
+    f(x) = (x_1 -1)^4 + \sum_{i=2}^{n-1} \left( \sin(x_i -x_n) - x_1^2  + x_i^2 \right)^2 + (x_n^2 - x_1^2)^2,
+    \]
+    \[
+    x_0 = [0.1, 0.1, \dots].
+    \]
+
+    \item \textbf{LIARWHD function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n} 4\left( x_i^2 - x_1 \right)^2 + \sum_{i=1}^{n} \left( x_i - 1 \right)^2
+    \]
+    \[
+    x_0 = [4, 4, 4, \dots, 4]
+    \]
+
+    \item \textbf{DIXON3DQ function (CUTE):}
+    \[
+    f(x) = (x_1 -1 )^2 + \sum_{i=1}^{n-1} \left( x_i - x_{i+1}\right)^2 + (x_n - 1)^2,
+    \]
+    \[
+    x_0 = [-1, -1, \dots, -1].
+    \]
+
+    \item \textbf{COSINE function (CUTE):}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \cos(-0.5 x_{i+1} + x_i^2),
+    \]
+    \[
+    x_0 = [1, 1, \dots, 1].
+    \]
+
+    \item \textbf{SINE function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \sin(-0.5 x_{i+1} + x_i^2),
+    \]
+    \[
+    x_0 = [1, 1, \dots, 1].
+    \]
+
+    \item \textbf{BIGGSB1 function (CUTE):}
+    \[
+    f(x) = (x_1 - 1)^2 + \sum_{i=1}^{n-1} \left( x_{i+1} - x_i\right)^2 + (1 - x_n)^2,
+    \]
+    \[
+    x_0 = [0, 0, \dots].
+    \]
+
+    \item \textbf{Generalized Quartic function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} x_i^2 + (x_{i+1} + x_i^2)^2,
+    \]
+    \[
+    x_0 = [1, 1, \dots].
+    \]
+
+    \item \textbf{Full Hessian FH3 function:}
+    \[
+    f(x) = \left(\sum_{i=1}^{n}x_i \right)^2 + \sum_{i=1}^{n} (x_i\exp(x_i) - 2x_i - x_i^2),
+    \]
+    \[
+    x_0 = [1, 1, \dots, 1].
+    \]
+\end{enumerate}
+\end{document}
