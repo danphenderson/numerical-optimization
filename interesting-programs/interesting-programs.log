@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  11 OCT 2024 00:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  24 OCT 2024 12:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/danphenderson/Desktop/Research/test-set/interesting-programs/interesting-programs.tex
-(/Users/danphenderson/Desktop/Research/test-set/interesting-programs/interesting-programs.tex
+**/Users/danphenderson/Desktop/Research/numerical-optimization/interesting-programs/interesting-programs.tex
+(/Users/danphenderson/Desktop/Research/numerical-optimization/interesting-programs/interesting-programs.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
@@ -236,14 +236,14 @@ L3 programming layer <2024-02-20>
  ) 
 Here is how much of TeX's memory you used:
  3069 strings out of 474116
- 49281 string characters out of 5743682
+ 49323 string characters out of 5743682
  1937187 words of memory out of 5000000
  25425 multiletter control sequences out of 15000+600000
  560076 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 79i,9n,93p,340b,198s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,9n,93p,354b,198s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on interesting-programs.pdf (7 pages, 106271 bytes).
+Output written on interesting-programs.pdf (7 pages, 106445 bytes).
 PDF statistics:
  68 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
