@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    133946,       3191]
-NotebookOptionsPosition[    132644,       3160]
-NotebookOutlinePosition[    133068,       3177]
-CellTagsIndexPosition[    133025,       3174]
+NotebookDataLength[    114103,       2707]
+NotebookOptionsPosition[    112804,       2676]
+NotebookOutlinePosition[    113228,       2693]
+CellTagsIndexPosition[    113185,       2690]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -41,8 +41,8 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"\"\<Name\>\"", "->", "name"}], ",", 
        RowBox[{"\"\<Definition\>\"", "->", "def"}], ",", 
-       RowBox[{"\"\<x0\>\"", "->", "x0"}]}], "|>"}]}], ";"}], "\n", 
-   "\[IndentingNewLine]", 
+       RowBox[{"\"\<x0\>\"", "->", "x0"}]}], "|>"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
    RowBox[{"(*", 
     RowBox[{
     "Create", " ", "the", " ", "test", " ", "set", " ", "with", " ", "inline",
@@ -60,488 +60,8 @@ Cell[BoxData[
    
    RowBox[{
     RowBox[{"TestSet", " ", "=", " ", 
-     RowBox[{"{", "\n", "   ", 
+     RowBox[{"{", "\n", "\t", 
       RowBox[{
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Trigonometric Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{"Sum", "[", "\n", "            ", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"(", 
-                 RowBox[{
-                  RowBox[{"(", 
-                   RowBox[{"n", " ", "-", " ", 
-                    RowBox[{"Sum", "[", 
-                    RowBox[{
-                    RowBox[{"Cos", "[", 
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "j", "]"}], "]"}], "]"}], ",", " ", 
-                    RowBox[{"{", 
-                    RowBox[{"j", ",", " ", "n"}], "}"}]}], "]"}]}], ")"}], 
-                  " ", "+", " ", 
-                  RowBox[{"i", " ", 
-                   RowBox[{"(", 
-                    RowBox[{"1", " ", "-", " ", 
-                    RowBox[{"Cos", "[", 
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ")"}]}], " ", 
-                  "-", " ", 
-                  RowBox[{"Sin", "[", 
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ")"}], "^", 
-                "2"}], ",", "\n", "            ", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", " ", "n"}], "}"}]}], "\n", "         ", 
-              "]"}]}], "\n", "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"0.2", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{
-        "\"\<Generalized Rosenbrock Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"n", " ", "=", " ", 
-                RowBox[{"Length", "[", "x", "]"}]}], ",", " ", 
-               RowBox[{"c", " ", "=", " ", "100.0"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{"Sum", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"c", " ", 
-                 RowBox[{
-                  RowBox[{"(", 
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}], " ", "-",
-                     " ", 
-                    RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], ")"}], "^", 
-                  "2"}]}], " ", "+", " ", 
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{"1.0", " ", "-", " ", 
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "^", "2"}]}], 
-               ",", " ", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", " ", 
-                 RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}]}], "\n", 
-            "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"OddQ", "[", "i", "]"}], ",", " ", 
-               RowBox[{"-", "1.2"}], ",", " ", "1"}], "]"}], ",", " ", 
-             RowBox[{"{", 
-              RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], "]"}]}], "\n", 
-        "   ", "]"}], ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Extended Penalty Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{"Sum", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], " ", "-", " ", "1"}], 
-                  ")"}], "^", "2"}], ",", " ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "1", ",", " ", 
-                  RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}], " ", 
-              "+", " ", 
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{
-                 RowBox[{"Sum", "[", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "j", "]"}], "]"}], "^", "2"}], ",", " ", 
-                   RowBox[{"{", 
-                    RowBox[{"j", ",", " ", "1", ",", " ", "n"}], "}"}]}], 
-                  "]"}], " ", "-", " ", "0.25"}], ")"}], "^", "2"}]}]}], "\n",
-             "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"i", ",", " ", 
-             RowBox[{"{", 
-              RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], "]"}]}], "\n", 
-        "   ", "]"}], ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Perturbed Quadratic Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{"Sum", "[", 
-               RowBox[{
-                RowBox[{"i", " ", 
-                 RowBox[{
-                  RowBox[{"x", "[", 
-                   RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], ",", " ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}], " ", "+", " ", 
-              
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{"1", "/", "100"}], ")"}], " ", 
-               RowBox[{
-                RowBox[{"(", 
-                 RowBox[{"Sum", "[", 
-                  RowBox[{
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-                   RowBox[{"{", 
-                    RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}], ")"}], "^", 
-                "2"}]}]}]}], "\n", "      ", "]"}]}], "]"}], ",", "\n", 
-         "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"0.5", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{
-        "\"\<Generalized White & Holst Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{
-               RowBox[{"n", " ", "=", " ", 
-                RowBox[{"Length", "[", "x", "]"}]}], ",", " ", 
-               RowBox[{"c", " ", "=", " ", "100"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{"Sum", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"c", " ", 
-                 RowBox[{
-                  RowBox[{"(", 
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}], " ", "-",
-                     " ", 
-                    RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "3"}]}], ")"}], "^", 
-                  "2"}]}], " ", "+", " ", 
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{"1", " ", "-", " ", 
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "^", "2"}]}], 
-               ",", " ", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", " ", 
-                 RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}]}], "\n", 
-            "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"OddQ", "[", "i", "]"}], ",", " ", 
-               RowBox[{"-", "1.2"}], ",", " ", "1"}], "]"}], ",", " ", 
-             RowBox[{"{", 
-              RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], "]"}]}], "\n", 
-        "   ", "]"}], ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Generalized PSC1 Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{"Sum", "[", "\n", "            ", 
-              RowBox[{
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], " ", "+", " ", 
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}], "^", 
-                    "2"}], " ", "+", " ", 
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], " ", 
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}]}]}], 
-                  ")"}], "^", "2"}], " ", "+", " ", 
-                RowBox[{
-                 RowBox[{"Sin", "[", 
-                  RowBox[{"x", "[", 
-                   RowBox[{"[", "i", "]"}], "]"}], "]"}], "^", "2"}], " ", 
-                "+", " ", 
-                RowBox[{
-                 RowBox[{"Cos", "[", 
-                  RowBox[{"x", "[", 
-                   RowBox[{"[", "i", "]"}], "]"}], "]"}], "^", "2"}]}], ",", 
-               "\n", "            ", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", " ", 
-                 RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "\n", 
-              "         ", "]"}]}], "\n", "      ", "]"}]}], "]"}], ",", "\n",
-          "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{
-             RowBox[{"If", "[", 
-              RowBox[{
-               RowBox[{"OddQ", "[", "i", "]"}], ",", " ", "3", ",", " ", 
-               "0.1"}], "]"}], ",", " ", 
-             RowBox[{"{", 
-              RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], "]"}]}], "\n", 
-        "   ", "]"}], ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Full Hessian FH1 Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{
-                 RowBox[{"x", "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], " ", "-", " ", "3"}], ")"}],
-                "^", "2"}], " ", "+", " ", 
-              RowBox[{"Sum", "[", "\n", "            ", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "1", "]"}], "]"}], " ", "-", " ", "3", " ", 
-                   "-", " ", 
-                   RowBox[{"2", " ", 
-                    RowBox[{
-                    RowBox[{"(", 
-                    RowBox[{"Sum", "[", 
-                    RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "j", "]"}], "]"}], ",", " ", 
-                    RowBox[{"{", 
-                    RowBox[{"j", ",", " ", "i"}], "}"}]}], "]"}], ")"}], "^", 
-                    "2"}]}]}], ")"}], "^", "2"}], ",", "\n", "            ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "2", ",", " ", "n"}], "}"}]}], "\n", 
-               "         ", "]"}]}]}], "\n", "      ", "]"}]}], "]"}], ",", 
-         "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"0.01", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Full Hessian FH2 Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{
-                 RowBox[{"x", "[", 
-                  RowBox[{"[", "1", "]"}], "]"}], " ", "-", " ", "5"}], ")"}],
-                "^", "2"}], " ", "+", " ", 
-              RowBox[{"Sum", "[", "\n", "            ", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{"Sum", "[", 
-                    RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "j", "]"}], "]"}], ",", " ", 
-                    RowBox[{"{", 
-                    RowBox[{"j", ",", " ", "i"}], "}"}]}], "]"}], " ", "-", 
-                   " ", "1"}], ")"}], "^", "2"}], ",", "\n", "            ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "2", ",", " ", "n"}], "}"}]}], "\n", 
-               "         ", "]"}]}]}], "\n", "      ", "]"}]}], "]"}], ",", 
-         "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"0.01", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{
-        "\"\<Perturbed Quadratic Diagonal Function\>\"", ",", "\n", "      ", 
-         
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{"Sum", "[", 
-                 RowBox[{
-                  RowBox[{"x", "[", 
-                   RowBox[{"[", "i", "]"}], "]"}], ",", " ", 
-                  RowBox[{"{", 
-                   RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}], ")"}], "^", 
-               "2"}], " ", "+", " ", 
-              RowBox[{"Sum", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{"i", "/", "100"}], ")"}], " ", 
-                 RowBox[{
-                  RowBox[{"x", "[", 
-                   RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], ",", " ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}]}], "\n", 
-            "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"0.5", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{"\"\<Quadratic QF1 Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{
-               RowBox[{"(", 
-                RowBox[{"1", "/", "2"}], ")"}], " ", 
-               RowBox[{"Sum", "[", 
-                RowBox[{
-                 RowBox[{"i", " ", 
-                  RowBox[{
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], ",", " ", 
-                 RowBox[{"{", 
-                  RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], " ", "-", 
-              " ", 
-              RowBox[{"x", "[", 
-               RowBox[{"[", "n", "]"}], "]"}]}]}], "\n", "      ", "]"}]}], 
-          "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"1", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{
-        "\"\<Extended Quadratic Penalty QP1 Function\>\"", ",", "\n", 
-         "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{
-              RowBox[{"Sum", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], " ", "-", " ",
-                    "2"}], ")"}], "^", "2"}], ",", " ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "1", ",", " ", 
-                  RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}], " ", 
-              "+", " ", 
-              RowBox[{"Sum", "[", 
-               RowBox[{
-                RowBox[{
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], " ", "-", " ",
-                    "0.5"}], ")"}], "^", "2"}], ",", " ", 
-                RowBox[{"{", 
-                 RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}]}], "\n", 
-            "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"1", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "      ", 
        RowBox[{"CreateTestFunction", "[", "\n", "      ", 
         RowBox[{
         "\"\<Extended Trigonometric Function\>\"", ",", "\n", "      ", 
@@ -637,8 +157,6 @@ Cell[BoxData[
              RowBox[{"{", 
               RowBox[{"i", ",", " ", "n"}], "}"}]}], "]"}]}], "]"}]}], "\n", 
         "   ", "]"}], ",", "\n", "   ", 
-       RowBox[{"(*", " ", 
-        RowBox[{"Additional", " ", "functions"}], " ", "*)"}], "\n", "   ", 
        RowBox[{"CreateTestFunction", "[", "\n", "      ", 
         RowBox[{"\"\<Extended Penalty Function\>\"", ",", "\n", "      ", 
          RowBox[{"Function", "[", 
@@ -767,49 +285,6 @@ Cell[BoxData[
        ",", "\n", "   ", 
        RowBox[{"CreateTestFunction", "[", "\n", "      ", 
         RowBox[{
-        "\"\<Generalized Tridiagonal 2 Function\>\"", ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"x", ",", " ", 
-           RowBox[{"Module", "[", 
-            RowBox[{
-             RowBox[{"{", 
-              RowBox[{"n", " ", "=", " ", 
-               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
-             "         ", 
-             RowBox[{"Sum", "[", 
-              RowBox[{
-               RowBox[{
-                RowBox[{"8", " ", 
-                 RowBox[{
-                  RowBox[{"(", 
-                   RowBox[{
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], " ", "-", " ", 
-                    RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}]}], ")"}], 
-                  "^", "2"}]}], " ", "+", " ", 
-                RowBox[{"11", " ", 
-                 RowBox[{"(", 
-                  RowBox[{
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], " ", "-", " ", 
-                   RowBox[{"x", "[", 
-                    RowBox[{"[", 
-                    RowBox[{"i", " ", "+", " ", "1"}], "]"}], "]"}]}], 
-                  ")"}]}]}], ",", " ", 
-               RowBox[{"{", 
-                RowBox[{"i", ",", " ", "1", ",", " ", 
-                 RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}]}], "\n", 
-            "      ", "]"}]}], "]"}], ",", "\n", "      ", 
-         RowBox[{"Function", "[", 
-          RowBox[{"n", ",", " ", 
-           RowBox[{"Table", "[", 
-            RowBox[{"1", ",", " ", 
-             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
-       ",", "\n", "   ", 
-       RowBox[{"CreateTestFunction", "[", "\n", "      ", 
-        RowBox[{
         "\"\<Generalized White & Holst Function\>\"", ",", "\n", "      ", 
          RowBox[{"Function", "[", 
           RowBox[{"x", ",", " ", 
@@ -1113,6 +588,53 @@ Cell[BoxData[
             RowBox[{"1", ",", " ", 
              RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "   ", "]"}], 
        ",", "\n", "   ", 
+       RowBox[{"CreateTestFunction", "[", "\n", "\t  ", 
+        RowBox[{
+        "\"\<Extended Quadratic Penalty QP2 Function\>\"", ",", "\n", "\t  ", 
+         
+         RowBox[{"Function", "[", 
+          RowBox[{"x", ",", " ", 
+           RowBox[{"Module", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"n", " ", "=", " ", 
+               RowBox[{"Length", "[", "x", "]"}]}], "}"}], ",", "\n", 
+             "\t     ", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"Sum", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", " ", "1", ",", " ", "n"}], "}"}]}], 
+                  "]"}], " ", "-", " ", "100"}], ")"}], "^", "2"}], " ", "+", 
+              " ", "\n", "\t     ", 
+              RowBox[{"Sum", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"x", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}], " ", "-", " ", 
+                   RowBox[{"Sin", "[", 
+                    RowBox[{"x", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ")"}], "^", 
+                 "2"}], ",", " ", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", " ", "1", ",", " ", 
+                  RowBox[{"n", " ", "-", " ", "1"}]}], "}"}]}], "]"}]}]}], 
+            "\n", "\t  ", "]"}]}], "]"}], ",", "\n", "\t  ", 
+         RowBox[{"Function", "[", 
+          RowBox[{"n", ",", " ", 
+           RowBox[{"Table", "[", 
+            RowBox[{"1", ",", " ", 
+             RowBox[{"{", "n", "}"}]}], "]"}]}], "]"}]}], "\n", "\t", "]"}], 
+       ",", "\n", "\t", 
        RowBox[{"CreateTestFunction", "[", "\n", "      ", 
         RowBox[{"\"\<Quadratic QF2 Function\>\"", ",", "\n", "      ", 
          RowBox[{"Function", "[", 
@@ -1812,7 +1334,7 @@ Cell[BoxData[
                  RowBox[{"i", " ", 
                   RowBox[{
                    RowBox[{"x", "[", 
-                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], " ", "-", 
+                    RowBox[{"[", "i", "]"}], "]"}], "^", "2"}]}], " ", "+", 
                  " ", 
                  RowBox[{
                   RowBox[{"(", 
@@ -2736,8 +2258,13 @@ Cell[BoxData[
    3.937607550432468*^9}, {3.937607590449267*^9, 3.937607590699666*^9}, {
    3.9376084808556013`*^9, 3.937608481770915*^9}, {3.9376085162392473`*^9, 
    3.937608518989554*^9}, 3.9376085970578327`*^9, {3.9376101186101*^9, 
-   3.9376101190483*^9}, 3.9376104146630173`*^9},
- CellLabel->"In[12]:=",ExpressionUUID->"63f9d286-b1ce-467a-8ab8-e12ccd6ca920"]
+   3.9376101190483*^9}, 3.9376104146630173`*^9, {3.9387793668191032`*^9, 
+   3.938779408571938*^9}, {3.938779456457687*^9, 3.93877945717973*^9}, {
+   3.938779766913249*^9, 3.9387797675142593`*^9}, {3.938779803830625*^9, 
+   3.938779804036487*^9}, {3.938779857567713*^9, 3.93877987927081*^9}, {
+   3.9387800396013403`*^9, 3.938780089903759*^9}, {3.938780507205194*^9, 
+   3.938780544959386*^9}},ExpressionUUID->"63f9d286-b1ce-467a-8ab8-\
+e12ccd6ca920"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -2808,7 +2335,7 @@ Cell[BoxData[{
                 RowBox[{"Part", "[", 
                  RowBox[{"x", ",", "i"}], "]"}]}]}], "]"}]}], "]"}]}], "\n", 
           "\t", "}"}], "]"}]}]}], "\n", "]"}]}], ";"}], "Code"], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{
    RowBox[{
@@ -2860,15 +2387,12 @@ Cell[BoxData[{
        StyleBox["\n", "Code"], 
        StyleBox["\t", "Code"], 
        StyleBox[
-        RowBox[{
-         StyleBox[
-          RowBox[{"(", "*"}]], " ", 
+        RowBox[{"(*", " ", 
          RowBox[{"Returning", " ", 
           RowBox[{"the", " ", "'"}], 
           RowBox[{"scale", "'"}], " ", "vector", " ", "so", " ", "we", " ", 
-          "know", " ", "our", " ", "sample", " ", "space"}], " ", 
-         StyleBox[
-          RowBox[{"*", ")"}]]}], "Code"], 
+          "know", " ", "our", " ", "sample", " ", "space"}], " ", "*)"}], 
+        "Code"], 
        StyleBox["\n", "Code"], "\t", 
        RowBox[{"{", "\n", "\t\t", 
         RowBox[{"scale", ",", "\n", "\t\t", 
@@ -2887,8 +2411,7 @@ Cell[BoxData[{
         "}"}]}]}], 
      StyleBox["\n", "Code"], 
      StyleBox["]", "Code"]}]}], 
-   StyleBox[";", "Code"]}], 
-  StyleBox["\n", "Code"]}], "\[IndentingNewLine]", 
+   StyleBox[";", "Code"]}], "\[IndentingNewLine]"}], "\n", 
  StyleBox[
   RowBox[{
    RowBox[{
@@ -2909,16 +2432,13 @@ Cell[BoxData[{
        RowBox[{"vars", " ", "=", " ", 
         RowBox[{"Array", "[", 
          RowBox[{"x", ",", " ", "n"}], "]"}]}], ";", "\n", "\t", "\n", "\t", 
-       RowBox[{
-        StyleBox[
-         RowBox[{"(", "*"}]], " ", 
+       RowBox[{"(*", " ", 
         RowBox[{
          RowBox[{
          "Generate", " ", "samples", " ", "around", " ", "the", " ", 
           "initial", " ", "point", " ", "x0"}], ",", " ", 
-         RowBox[{"return", " ", "scale", " ", "vector"}]}], 
-        StyleBox[
-         RowBox[{"*", ")"}]]}], "\n", "\t", 
+         RowBox[{"return", " ", "scale", " ", "vector"}]}], "*)"}], "\n", 
+       "\t", 
        RowBox[{
         RowBox[{"{", 
          RowBox[{"scale", ",", " ", "samples"}], "}"}], " ", "=", " ", 
@@ -2939,14 +2459,10 @@ Cell[BoxData[{
          " ", "at", " ", "each", " ", "sample"}], " ", "*)"}], "\n", "\t", 
        RowBox[{"sampledEvals", " ", "=", " ", 
         RowBox[{"Table", "[", "\n", "\t\t", 
-         RowBox[{
-          StyleBox[
-           RowBox[{"(", "*"}]], " ", 
+         RowBox[{"(*", " ", 
           RowBox[{
           "sometimes", " ", "we", " ", "get", " ", "symbolic", " ", 
-           "results"}], " ", 
-          StyleBox[
-           RowBox[{"*", ")"}]]}], "\n", "\t\t", 
+           "results"}], " ", "*)"}], "\n", "\t\t", 
          RowBox[{
           RowBox[{"N", "[", 
            RowBox[{"Eigenvalues", "[", 
@@ -3054,9 +2570,8 @@ Cell[BoxData[{
    3.937608940760975*^9, 3.9376091390914907`*^9, {3.937609205328733*^9, 
    3.937609253930241*^9}, {3.93760952657513*^9, 3.9376095452898684`*^9}, {
    3.9376097405802927`*^9, 3.937609745593845*^9}, {3.937610139983059*^9, 
-   3.9376101460457277`*^9}, {3.937610494743108*^9, 
-   3.9376105011254168`*^9}},ExpressionUUID->"20c1c610-e10a-40d1-a79a-\
-90d5219ee402"]
+   3.9376101460457277`*^9}, {3.937610494743108*^9, 3.9376105011254168`*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"20c1c610-e10a-40d1-a79a-90d5219ee402"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -3150,11 +2665,12 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"Length", "[", "TestSet", "]"}]], "Input",
  CellChangeTimes->{{3.937647447889213*^9, 3.937647450598727*^9}},
- CellLabel->"In[23]:=",ExpressionUUID->"23ca05a5-a642-4063-9019-308e06dad509"],
+ CellLabel->"In[14]:=",ExpressionUUID->"23ca05a5-a642-4063-9019-308e06dad509"],
 
-Cell[BoxData["58"], "Output",
- CellChangeTimes->{3.937647450939412*^9},
- CellLabel->"Out[23]=",ExpressionUUID->"d246fdfc-7fd0-4ecb-8f33-09be06799ffd"]
+Cell[BoxData["46"], "Output",
+ CellChangeTimes->{3.937647450939412*^9, 3.938779186513156*^9, 
+  3.938780096704356*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"650dd13f-42e7-4950-99c4-509c7565451d"]
 }, Open  ]]
 }, Open  ]]
 },
@@ -3178,19 +2694,19 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 158, 3, 81, "Subsection",ExpressionUUID->"d2c4892b-29d3-4d35-be9d-5616d7ae2a22"],
-Cell[741, 27, 114395, 2712, 14463, "Code",ExpressionUUID->"63f9d286-b1ce-467a-8ab8-e12ccd6ca920"]
+Cell[741, 27, 94765, 2239, 11882, "Code",ExpressionUUID->"63f9d286-b1ce-467a-8ab8-e12ccd6ca920"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[115173, 2744, 435, 10, 122, "Subsection",ExpressionUUID->"6f1abe83-b2e9-491d-a0a6-b57f68b50d1b"],
-Cell[115611, 2756, 12787, 302, 1964, "Code",ExpressionUUID->"20c1c610-e10a-40d1-a79a-90d5219ee402"]
+Cell[95543, 2271, 435, 10, 122, "Subsection",ExpressionUUID->"6f1abe83-b2e9-491d-a0a6-b57f68b50d1b"],
+Cell[95981, 2283, 12530, 290, 1964, "Code",ExpressionUUID->"20c1c610-e10a-40d1-a79a-90d5219ee402"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[128435, 3063, 203, 4, 101, "Section",ExpressionUUID->"227a3e43-2888-46fe-a858-9c95beabde33"],
-Cell[128641, 3069, 3160, 62, 419, "Input",ExpressionUUID->"139afd30-8f04-460b-9381-d9dd9210fd24"],
-Cell[131804, 3133, 424, 12, 46, "Input",ExpressionUUID->"8239db83-c628-4571-bb35-fd932af57ded"],
+Cell[108548, 2578, 203, 4, 101, "Section",ExpressionUUID->"227a3e43-2888-46fe-a858-9c95beabde33"],
+Cell[108754, 2584, 3160, 62, 419, "Input",ExpressionUUID->"139afd30-8f04-460b-9381-d9dd9210fd24"],
+Cell[111917, 2648, 424, 12, 46, "Input",ExpressionUUID->"8239db83-c628-4571-bb35-fd932af57ded"],
 Cell[CellGroupData[{
-Cell[132253, 3149, 210, 3, 46, "Input",ExpressionUUID->"23ca05a5-a642-4063-9019-308e06dad509"],
-Cell[132466, 3154, 150, 2, 52, "Output",ExpressionUUID->"d246fdfc-7fd0-4ecb-8f33-09be06799ffd"]
+Cell[112366, 2664, 210, 3, 46, "Input",ExpressionUUID->"23ca05a5-a642-4063-9019-308e06dad509"],
+Cell[112579, 2669, 197, 3, 52, "Output",ExpressionUUID->"650dd13f-42e7-4950-99c4-509c7565451d"]
 }, Open  ]]
 }, Open  ]]
 }
