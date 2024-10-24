@@ -61,6 +61,13 @@
     x_0 = [0.5, 0.5, \dots, 0.5].
     \]
 
+    \item \textbf{Generalized Tridiagonal 1 function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} ( x_i +  x_{i+1} - 3)^2 + (x_{i} - x_{i+1} + 1)^4,
+    \]
+    \[
+    x_0 = [2, 2, \dots, 2].
+    \]
 
     \item \textbf{Generalized White \& Holst function:}
     \[
@@ -148,7 +155,7 @@
 
     \item \textbf{FLETCBV3 function (CUTE):}
     \[
-    f(x) = \frac{1}{2}p(x_1^2 + x_n^2) + \sum_{i=1}^{n-1} (x_i - x_{i+1})^2 - \sum_{i=1}^{n} \left( \frac{p(h^2 + 2)}{h^2} x_i + \frac{c p}{h^2} \cos(x_i) \right),
+    f(x) = \frac{1}{2}p(x_1^2 + x_n^2) + \frac{p}{2}\sum_{i=1}^{n-1} (x_i - x_{i+1})^2 - \sum_{i=1}^{n} \left( \frac{p(h^2 + 2)}{h^2} x_i + \frac{c p}{h^2} \cos(x_i) \right),
     \]
 
     where:
@@ -171,7 +178,7 @@
 
     \item \textbf{BDQRTIC function (CUTE):}
     \[
-    f(x) = \sum_{i=1}^{n-4} (-4 x_i + 3)^2 + \left( x_1^2 + 2 x_{i+1}^2 + 3 x_{i+2}^2 + 4 x_{i+3}^2 + 5 x_n^2 \right)^2,
+    f(x) = \sum_{i=1}^{n-4} (-4 x_i + 3)^2 + \left( x_i^2 + 2 x_{i+1}^2 + 3 x_{i+2}^2 + 4 x_{i+3}^2 + 5 x_n^2 \right)^2,
     \]
 
     \[
@@ -259,7 +266,7 @@
 
     \item \textbf{Perturbed Tridiagonal Quadratic function:}
     \[
-    f(x) = x_1^2 + \sum_{i=2}^{n-1} i x_i^2 -  (x_{i-1} +  x_i + x_{i+1})^2,
+    f(x) = x_1^2 + \sum_{i=2}^{n-1} i x_i^2 + (x_{i-1} +  x_i + x_{i+1})^2,
     \]
     \[
     x_0 = [0.5, 0.5, \dots, 0.5].
@@ -350,7 +357,7 @@
 
     \item \textbf{GENHUMPS function (CUTE):}
     \[
-    f(x) = \sum_{i=1}^{n-1} \left( \sin(2x_i)^2 \sin(2x_{i+1})^2 + 0.05 (x_i^2 + x_{i+1}^2)^2 \right),
+    f(x) = \sum_{i=1}^{n-1} \left( \sin(2x_i)^2 \sin(2x_{i+1})^2 + 0.05 (x_i^2 + x_{i+1}^2) \right),
     \]
     \[
     x_0 = [-506, 506.2, \dots, 506.2].

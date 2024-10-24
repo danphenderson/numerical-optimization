@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1728621273.87229 "/Users/danphenderson/Desktop/Research/test-set/interesting-programs/interesting-programs.tex" "interesting-programs.pdf" "interesting-programs" 1728621274.32358 0
-  "/Users/danphenderson/Desktop/Research/test-set/interesting-programs/interesting-programs.tex" 1728621273.52984 10591 02c6cc4175f3828ed3b8a4c553b3d4d4 ""
+["pdflatex"] 1729021917.7317 "/Users/danphenderson/Desktop/Research/numerical-optimization/interesting-programs/interesting-programs.tex" "interesting-programs.pdf" "interesting-programs" 1729021918.22168 0
+  "/Users/danphenderson/Desktop/Research/numerical-optimization/interesting-programs/interesting-programs.tex" 1729021917.52523 10789 118dd0ede66f7a2603bde7d5ca845339 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1246382020 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -47,8 +47,8 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1724972836.08469 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1724972832 8221423 64cea99c7b719d0d6ffcf013a3c2b476 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "interesting-programs.aux" 1728621274.28269 32 4d1825978335c8847f72f7c473f9edc8 "pdflatex"
-  "interesting-programs.tex" 1728621273.52984 10591 02c6cc4175f3828ed3b8a4c553b3d4d4 ""
+  "interesting-programs.aux" 1729021918.18056 32 4d1825978335c8847f72f7c473f9edc8 "pdflatex"
+  "interesting-programs.tex" 1729021917.52523 10789 118dd0ede66f7a2603bde7d5ca845339 ""
   (generated)
   "interesting-programs.aux"
   "interesting-programs.log"
