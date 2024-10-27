@@ -31,3 +31,8 @@ Manifest.toml
 misc/
 
 .DS_Store
+
+
+.env
+.venv
+numerical-optimization.code-workspace

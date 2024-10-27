@@ -1,0 +1,39 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+httpx = "*"
+openai = "*"
+tiktoken = "*"
+email-validator = "*"
+python-dotenv = "*"
+toml = "*"
+pydantic-settings = "*"
+pydantic = {extras = ["email"] }
+langchain = "*"
+transformers = "*"
+accelerate = "*"
+langchain-openai = "*"
+rich = "*"
+jsonschema = "*"
+langchain-community = "*"
+typing-extensions = "*"
+faiss-cpu = "*"
+requests = "*"
+python-magic = "*"
+reportlab = "*"
+ipython = "*"
+pypdf = "*"
+
+[dev-packages]
+ipython = "*"
+mypy = "*"
+types-toml = "*"
+jupyter = "*"
+
+[scripts]
+
+[requires]
+python_version = "3.11"
