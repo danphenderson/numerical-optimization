@@ -36,3 +36,7 @@ misc/
 .env
 .venv
 numerical-optimization.code-workspace
+
+
+Pipfile.lock
+Pipfile
