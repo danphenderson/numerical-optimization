@@ -1,0 +1,6 @@
+[submodule "UncNLPrograms.jl"]
+	path = julia/UncNLPrograms.jl
+	url = git@github.com:danphenderson/UncNLPrograms.jl.git
+[submodule "julia/BlockOpt.jl"]
+	path = julia/BlockOpt.jl
+	url = git@github.com:danphenderson/BlockOpt.jl.git
