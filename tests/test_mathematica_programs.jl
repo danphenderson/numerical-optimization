@@ -48,14 +48,14 @@ function run_tests_for_dimension(dimension::Int)
         try
             @test abs(expected_fx0 - test_problem.fx0)/expected_fx0 < 1e-12
             @test abs(expected_fx0 - test_problem.fx0) < 1e-8
-        catch e
+        catch e 
             @warn "Test failed for problem: $(test_problem.name) with dimension: $dimension"
         end
     end
 end
 
 function run_tests()
-    test_dimension = [4, 5, 7, 10, 15]
+    test_dimension = [5, 6, 7, 10, 15]
     for d in test_dimension
         run_tests_for_dimension(d)
     end
