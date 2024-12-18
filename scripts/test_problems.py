@@ -35,7 +35,7 @@ llm = ChatOpenAI(model='chatgpt-4o-latest')
 MODELS = [
     # "cosine",
     # "arglinb","arglinc","argtrig","arwhead","bdqrtic","bearing",
-    # "brownal","broyden3d","broydn7d","chainwoo","chnrosnb_mod","clplatea",
+    # "brownal","broyden3d","chainwoo","chnrosnb_mod","clplatea",
     # "clplateb","clplatec","cosine","cragglvy","cragglvy2","curly","curly10","curly20",
     # "curly30", "dixon3dq","dqdrtic","dqrtic",
     # "edensch","engval1","errinros_mod","extrosnb","fletcbv2","fletcbv3_mod","fletchcr",
@@ -50,9 +50,10 @@ MODELS = [
     # The following problems have constraints on the dimension:
     # "dixmaane", "dixmaanf","dixmaang","dixmaanh","dixmaani","dixmaanj",   # Multiple of 3
     # "dixmaank","dixmaanl","dixmaanm","dixmaann","dixmaano","dixmaanp",    # Multiple of 3
-    # "nzf1",       # Must be greater than 26
-    # "powellsg"    # Multiple of 4
-    # "spmsrtls"    # Ref: https://github.com/JuliaSmoothOptimizers/OptimizationProblems.jl/issues/354
+    # "nzf1",        # Must be greater than 26
+    # "powellsg",    # Multiple of 4
+    # "broydn7d",    # Multiple of 2
+    # "spmsrtls",    # Ref: https://github.com/JuliaSmoothOptimizers/OptimizationProblems.jl/issues/354
 ]
 
 FILES = [file for file in (Path(".") / "ADNLPProblems").iterdir()]
