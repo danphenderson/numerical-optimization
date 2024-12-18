@@ -15,6 +15,8 @@ TODO:
   This is not currently handled in the mathematica code, as it is in their Julia source
   code declaration. We should either add constraints to the Mathematica code or remove
   such problems from the test set.
+- Script failed on noncvxu2 and noncvxun. Adding them as examples in the
+  prompt should make the script more robust. (correct in mathematica code)
 """
 
 from pathlib import Path
@@ -33,16 +35,19 @@ _openai.api_key = getenv("OPENAI_API_KEY", "")
 llm = ChatOpenAI(model='chatgpt-4o-latest')
 
 MODELS = [
+    "noncvxu2",
+    "noncvxun",
+    #"chnrosnb_mod"
     # "cosine",
-    # "arglinb","arglinc","argtrig","arwhead","bdqrtic","bearing",
-    # "brownal","broyden3d","chainwoo","chnrosnb_mod","clplatea",
-    # "clplateb","clplatec","cosine","cragglvy","cragglvy2","curly","curly10","curly20",
+    # "arglinb","arglinc","argtrig","arwhead","bdqrtic",
+    # "brownal","broyden3d","chnrosnb_mod",
+    # "cosine","cragglvy","cragglvy2","curly","curly10","curly20",
     # "curly30", "dixon3dq","dqdrtic","dqrtic",
     # "edensch","engval1","errinros_mod","extrosnb","fletcbv2","fletcbv3_mod","fletchcr",
     # "genhumps","genrose_nash","indef_mod","integreq","liarwhd","morebv",
-    # "ncb20","ncb20b","noncvxu2","noncvxun","nondia","nondquar","penalty1","penalty2","penalty3",
-    # "power","quartc","sbrybnd","schmvett","scosine","sinquad","sparsine","sparsqur",
-    # "srosenbr","tointgss","tquartic","tridia","vardim","woods"
+    # "ncb20","noncvxu2","noncvxun","nondia","nondquar","penalty1","penalty2","penalty3",
+    # "power","quartc","sbrybnd","schmvett","scosine","sinquad",
+    # "tointgss","tquartic","tridia","vardim"
 
     # EXCLUDED PROBLEMS:
     # The following problems are given as examples:
@@ -50,10 +55,14 @@ MODELS = [
     # The following problems have constraints on the dimension:
     # "dixmaane", "dixmaanf","dixmaang","dixmaanh","dixmaani","dixmaanj",   # Multiple of 3
     # "dixmaank","dixmaanl","dixmaanm","dixmaann","dixmaano","dixmaanp",    # Multiple of 3
-    # "nzf1",        # Must be greater than 26
-    # "powellsg",    # Multiple of 4
-    # "broydn7d",    # Multiple of 2
-    # "spmsrtls",    # Ref: https://github.com/JuliaSmoothOptimizers/OptimizationProblems.jl/issues/354
+    # "nzf1",                               # Must be greater than 26
+    # "powellsg", "chainwoo", "woods"       # Multiple of 4
+    # "broydn7d",                           # Multiple of 2
+    # "ncb20b"                              # Dim greater than 20
+    # "sparsqur", "sparsine"                 # Dim greater than 10
+    # "srosenbr"                            # Dim must be even
+    # "spmsrtls", "bearing"                 # Issue Ref: https://github.com/JuliaSmoothOptimizers/OptimizationProblems.jl/issues/354
+    # "clplatea", "clplateb", "clplatec"    # Issue Ref: https://github.com/JuliaSmoothOptimizers/OptimizationProblems.jl/issues/355
 ]
 
 FILES = [file for file in (Path(".") / "ADNLPProblems").iterdir()]
@@ -142,10 +151,13 @@ rosenbrock(args...; kwargs...) = genrose(args..., n = 2; delete!(Dict(kwargs), :
 Expected Mathematica code output:
 CreateTestFunction[
     "genrose",
-    Function[x, Module[{{n = Length[x]}},
-        Sum[100*(x[[i + 1]] - x[[i]]^2)^2 + (1.0 - x[[i]])^2, {{i, n - 1}}]
+    Function[x,
+    Module[{{n = Length[x]}},
+        1 +
+        100 * Sum[(x[[i + 1]] - x[[i]]^2)^2, {{i, 1, n - 1}}] +
+        Sum[(x[[i]] - 1)^2, {{i, 1, n - 1}}]
     ]],
-    Function[n, Table[If[OddQ[i], -1.2, 1], {{i, n}}]]
+    Function[n, N[Table[i/(n + 1), {{i, 1, n}}]]]
 ]
 """
             ),

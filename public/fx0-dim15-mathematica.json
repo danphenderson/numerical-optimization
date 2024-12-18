@@ -1,7 +1,7 @@
 [
 	{
 		"Name":"genrose",
-		"InitialValue":3.5573999999999996e3
+		"InitialValue":9.676849365234375e1
 	},
 	{
 		"Name":"arglina",
@@ -44,10 +44,6 @@
 		"InitialValue":1.243e3
 	},
 	{
-		"Name":"bearing",
-		"InitialValue":9.14263083795407
-	},
-	{
 		"Name":"brownal",
 		"InitialValue":4.4849996948288754e2
 	},
@@ -60,24 +56,8 @@
 		"InitialValue":2.7e2
 	},
 	{
-		"Name":"chainwoo",
-		"InitialValue":6.15801e4
-	},
-	{
-		"Name":"chnrosnb",
+		"Name":"chnrosnb_mod",
 		"InitialValue":2.740455369945744e3
-	},
-	{
-		"Name":"clplatea",
-		"InitialValue":0.0
-	},
-	{
-		"Name":"clplateb",
-		"InitialValue":0.0
-	},
-	{
-		"Name":"clplatec",
-		"InitialValue":0.0
 	},
 	{
 		"Name":"cragglvy",
@@ -128,7 +108,7 @@
 		"InitialValue":8.26e2
 	},
 	{
-		"Name":"errinros",
+		"Name":"errinros_mod",
 		"InitialValue":2.530592869623551e4
 	},
 	{
@@ -140,7 +120,7 @@
 		"InitialValue":-0.5769101627236601
 	},
 	{
-		"Name":"fletcbv3",
+		"Name":"fletcbv3_mod",
 		"InitialValue":-7.095385615757781e-5
 	},
 	{
@@ -160,7 +140,7 @@
 		"InitialValue":9.589349365234375e1
 	},
 	{
-		"Name":"indef",
+		"Name":"indef_mod",
 		"InitialValue":1.3311793667554424e1
 	},
 	{
@@ -176,20 +156,12 @@
 		"InitialValue":0.26978072691679245
 	},
 	{
-		"Name":"ncb20b",
-		"InitialValue":3.0e1
-	},
-	{
-		"Name":"ncb20b",
-		"InitialValue":3.0e1
-	},
-	{
 		"Name":"noncvxu2",
-		"InitialValue":9.142209774358991e3
+		"InitialValue":9.733511455939195e3
 	},
 	{
 		"Name":"noncvxun",
-		"InitialValue":1.0022937275653981e4
+		"InitialValue":1.0768521882449435e4
 	},
 	{
 		"Name":"nondia",
@@ -236,18 +208,6 @@
 		"InitialValue":0.6561
 	},
 	{
-		"Name":"sparsine",
-		"InitialValue":4.964735096624091e2
-	},
-	{
-		"Name":"sparsqur",
-		"InitialValue":3.375e1
-	},
-	{
-		"Name":"srosenbr",
-		"InitialValue":1.6939999999999995e2
-	},
-	{
 		"Name":"tointgss",
 		"InitialValue":1.246470588235294e2
 	},
@@ -262,9 +222,5 @@
 	{
 		"Name":"vardim",
 		"InitialValue":4.6707358004938275e7
-	},
-	{
-		"Name":"woods",
-		"InitialValue":5.7576e4
 	}
 ]

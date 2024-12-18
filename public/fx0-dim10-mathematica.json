@@ -1,7 +1,7 @@
 [
 	{
 		"Name":"genrose",
-		"InitialValue":2.057e3
+		"InitialValue":7.914794071443208e1
 	},
 	{
 		"Name":"arglina",
@@ -44,10 +44,6 @@
 		"InitialValue":6.78e2
 	},
 	{
-		"Name":"bearing",
-		"InitialValue":0.0
-	},
-	{
 		"Name":"brownal",
 		"InitialValue":1.3662402391433716e2
 	},
@@ -60,24 +56,8 @@
 		"InitialValue":1.8e2
 	},
 	{
-		"Name":"chainwoo",
-		"InitialValue":4.71441e4
-	},
-	{
-		"Name":"chnrosnb",
+		"Name":"chnrosnb_mod",
 		"InitialValue":1.7161605999643066e3
-	},
-	{
-		"Name":"clplatea",
-		"InitialValue":0.0
-	},
-	{
-		"Name":"clplateb",
-		"InitialValue":0.0
-	},
-	{
-		"Name":"clplatec",
-		"InitialValue":0.0
 	},
 	{
 		"Name":"cragglvy",
@@ -128,7 +108,7 @@
 		"InitialValue":5.31e2
 	},
 	{
-		"Name":"errinros",
+		"Name":"errinros_mod",
 		"InitialValue":1.5522223109112358e4
 	},
 	{
@@ -140,7 +120,7 @@
 		"InitialValue":-0.6072698679464723
 	},
 	{
-		"Name":"fletcbv3",
+		"Name":"fletcbv3_mod",
 		"InitialValue":-2.240574386632066e-5
 	},
 	{
@@ -160,7 +140,7 @@
 		"InitialValue":7.832975889625025e1
 	},
 	{
-		"Name":"indef",
+		"Name":"indef_mod",
 		"InitialValue":8.66159535940397
 	},
 	{
@@ -176,20 +156,12 @@
 		"InitialValue":0.2927233165693688
 	},
 	{
-		"Name":"ncb20b",
-		"InitialValue":2.0e1
-	},
-	{
-		"Name":"ncb20b",
-		"InitialValue":2.0e1
-	},
-	{
 		"Name":"noncvxu2",
-		"InitialValue":3.1781966434095193e3
+		"InitialValue":3.117326364831713e3
 	},
 	{
 		"Name":"noncvxun",
-		"InitialValue":2.9467135565748113e3
+		"InitialValue":3.316536407510104e3
 	},
 	{
 		"Name":"nondia",
@@ -236,18 +208,6 @@
 		"InitialValue":0.6561
 	},
 	{
-		"Name":"sparsine",
-		"InitialValue":2.2755035859527084e2
-	},
-	{
-		"Name":"sparsqur",
-		"InitialValue":1.546875e1
-	},
-	{
-		"Name":"srosenbr",
-		"InitialValue":1.2099999999999997e2
-	},
-	{
 		"Name":"tointgss",
 		"InitialValue":7.866666666666667e1
 	},
@@ -262,9 +222,5 @@
 	{
 		"Name":"vardim",
 		"InitialValue":2.1985511625e6
-	},
-	{
-		"Name":"woods",
-		"InitialValue":3.8384e4
 	}
 ]
