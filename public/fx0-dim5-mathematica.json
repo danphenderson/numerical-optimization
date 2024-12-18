@@ -1,71 +1,71 @@
 [
 	{
 		"Name":"genrose",
-		"InitialValue":3.5573999999999996e3
+		"InitialValue":1.0164000000000001e3
 	},
 	{
 		"Name":"arglina",
-		"InitialValue":3.75e1
+		"InitialValue":1.25e1
 	},
 	{
 		"Name":"freuroth",
-		"InitialValue":6.85325e3
+		"InitialValue":1.80325e3
 	},
 	{
 		"Name":"eg2",
-		"InitialValue":-1.178059378731055e1
+		"InitialValue":-3.365883939231586
 	},
 	{
 		"Name":"brybnd",
-		"InitialValue":2.7e2
+		"InitialValue":9.0e1
 	},
 	{
 		"Name":"cosine",
-		"InitialValue":1.2286155866465219e1
+		"InitialValue":3.510330247561491
 	},
 	{
 		"Name":"arglinb",
-		"InitialValue":6.8020215e7
+		"InitialValue":4.24925e4
 	},
 	{
 		"Name":"arglinc",
-		"InitialValue":8.3350206e7
+		"InitialValue":1.5886e4
 	},
 	{
 		"Name":"argtrig",
-		"InitialValue":0.7660124974687399
+		"InitialValue":0.7940124323877225
 	},
 	{
 		"Name":"arwhead",
-		"InitialValue":4.2e1
+		"InitialValue":1.2e1
 	},
 	{
 		"Name":"bdqrtic",
-		"InitialValue":1.243e3
+		"InitialValue":1.13e2
 	},
 	{
 		"Name":"bearing",
-		"InitialValue":9.14263083795407
+		"InitialValue":0.0
 	},
 	{
 		"Name":"brownal",
-		"InitialValue":4.4849996948288754e2
+		"InitialValue":1.846923828125e1
 	},
 	{
 		"Name":"broyden3d",
-		"InitialValue":1.3e1
+		"InitialValue":8.0
 	},
 	{
 		"Name":"brybnd",
-		"InitialValue":2.7e2
+		"InitialValue":9.0e1
 	},
 	{
 		"Name":"chainwoo",
-		"InitialValue":6.15801e4
+		"InitialValue":1.9193e4
 	},
 	{
 		"Name":"chnrosnb",
-		"InitialValue":2.740455369945744e3
+		"InitialValue":6.139580443707266e2
 	},
 	{
 		"Name":"clplatea",
@@ -81,27 +81,27 @@
 	},
 	{
 		"Name":"cragglvy",
-		"InitialValue":5.504433406158932e3
+		"InitialValue":2.266182511289055
 	},
 	{
 		"Name":"cragglvy2",
-		"InitialValue":5.504433406158932e3
+		"InitialValue":2.266182511289055
 	},
 	{
 		"Name":"curly10",
-		"InitialValue":-7.592749988441964e-4
+		"InitialValue":-9.539444443541954e-5
 	},
 	{
 		"Name":"curly10",
-		"InitialValue":-7.592749988441964e-4
+		"InitialValue":-9.539444443541954e-5
 	},
 	{
 		"Name":"curly20",
-		"InitialValue":-8.681937479988264e-4
+		"InitialValue":-9.539444443541954e-5
 	},
 	{
 		"Name":"curly30",
-		"InitialValue":-8.681937479988264e-4
+		"InitialValue":-9.539444443541954e-5
 	},
 	{
 		"Name":"dixon3dq",
@@ -109,127 +109,127 @@
 	},
 	{
 		"Name":"dqdrtic",
-		"InitialValue":2.3517e4
+		"InitialValue":5.427e3
 	},
 	{
 		"Name":"dqrtic",
-		"InitialValue":8.9272e4
+		"InitialValue":9.9e1
 	},
 	{
 		"Name":"edensch",
-		"InitialValue":2.54e2
+		"InitialValue":8.4e1
 	},
 	{
 		"Name":"eg2",
-		"InitialValue":-1.178059378731055e1
+		"InitialValue":-3.365883939231586
 	},
 	{
 		"Name":"engval1",
-		"InitialValue":8.26e2
+		"InitialValue":2.36e2
 	},
 	{
 		"Name":"errinros",
-		"InitialValue":2.530592869623551e4
+		"InitialValue":5.4509106530992e3
 	},
 	{
 		"Name":"extrosnb",
-		"InitialValue":5.604e3
+		"InitialValue":1.604e3
 	},
 	{
 		"Name":"fletcbv2",
-		"InitialValue":-0.5769101627236601
+		"InitialValue":-0.6740828401285567
 	},
 	{
 		"Name":"fletcbv3",
-		"InitialValue":-7.095385615757781e-5
+		"InitialValue":-3.3569342678229348e-6
 	},
 	{
 		"Name":"fletchcr",
-		"InitialValue":1.4e3
+		"InitialValue":4.0e2
 	},
 	{
 		"Name":"freuroth",
-		"InitialValue":6.85325e3
+		"InitialValue":1.80325e3
 	},
 	{
 		"Name":"genhumps",
-		"InitialValue":3.587361223645531e5
+		"InitialValue":1.024885933782947e5
 	},
 	{
 		"Name":"genrose_nash",
-		"InitialValue":9.589349365234375e1
+		"InitialValue":5.877777777777778e1
 	},
 	{
 		"Name":"indef",
-		"InitialValue":1.3311793667554424e1
+		"InitialValue":3.944939585251048
 	},
 	{
 		"Name":"integreq",
-		"InitialValue":4.573166960953373e-2
+		"InitialValue":1.7944309587620454e-2
 	},
 	{
 		"Name":"liarwhd",
-		"InitialValue":8.775e3
+		"InitialValue":2.925e3
 	},
 	{
 		"Name":"morebv",
-		"InitialValue":0.26978072691679245
+		"InitialValue":0.3981353538050761
 	},
 	{
 		"Name":"ncb20b",
-		"InitialValue":3.0e1
+		"InitialValue":1.0e1
 	},
 	{
 		"Name":"ncb20b",
-		"InitialValue":3.0e1
+		"InitialValue":1.0e1
 	},
 	{
 		"Name":"noncvxu2",
-		"InitialValue":9.142209774358991e3
+		"InitialValue":4.484649527852657e2
 	},
 	{
 		"Name":"noncvxun",
-		"InitialValue":1.0022937275653981e4
+		"InitialValue":4.556922383353659e2
 	},
 	{
 		"Name":"nondia",
-		"InitialValue":5.604e3
+		"InitialValue":1.604e3
 	},
 	{
 		"Name":"nondquar",
-		"InitialValue":2.1e1
+		"InitialValue":1.1e1
 	},
 	{
 		"Name":"penalty1",
-		"InitialValue":7.68490036325e5
+		"InitialValue":1.4987814e3
 	},
 	{
 		"Name":"penalty2",
-		"InitialValue":8.410915557932592e2
+		"InitialValue":7.652519794409628
 	},
 	{
 		"Name":"penalty3",
-		"InitialValue":7.445085228435697e4
+		"InitialValue":2.588660427217025e3
 	},
 	{
 		"Name":"power",
-		"InitialValue":7.2e3
+		"InitialValue":1.125e2
 	},
 	{
 		"Name":"quartc",
-		"InitialValue":8.9272e4
+		"InitialValue":9.9e1
 	},
 	{
 		"Name":"sbrybnd",
-		"InitialValue":1.04e2
+		"InitialValue":2.8e1
 	},
 	{
 		"Name":"schmvett",
-		"InitialValue":-2.508041637831986e1
+		"InitialValue":-5.787788394996891
 	},
 	{
 		"Name":"scosine",
-		"InitialValue":1.2286155866465219e1
+		"InitialValue":3.510330247561491
 	},
 	{
 		"Name":"sinquad",
@@ -237,19 +237,19 @@
 	},
 	{
 		"Name":"sparsine",
-		"InitialValue":4.964735096624091e2
+		"InitialValue":6.205918870780114e1
 	},
 	{
 		"Name":"sparsqur",
-		"InitialValue":3.375e1
+		"InitialValue":4.21875
 	},
 	{
 		"Name":"srosenbr",
-		"InitialValue":1.6939999999999995e2
+		"InitialValue":4.839999999999999e1
 	},
 	{
 		"Name":"tointgss",
-		"InitialValue":1.246470588235294e2
+		"InitialValue":3.1285714285714285e1
 	},
 	{
 		"Name":"tquartic",
@@ -257,14 +257,14 @@
 	},
 	{
 		"Name":"tridia",
-		"InitialValue":1.19e2
+		"InitialValue":1.4e1
 	},
 	{
 		"Name":"vardim",
-		"InitialValue":4.6707358004938275e7
+		"InitialValue":1.47642e4
 	},
 	{
 		"Name":"woods",
-		"InitialValue":5.7576e4
+		"InitialValue":1.9192e4
 	}
 ]
