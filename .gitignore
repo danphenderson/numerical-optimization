@@ -23,9 +23,6 @@ docs/site/
 # environment.
 Manifest.toml
 
-# Notes contained in text files
-*.txt
-
 .ipynb_checkpoints/
 
 misc/
