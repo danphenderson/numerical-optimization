@@ -33,7 +33,7 @@ misc/
 .env
 .venv
 numerical-optimization.code-workspace
-
+ADNLPProblems
 
 Pipfile.lock
 Pipfile
