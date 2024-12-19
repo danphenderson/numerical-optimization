@@ -7,9 +7,10 @@ import re
 from os import getenv
 from dotenv import load_dotenv
 from pathlib import Path
-from langsmith import expect
+
 import openai as _openai
 import logging
+
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -20,7 +21,7 @@ _openai.api_key = getenv("OPENAI_API_KEY", "")
 
 _PATH = Path(__file__).resolve()
 
-_TEST_SET_PATH = _PATH.parent.parent / Path("test-set") / Path("programs.tex")
+_TEST_SET_PATH = _PATH.parent.parent / Path("test-set") / Path("filtered") / Path("interesting-programs.tex")
 
 _OUTPUT_PATH = _PATH.parent.parent / Path("output") / Path("julia_functions.jl")
 
@@ -71,57 +72,7 @@ def convert_parsed_latex_to_julia(parsed_latex) -> list[str]:
 
     latex_to_julia_template = ChatPromptTemplate.from_messages(
         [
-            (
-                "system",
-                """You are a helpful AI assistant that converts LaTeX optimization programs to Julia functions. Specifically, you are given the LaTeX objective function, initial iterate, and problem name for an unconstrained optimization program.""",
-            ),
-            (
-                "human",
-                """For example, consider this LaTeX program:
-
-```tex
-\\textbf{{Generalized Rosenbrock function:}}
-    \\[f(x) = \\sum_{{i=1}}^{{n-1}} \\left( c(x_{{i+1}} - x_i^2)^2 + (1 - x_i)^2 \\right),\\]
-    \\[x_0 = [-1.2, 1, -1.2, 1, \\dots, -1.2, 1], \\quad c = 100.\\]
-```
-
-The expected output should look like this:
-
-```julia
-f = x -> begin
-    N = lastindex(x)
-    return 100sum((x[i+1] - x[i]^2)^2 for i = 1:N-1) + sum((x[i] - 1.0)^2 for i = 1:N-1)
-end
-
-init = (n::Int=500) -> begin
-    x0 = [j/(n+1) for j in 1:n]
-    return n, x0, "Generalized Rosenbrock"
-end
-```
-
-You should only return the ```julia``` code block when prompted with a LateX optimization program. Return nothing more than the Julia code block.
-"""),
-            ("ai", "Great! Can you provide me with one more example?"),
-            ("human", """Another example, consider this LaTeX program:
-
-```tex
-'\\textbf{{Extended Penalty function:}}
-    \\[f(x) =  \\sum_{{i=1}}^{{n-1}} (x_i - 1)^2 + \\left(\\sum_{{j=1}}^{{n}}  x_j^2 - 0.25 \\right)^2,\\]
-    \\[x_0 = [1, 2, \\dots, n].\\]'
-
-The expected output should look like this:
-
-```julia
-f = x -> begin
-    N = lastindex(x)
-    return sum((x[i] - 1.0)^2 for i = 1:N) + (sum(x[j]^2 for j = 1:N) - 0.25)^2
-end
-
-init = (n::Int=500) -> begin
-    x0 = [j for j in 1:n]
-    return n, x0, "Extended Penalty"
-end
-```"""),
+            ("system", "Convert the following LaTeX program to Julia code:"),
             ("ai", "Great! provide me with with LaTeX programs and I will generate the corresponding Julia code blocks."),
             ("human", "{item}"),
         ]
