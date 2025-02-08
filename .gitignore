@@ -23,20 +23,17 @@ docs/site/
 # environment.
 Manifest.toml
 
-# Notes contained in text files
-*.txt
-
 .ipynb_checkpoints/
 
 misc/
 
 .DS_Store
 
-
+.vscode/
 .env
 .venv
 numerical-optimization.code-workspace
-
+ADNLPProblems
 
 Pipfile.lock
 Pipfile
