@@ -1,0 +1,69 @@
+\documentclass[10pt]{article}
+
+\include{preamble.tex}
+
+% Page header
+\title{MA5680: TRS}
+\author{Daniel Henderson}
+\date{\today}
+
+
+% Page body
+\begin{document}
+\maketitle
+
+\noindent In the language of your choice implement step 2 of algorithm 5.1 on p14 of the article.
+
+\begin{solution}
+    A bit of a digression but we show that out generalized eigenvalue problem may be written in standard form:
+    \begin{flalign*}
+        \bmfour{-B}{A}{A}{-\frac{gg^\top}{\Delta^2}} \vect{y_1 \\ y_2} & 
+            = -\la^* \bmfour{0}{B}{B}{0} \vect{y_1 \\ y_2}  \\
+        \bmfour{0}{B}{B}{0}^{-1} \bmfour{-B}{A}{A}{-\frac{gg^\top}{\Delta^2}} \vect{y_1 \\ y_2} & = 
+            -\la^* \bmfour{0}{B}{B}{0}^{-1} \bmfour{0}{B}{B}{0} \vect{y_1 \\ y_2} \\
+        \bmfour{0}{B^{-1}}{B^{-1}}{0} \bmfour{-B}{A}{A}{-\frac{gg^\top}{\Delta^2}} \vect{y_1 \\ y_2} & 
+            = -\la^* \bmfour{0}{B^{-1}}{B^{-1}}{0} \bmfour{0}{B}{B}{0} \vect{y_1 \\ y_2} \\
+        \bmfour{-B^{-1} B}{-B^{-1} \frac{gg^\top}{\Delta^2}}{-B^{-1} A}{B^{-1} A} \vect{y_1 \\ y_2} = &
+            = -\la^* \bmfour{B^{-1}B}{0}{0}{B^{-1}B} \vect{y_1 \\ y_2} \\
+        \bmfour{-B^{-1} B}{-B^{-1} \frac{gg^\top}{\Delta^2}}{-B^{-1} A}{B^{-1} A} \vect{y_1 \\ y_2} = &
+            -\la^*I_{2n \times 2n} \vect{y_1 \\ y_2} \\
+        \left(\bmfour{-B^{-1} B}{-B^{-1} \frac{gg^\top}{\Delta^2}}{-B^{-1} A}{B^{-1} A}  - \la^* I_{2n \times 2n} \right)\vect{y_1 \\ y_2} & = 0
+    \end{flalign*}
+    Note, that $\bmfour{0}{B}{B}{0}$ is invertible, as $\det \bmfour{0}{B}{B}{0} = \det (0_{n \times n} - B) * \det (0_{n \times n} + B) = -\det(B)^2 < 0$ as
+    $B$ is symmetric positive definite, which implies $\det(B) > 0$. Concluding our digression, we make note that 
+    the hard-case occurs when $\la^*$ equals the largest eigenvalue of $A + \la B$, or equivalently, when $\text{alge}(\la^*) > 1$.
+    
+    \newpage
+    
+\lstset{language=julia}
+    \begin{lstlisting}[language=julia, caption={Implementation of Algorithm 5.1 step 2}]
+julia> using LinearAlgebra
+julia> A = let X = randn(n, n); X + X'; end; 
+julia> B = let X = randn(n, n); X * X'; end;
+julia> Δ = 0.1
+julia> g, p0 = randn(n), randn(n)
+julia> m = (p) -> p' * g + 0.5 * p' * A * p
+julia> M0 = [-B A; A -g*g'/Δ^2];
+julia> M1 = -[zeros(n,n) B; B zeros(n,n)]
+julia> F = eigen(M0, M1)
+julia> λstar = maximum(abs.(F.values)) # HACK: okay since we are ignoring the hard case
+  22.045702676755557
+julia> y = F.vectors[:, end] # And a worse hack
+julia> y1, y2 = y[1:10], y[11:20]
+julia> pstar = sign(g'*y2)*Δ*y1./sqrt(y1'*B*y1)
+10-element Vector{ComplexF64}:
+   -0.0696182291622581 + 0.0im
+ -0.029856150657183066 + 0.0im
+  0.021457658057046993 + 0.0im
+ -0.015672083161465084 + 0.0im
+   0.03743652574264288 + 0.0im
+  -0.04079621450785599 + 0.0im
+ -0.017286212026279373 + 0.0im
+   0.01829971992538563 + 0.0im
+  -0.00794105054155718 + 0.0im
+ -0.056551058280238306 + 0.0im
+julia> sqrt(pstar'*B*pstar) 
+ 0.1 + 0.0im # Hence our solution is on the boundary
+\end{lstlisting}
+\end{solution}
+\end{document} 

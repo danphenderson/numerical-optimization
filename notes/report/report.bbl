@@ -1,0 +1,13 @@
+\begin{thebibliography}{NW06}
+
+\bibitem[MOS]{OptimizationProblems}
+Tangi Migot, Dominique Orban, and Abel~Soares Siqueira.
+\newblock Optimizationproblems.jl: A collection of optimization problems in julia.
+\newblock If you use this software, please cite it using the metadata from this file.
+
+\bibitem[NW06]{NocedalAndWright06}
+Jorge Nocedal and Stephen~J. Wright.
+\newblock {\em Numerical Optimization}.
+\newblock Springer, New York, NY, USA, second edition, 2006.
+
+\end{thebibliography}

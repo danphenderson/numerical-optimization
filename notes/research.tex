@@ -1,0 +1,607 @@
+    \documentclass[11pt]{article}
+
+    \input{preamble.tex}
+
+    % Page header
+    \title{Running Notes}
+    \author{Daniel Henderson}
+    \date{\today}
+
+    % Document Start
+    \begin{document}
+    \maketitle
+
+    % ------------------------------------------------------------------------------
+    % SECTION 1: PRELIMINARIES ------------------------------------------------------
+    % ------------------------------------------------------------------------------
+    \section{Preliminaries}
+
+    \medskip
+
+    \subsection{Notation}
+    We use the following notation\
+
+    \textcolor{Black}{
+        \begin{itemize}
+            \item $\| \cdot \|$ denotes the usual $\ell_2$ norm for vectors $\vct{x}$ in $\mathbb{R}^n$ and $p = 2$ norm
+            for matrices in $\mathbb{R}^{n \times m}$. i.e.,
+            \begin{flalign*}
+                \|x\| & := \left(\sum_i x_i^2\right)^{1/2} \\
+                 \|A\| & := (\lambda_{\max}(A^\top A))^{1/2}
+            = \max(\sigma(A))
+            \end{flalign*}
+            \item $\sigma(A) := \{\text{singular values of } A\}$.
+            \item $A \in \mathbb{R}^{n\times n}$ $\implies ~ \sigma(A) = \{\text{eigenvalues of } A \text{ (i.e. spectrum)}\}$
+            \item $\sigma_{\max}(A) := \max(\sigma(A))$ and $\sigma_{\min}(A) := \min(\sigma(A))$.
+            \item $ A \in \mathbb{R}^{n\times n}$  $\implies \lambda_{\max}(A) := \sigma_{\max}(A)$ and $\lambda_{\min}(A) = \sigma_{\min}(A) $
+            \item $\langle \cdot, \cdot \rangle$ denotes the usual inner product on $\mathbb{R}^n$, i.e.,
+            $$
+                \langle \vct{x}, \vct{y} \rangle := \vct{x}^\top \vct{y} = \sum_{i=1}^n \vct{x}_i \vct{y}_i = \| \vct{x} \| \|\vct{y}\| \cos(\theta)
+            $$
+            where $\theta$ is the angle between $\vct{x}$ and $\vct{y}$.
+            \item $\mathcal{B}_r(\vct{x}) := \{ \vct{y} \in \mathbb{R}^n : \|\vct{y} - \vct{x}\| < r \}$ is the open ball of radius $r$ centered at $\vct{x} \in \R^n$.
+        \end{itemize}
+    }
+
+    \medskip
+
+    \subsection{Assumptions}
+    We assume the following assumptions\
+
+    \textcolor{Black}{
+        \begin{itemize}
+            \item Let $\Omega \subset \R^n$ be a bounded open subset with a smooth boundary $\partial \Omega$,
+            which we assume is a $C^2$-manifold. Additionally, we often consider $\Omega$ and $\partial \Omega$
+            to be the $n-1$-dimensional hypersurface of a $n$-dimensional ball.
+            \item Let be a function $f \in C^\infty(\Omega; \R)$ is a continous
+            and infinitely-differentiable mapping from $\Omega$ to $\R$.
+            In general, $f$ is nonlinear and nonconvex on $\Omega$.
+            \item We assume $C^2$ regularity of the boundary $\partial \Omega$
+            ao that the derivatives of $f$ may be extended to $\partial \Omega$.
+            \item The typefont $\vct{x}$ will denote a vector in $\mathbb{R}^n$.
+        \end{itemize}
+    }
+
+    \subsection{Definitions}
+    Using the above notation, we assume our assumptions hold, and we define the following\
+    % Lipschitz
+    \begin{definition}
+    \textcolor{blue}{
+        $f$ is \textbf{$L$-Lipschitz} if $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+        \; \exists~ L \geq 0 ~:~  \| f(\vct{x_1}) - f(\vct{x_2})\| 
+        \leq L\|\vct{x_1} - \vct{x_2}\|
+        $$
+    }
+    \end{definition}
+
+    % L-Liaafpschitz gradient
+    \begin{definition} 
+    \textcolor{blue}{
+        $f$ has \textbf{$\ell$-Lipschitz gradient}, or, $f$ is \textbf{$\ell$-smooth} if
+        $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+            \exists~ \ell \geq 0 ~:~ \|\nabla f(\vct{x_1}) - \nabla f(\vct{x_2})\| 
+            \leq \ell\|\vct{x_1} - \vct{x_2}\|
+        $$
+    }
+    \end{definition}
+
+    % Rho Lipschitz Hessian
+    \begin{definition}
+    \textcolor{blue}{
+        $f$ has \textbf{$\rho$-Lipschitz Hessian} if $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+            \; \exists~ \rho \geq 0 ~:~ \|\nabla^2 f(\vct{x_1}) - \nabla^2 f(\vct{x_2})\| 
+            \leq \rho\|\vct{x_1} - \vct{x_2}\|
+        $$
+    }
+    \end{definition}
+
+    % Convexity
+    \begin{definition}
+    \textcolor{blue}{
+        $f$ is \textbf{convex} if $\forall ~ \vct{x_1},\vct{x_2}$
+        \begin{flalign*}
+            f(\vct{x_2}) & \geq f(\vct{x_1}) + \langle  \vct{x_2} - \vct{x_1}, \nabla f(\vct{x_1}) \rangle\\
+                        & = f(\vct{x_1}) + \nabla f(\vct{x_1})^T(\vct{x_2} - \vct{x_1}) 
+        \end{flalign*}
+    }
+    \end{definition}
+
+    % Strictly Convex
+    \begin{definition}
+    \textcolor{blue}{
+        $f$ is \textbf{strictly convex} if
+        \begin{flalign*}
+            \exists~ \mu > 0 ~ : ~ & \nabla^2 f \succeq \mu I \\ 
+            & \iff \lambda_{\min}(\nabla^2 f) \geq \mu > 0 
+        \end{flalign*}
+    }
+    \end{definition}
+
+    % Alpha strong convexity
+    \begin{definition}
+    \textcolor{blue}{
+        $f$ is \textbf{$\alpha$-strongly convex} if $\forall ~ \vct{x_1},\vct{x_2} \exists~ \alpha > 0$ s.t.
+        \begin{flalign*}
+            & f(\vct{x_2}) \geq f(\vct{x_1}) + \langle \nabla f(\vct{x_1}), \vct{x_2} - \vct{x_1} \rangle + 
+            \frac{\alpha}{2}\|\vct{x_2} - \vct{x_1} \|^2\\
+            & \iff \lambda_{\min}(\nabla^2 f (\vct{x})) \geq - \alpha. 
+        \end{flalign*}
+    }
+    \end{definition}
+
+    % First-order stationary point
+    \begin{definition}
+    \textcolor{blue}{
+        $\vct{x^*}$ is a \textbf{first-order stationary point}
+        if $\| \nabla f(x^*) \| = 0$.
+    }
+    \end{definition}
+
+    % Eps-first-order stationary point
+    \begin{definition}
+    \textcolor{blue}{
+        $\vct{x^*}$ is an \textbf{$\eps$-first-order stationary point} 
+        if $\|\nabla f(x^*)\| \leq \eps$. 
+    }
+    \end{definition}
+
+    % Second-order stationary point
+    \begin{definition}
+    \textcolor{blue}{
+        $\vct{x}^* \in \R^n$ is a \textbf{second-order stationary point} if 
+        $
+            \| \nabla f(x^*) \| = 0\text{ and } \nabla^2 f(x^*) \succeq 0.
+        $
+    }
+    \end{definition}
+
+    % Eps-second-order stationary point
+    \begin{definition}
+    \textcolor{blue}{
+        if $f$ has $\rho$-Lipschitz Hessian, $\vct{x}^* \in \R^n$ is a
+        \textbf{$\eps$-second-order stationary point} if 
+        $$
+            \| \nabla f(x^*) \| \leq \eps \text{ and }\nabla^2 f(x^*) \succeq -\sqrt{\rho \eps}
+        $$
+        \begin{remark}
+        Note that the Hessian is not required to be positive definite, 
+        but it is required to have a small eigenvalue. 
+    \end{remark}
+    }
+    \end{definition}
+
+
+    % General Form of Unconstrained Optimization Problem
+    \begin{definition}
+    \textcolor{blue}{
+    We consider the general form of our \textbf{unconstrained optimization problem} to be
+    \begin{flalign}
+        \min_{\vct{x} \in \mathbb{R}^n} f(\vct{x}) \quad \text{s.t.} \quad 
+        \vct{x} \in K \subseteq \mathbb{R}^n
+        \label{eq:unconstrained-opt}
+    \end{flalign}
+    where $K$ is a compact set in $\mathbb{R}^n$.
+    We denote the \textbf{optimal solution} and \textbf{optimal value} 
+    of the optimization problem 
+    \begin{flalign*}
+        \vct{x}^* & = \mathop{\mathrm{arg\,min}}_{\vct{x} \in K} f(\vct{x})\\
+        \vct{f}^* & = \mathop{\mathrm{min}}_{\vct{x} \in K} f(\vct{x})
+    \end{flalign*}
+    where $\vct{x}^*$ satisfies the first-order optimality condition, i.e., $\nabla f(\vct{x}^*) = 0$.
+    }
+    \end{definition}
+
+    \begin{definition}
+    \textcolor{blue}{
+        Let the \textbf{gradient flow} of $f$ be a solution to the dynamical system defined as
+        $$
+            \vct{\gamma}'(t) = -\nabla f(\vct{\gamma}(t)) 
+        $$
+        where the evolution of our phase space is driven by the negative gradient of $f$.
+        A \textbf{gradient flow line} of $f$ is an integral curve $\vct{\gamma} : [0, t_f] \rightarrow \Omega$
+        satisfying the above evolutionary system (ordinary-differential equation) subject to $\vct{\gamma}(0) = \vct{x_0}$.
+    }
+    \end{definition}
+
+    \medskip
+
+    We aim to classify the phase space of the \emph{gradient flow} of $f$ on $\Omega$.
+    First we notice that for and any critical point $\vct{x}^*$, 
+    \begin{flalign*}
+        \vct{\gamma}(t) & = \vct{x}^* ~ \forall ~ t \in [0, t_f] \\
+        \implies & \quad \vct{\gamma}'(t) = \vct{0} ~\text{ and }~
+        -\nabla f(\vct{\gamma}(t)) = -\nabla f(\vct{x}^*) = \vct{0} \quad \because ~ \vct{x}^* ~ \text{ is a critical point} \\
+        \therefore & \quad \vct{\gamma}(t) = -\nabla f(\vct{\gamma}(t))  ~ \forall ~ t \in [0, t_f]
+    \end{flalign*}
+
+    Consequently, by the uniqueness of solutions for ordinary differential
+    equations, if any flow line contains a \emph{first-order} critical point $\vct{x}^*$,
+    it must be a constant flow line.
+
+    \begin{lemma}
+        The function $f: \omega \rightarrow \R$ is nonincreasing
+        along any flow-line $\vct{\gamma}(t)$ and strictly decreasing
+        along flow lines not containing a critical point $x^*$.
+    \end{lemma}
+    \begin{proof}
+        Let $\vct{\gamma} : [0, t_f] \rightarrow \Omega$ be a flow line.
+        Consider the composition $f \circ \vct{\gamma} : [0, t_f] \rightarrow \R$,
+        its derivative is
+        \begin{flalign*}
+            \dfrac{d}{dt}\big( f(\vct{\gamma}(t)) \big) & =
+                \langle \nabla_{\vct{\gamma(t)}}(f), \dfrac{d\vct{\gamma}}{dt} \rangle \\
+                 & = \langle \nabla_{\vct{\gamma(t)}}(f), - \nabla_{\gamma(t)}(f) \rangle \\
+                 & = - \langle \nabla_{\vct{\gamma(t)}}(f), \nabla_{\gamma(t)}(f) \rangle \\
+                 & = - | \nabla_{\vct{\gamma(t)}}(f) |^2 \\
+                 & \leq 0
+        \end{flalign*}
+        Therefore, $f'(\vct{\gamma(t)}) = 0$ iff $\vct{\gamma}(t)$ is on a critical point
+        of $f$. In particular, if $\vct{\gamma}(t)$ does not contain in its image
+        a critical point of $f$, then the above inequality implies that
+        $f$ is strictly decreasing along the integral curve $\vct{\gamma(t)}$.
+    \end{proof}
+
+    \medskip
+
+    \begin{theorem}
+        For all $\vct{x}$ in the closed manifold $\overline{\Omega}$, there exists
+        uniquely $\vct{\gamma}_{\vct{x}}(t) : \R \rightarrow \overline{\Omega}$
+        such that $\vct{\gamma}_{\vct{x}}(0) = \vct{x}$
+        and the limits
+        $$
+            \lim_{t \to -\infty } \vct{\gamma}_{\vct{x}}(t) ~ \text{ and } ~ 
+            \lim_{t \to \infty } \vct{\gamma}_{\vct{x}}(t)
+        $$
+        exist and converge to \emph{critical-points} of $f$.
+    \end{theorem}
+   
+    Now it may be shown that the flow map operator $T : \overline{\Omega} \times \R \rightarrow \overline{\Omega}$
+    defined as $T(\vct{x}, t) : =  \vct{\gamma}_{\vct{x}}(t)$. This implies theoretically that we may
+    perform analysis of our phase space as constructed by a smooth union of integral curves.
+    Consequently, by our previous lemma, if the flow map $T$ contains a critical point $\vct{x}^*$ then
+    it ought to be that $T(\vct{x}^*, t) \equiv \text{ const } ~ \forall t$, otherwise,
+    $T$ is descending for all of time.
+
+   
+
+    % Scheme for solving unconstrained optimization problem
+    \begin{definition}
+        A \textbf{scheme} for solving a general form \emph{unconstrained optimization problem}
+        is a one-parameter family of iteration operators:
+        $$
+            T_h : \R^n \rightarrow \R^n ~ \text{ where } ~\vct{x}_{k+1} = T_h(\vct{x}_k), ~ h \in (0, h_0]
+        $$
+        where $h_0$ is a constant and $h$ is the step size. The scheme is well-defined such that
+        the triplet $(\vct{x}_0, h, T_h)$ satisfy
+        \begin{enumerate}
+            \item \emph{Consistency}: $\forall \vct{x} \in K$ 
+            $$
+                \left( T_h(\vct{x}) - \vct{x} \right) h^{-1} + \nabla f(\vct{x}) \rightarrow 0 \text{ as } h \rightarrow 0.
+            $$
+            implying that a single step approximates the continous gradient flow w/ local error
+            $\mathcal{O}(h^{p+1})$ where $p$ is the global order of the scheme.
+            \item \emph{Stability}: $\exists~ c > 0, h_0 > 0 ~:~ \forall h \in (0, h_0]$,
+            and for all $\vct{x_1}, \vct{x_2}$ in a \emph{neighborhood $N \subset K$}
+            around an \emph{optimal solution} $\vct{x}^*$
+            $$
+                \| T_h(\vct{x_1}) - T_h(\vct{x_2}) \| \leq (1 - ch) \| \vct{x_1} - \vct{x_2} \|
+            $$
+            where $c$ is a constant that depends on the scheme and $h$ is the step size.
+            Or, equivalently, the scheme is \emph{stable} if
+            $\exists~ c > 0, h_0 > 0 ~:~ \forall h \in (0, h_0]$,
+            and for all $\vct{x}$ in a \emph{neighborhood} about $\vct{x}^*$,
+            each step results in a strict decrease of by atleast a factor of $1 - ch$, i.e.,
+            $$
+            \| J(T_h(\vct{x})) \| \leq (1 - ch)
+            $$
+            where $J(T_h(\vct{x}))$ is the Jacobian of the scheme.
+            \item \emph{Convergence}: $\forall~ \vct{x_0} \in N \subset K$, s.t. $N$ is some neighborhood
+            around a strict minimizer $x^*$. and $\forall \eps > 0$ 
+            $$
+                \exists~ K \in \mathbb{N} ~:~ \forall k ~ > K, \vct{x}_k \in N \text{ and } 
+                d(\vct{x}_k, \vct{x}^*) \leq \eps.
+            $$
+        \end{enumerate}
+    \end{definition}
+
+    % Strict Saddle Property
+    \begin{definition}
+        \textcolor{blue}{
+            $\vct{x}^*$ is \textbf{non-degenerate} if $\nabla^2 f(x^*)$ is non-singular.
+        }
+    \end{definition}
+
+
+    % Level Set
+    \begin{definition}
+        \textcolor{blue}{
+            The \textbf{level set} of $f$ at $c$ is the set of points $\vct{x} \in \Omega$ such that
+            $f(\vct{x}) = c$, i.e.,
+            $$
+                L_c = \{ \vct{x} \in \Omega : f(\vct{x}) = c \}
+            $$
+            The level set $L_c$ is a smooth manifold with boundary $\partial L_c$.
+                        The \textbf{sublevel} and \textbf{superlevel} sets of $f$ at $c$
+            are the sets of points $\vct{x} \in \Omega$ such that
+            $f(\vct{x}) \leq c$ and $f(\vct{x}) \geq c$, respectively, i.e.,
+            \begin{flalign*}
+                L_c^- & = \{ \vct{x} \in \Omega : f(\vct{x}) \leq c \} \\
+                L_c^+ & = \{ \vct{x} \in \Omega : f(\vct{x}) \geq c \}.
+            \end{flalign*}
+            The sublevel set $L_c^-$ is a smooth manifold with boundary $\partial L_c^-$
+            and the superlevel set $L_c^+$ is a smooth manifold with boundary $\partial L_c^+$.
+        }
+    \end{definition}
+
+    \medskip 
+
+    \begin{theorem}
+        \textcolor{Red}{
+            For a Morse function $f$ on $\Omega$, the gradient of $f$ is either zero or
+            orthogonal to the tangent space of the level set $L_c$ at $\vct{x} \in L_c$.
+        }
+    \end{theorem}
+
+    The above theorem implies that at a stationary point $\vct{x^*}$, a
+    level set $L_{\vct{x^*}}$ is reduced to a single point
+    when $\vct{x^*}$ is a local minimum or maximum. 
+    Otherwise, the level set may have a singularity
+    such as a self-intersection or a cusp.
+    \medskip
+
+    % SECTION 2: OVERVIEW OF OPTIMIZATION SCHEMES ----------------------------------
+    % ------------------------------------------------------------------------------
+    \section{Overview of Optimization Schemes}
+    % ------------------------------------------------------------------------------
+
+    % Gradient Descent 
+    \subsection{Gradient Descent (GD)}
+    \subsubsection*{Continous Model}
+        \textcolor{Black}{
+            TODO: Explain the gradient descent phase space and the level
+            set equations for the continous model.
+        }
+    \subsubsection*{Scheme}
+        The \textbf{gradient descent} line search scheme is
+        $$
+            T_h(\vct{x}) = \vct{x} - h \nabla f(\vct{x})
+        $$
+        first-order $(p = 1)$ and contractive when $\nabla^2 f \succeq \mu I \succeq 0$.
+
+    \medskip
+
+
+    % Newton's Method
+    \subsection{Newton's Method (NM)}
+    \subsubsection*{Continous Model}
+        \textcolor{Black}{
+            TODO: Explain the Newton's method phase space and the level
+            set equations for the continous model.
+        }
+
+    \subsubsection*{Scheme}
+        The \textbf{Newton's method} line search scheme is
+        $$
+            T_h(\vct{x}) = \vct{x} - h \nabla^2 f(\vct{x})^{-1} \nabla f(\vct{x})
+        $$
+        second-order $(p = 2)$ and contractive when $\nabla^2 f \succeq \mu I \succeq 0$.
+    \medskip
+
+    % Trust Region Methods (TR)
+    \subsection{Trust Region Methods (TR)}
+    \subsubsection*{Continous Model}
+        \textcolor{Red}{
+            TODO: Explain the trust region method phase space and the level
+            set equations for the continous model.
+        }
+    \subsubsection*{Scheme}
+        The \textbf{trust region method} line search scheme is
+        $$
+            T_h(\vct{x}) = \vct{x} + \arg \min_{\vct{\tau}} m_{\vct{x}}(\vct{\tau})
+        $$ 
+        where $m_{\vct{x}}(\vct{\tau}) = f(\vct{x}) + \langle \nabla f(\vct{x}), \vct{\tau} \rangle +
+        \frac{1}{2} \langle \vct{\tau}, \nabla^2 f(\vct{x}) \vct{\tau} \rangle$ is the 
+        quadratic approximation of $f$ at $\vct{x}$ and $\|\vct{\tau}\| \leq \Delta$
+        is the trust region constraint.
+
+    \medskip
+
+
+    % Quasi-Newton Methods
+    \subsection{Quasi-Newton Methods (QN)}
+    \subsubsection*{Continous Model}
+        \textcolor{Red}{
+            TODO : Explain the quasi-newton method phase space and the level
+            set equations for the continous model.
+        }
+    \subsubsection*{Scheme}
+        The \textbf{quasi-newton method} line search scheme is
+        $$
+            T_h(\vct{x}) = \vct{x} - h  B \nabla f(\vct{x})
+        $$ 
+        where $B \approx \nabla^2 f^{-1}(\vct{x})$ is a positive-definite approximation of the Hessian.
+        The quasi-newton method is a first-order $(p = 1)$ scheme and contractive when
+        $\nabla^2 f \succeq \mu I \succeq 0$.
+
+
+    \medskip
+
+    % Section 3: Theory ------------------------------------------------------
+    % ------------------------------------------------------------------------------
+    \section{Theory}
+    % ------------------------------------------------------------------------------
+
+
+    \subsection{Morse Theory}
+    \medskip
+
+    Note that $\Omega$ is a bounded subset of $\R^n$, so its closure
+    $\overline{\Omega} = \Omega \cup \partial \Omega$ is a compact subset
+    of $\R^n$, by the Heine-Borel Theorem.
+    Also, the boundary $\partial \Omega$ is sufficiently smooth,
+    so we can apply the theory of smooth manifolds.
+    The closure $\overline{\Omega}$ is a compact subset of $\R^n$ and
+    is a smooth manifold with boundary $\partial \Omega$.
+    The interior $\Omega$ is an open subset of $\R^n$ and is a smooth manifold.
+
+
+    \begin{definition}
+        \textcolor{blue}{
+            A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
+            differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
+            $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
+            The set of critical points of $f$ is denoted by $\text{crit}(f)$.
+        }
+    \end{definition}
+
+    \begin{definition}
+        \textcolor{blue}{
+            A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+            the Hessian $H_p f$ is non-singular.
+        }
+    \end{definition}
+
+    \begin{definition}
+        \textcolor{blue}{
+            The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
+            the dimension of the negative eigenspace of the Hessian $H_p f$.
+            \begin{itemize}
+                \item local minima at $\vct{x^*}$ have index $0$.
+                \item local maxima at $\vct{x^*}$ have index $n$.
+                \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
+            \end{itemize}
+            We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
+            critical points of index $i$.
+        }
+    \end{definition}
+
+    \begin{remark}
+        For each objective function $f$ we are interested in determining the
+        critical points of $f$ 
+    \end{remark}
+
+    \begin{remark}
+        \textcolor{blue}{
+            The \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
+            all critical points of $f$ are non-degenerate.
+        }
+    \end{remark}
+
+    \begin{theorem}
+        \textcolor{Blue}{
+            Let $f$ be a Morse function on $\Omega$, then the Euler characteristic of $\Omega$ is
+            given by
+            $$
+                \chi(\Omega) = \sum_{i=0}^n (-1)^i c_i
+            $$
+            where $c_i$ is the number of critical points of index $i$.
+        }
+    \end{theorem}
+
+    \begin{remark}
+        The Euler characteristic $\chi(\Omega)$ is a topological invariant of the manifold $\Omega$
+        and is independent of the choice of Morse function $f$.
+        The Euler characteristic is a measure of the "shape" of the manifold and can be used to
+        distinguish between different topological spaces.
+        The Euler characteristic may be defined by the alternating sum of the Betti numbers
+        $b_i$ of the manifold $\Omega$
+        $$
+            \chi(\Omega) = \sum_{i=0}^n (-1)^i b_i
+        $$
+        where $b_i$ is the $i$-th Betti number of the manifold $\Omega$.
+    \end{remark}
+
+    \begin{theorem}
+        \textcolor{ForestGreen}{
+            (Sard's theorem) Let $f$ be a Morse function on $\Omega$, then
+            the image $f(\text{crit}(f))$ has Lebesque measure zero in $\R$.
+        }
+    \end{theorem}
+
+    \begin{remark}
+        We state a particular instance of Sard's theorem for continous scalar-valued functions $f$,
+        which was first proved by Anothony P. Morse in 1939.
+        The theorem asserts that the image of the critical points of a Morse function is a set 
+        of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
+        do not form a dense subset of the manifold $\Omega$.
+        Consequently, selecting $\vct{x} \in \Omega$ at random will almost never yeild a critical
+        point of $f$.
+    \end{remark}
+
+    \begin{remark}
+        The property that $\vct{x^*} \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
+        not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
+    \end{remark}
+
+
+
+    \subsection{Analysis of Gradient Descent (GD)}
+
+        \begin{theorem} Assume $f$ is $\ell$-smooth and $\alpha$-strongly convex and that $\eps > 0$.
+            If we iterate the gradient descent \emph{scheme} with $h = h_0 = \frac{1}{\ell}$ held fixed, i.e.,
+            $$
+                T_{h}(\vct{x}_k) = \vct{x}_k - \frac{1}{\ell} \nabla f(\vct{x}_k),
+            $$
+            then $d(x_k, x^*) \leq \eps$ for all $k > K$ where $K$ is chosen to satisfy
+            $$
+                \frac{2\ell}{\alpha} \cdot \log\left(\frac{d(x_0, x^*)}{\eps}\right) \leq K.
+            $$
+        \end{theorem}
+
+        \begin{remark}
+            Under \emph{$\ell$-smoothness} and \emph{$\alpha$-strong convexity} assumptions
+            in a neighborhood $\Omega$ about $\vct{x}^*$, it may be shown directly from 
+            the above theorem above that the \emph{GD scheme} converges linearly to 
+            the optimal solution $\vct{x}^*$ at a rate of
+            $$
+                \frac{d(\vct{x}_k, \vct{x}^*)}{d(\vct{x}_{k-1}, \vct{x}^*)} \leq 1 - \frac{\alpha}{\ell}
+            $$
+            where $d(\vct{x}_k, \vct{x}^*)$ is the distance between the current iterate $\vct{x}_k$ and 
+            the optimal solution $\vct{x}^*$. The convergence rate is linear in the sense that the 
+            distance between the current iterate and the optimal solution decreases by a factor of 
+            $1 - \frac{\alpha}{\ell}$ at each iteration. (Ref: TODO)
+        \end{remark}
+
+        \begin{remark}
+            Convergence to a first-order stationary point trivally
+            implies convergence to a $\eps$-first-order stationary point.
+            Similarly, convergence to a second-order stationary point trivially
+            implies convergence to a $\eps$-second-order stationary point.
+        \end{remark}
+
+        \medskip
+
+        \begin{theorem}
+            Assume $f$ is $\ell$-smooth, then for any $\eps > 0$, if we iterate
+            the GD scheme with $h = h_0 = \frac{1}{\ell}$ held fixed starting from
+            $\vct{x}_0 \in \Omega$ where $\Omega$ is a neighborhood of $x^*$,
+            then the number of iterations $K$ required to achieve the stopping condition
+            $\| \nabla f(\vct{x}_k) \| \leq \eps$ is at most
+            $$
+                \left\lceil \frac{\ell}{\eps^{2}} \, (f(\vct{x}_0) - f(\vct{x}^*)) \right\rceil
+            $$
+        \end{theorem}
+
+        \begin{remark}
+            \textbf{TODO and Questions}
+            \begin{itemize}
+                \item State how we use theorems in when performing analysis from
+                the results of our experimewts.
+                \item What is the relationship between $\ell$ and $\alpha$?
+                \item In practice do we know how to compute $\ell$ and $\alpha$?
+                \item What is the relationship between $\ell$ and $\rho$?
+                \item In practice do we know how to compute $\ell$ and $\rho$?
+            \end{itemize}
+        \end{remark}
+
+
+    \begin{remark}
+        JinSaddle.pdf Section 3.1 - Strict Saddle Property
+    \end{remark}
+
+
+    \end{document}
+    %% END OF DOCUMENT --------------------------------------------------------------
