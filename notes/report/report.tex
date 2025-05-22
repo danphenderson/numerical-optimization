@@ -15,17 +15,19 @@
 \begin{abstract}
     \noindent
     \textcolor{Red}{
-    Analysis of standard set of unconstrained minimization problems
-    of a smooth objective function $f: \R^n \rightarrow \R$.
-    Our test problems are selected from the \texttt{OptimizationProblems.jl}
-    \cite{OptimizationProblems} Julia package.
-    We investigate the local convexity of eac problem by sampling
-    the Hessian $\nabla^2 f(x)$ at a set of random points $x$ in
-    the neighborhood of a strict local minimizer $x^*$.
-    We start with an introduction and survey of the Literature,
-    followed by a description of the test problems and the sampling
-    procedure. We then present the results of our sampling experiment
-    and a discussion of the results.
+    We study the local convexity properties of a benchmark suite of smooth,
+    unconstrained minimization problems drawn from the
+    \texttt{OptimizationProblems.jl}~\cite{OptimizationProblems} Julia package.
+    For each problem, we review its origin, present the analytic form
+    of the objective $f:\R^n\!\to\!\R$ and the standard starting point
+    $\vct{x}_0$.  We then introduce a sampling-based procedure to classify
+    the critical-point structure and verify the positive-definiteness of
+    the Hessian in a neighborhood of a strict local minimizer.  Numerical
+    experiments confirm that while some test functions exhibit strong
+    local convexity, others contain narrow regions of non-convexity that
+    can slow down standard schemes.  Our findings provide guidance for
+    choosing and tuning first- and second-order methods on common
+    benchmark problems.
     }
     \noindent\textbf{Keywords:} Julia, Optimization, Benchmarking, Automatic Differentiation
 \end{abstract}
@@ -36,12 +38,12 @@
 \tableofcontents
 \newpage
 
+
 % ------------------ INTRODUCTION
 \section{Introduction}
-    \textcolor{Red}{
     Our aim is to investigate the local convexity of standard
     test problems from the Constrained and Unconstrained Optimization Test
-    Environment (CUTE).We start with a brief review of continuous
+    Environment (CUTE)~\cite{CUTE}. We start with a brief review of continuous
     smooth optimization problems.
     We then present a set of test problems selected from the
     \texttt{OptimizationProblems.jl} \cite{OptimizationProblems}
@@ -50,21 +52,18 @@
     structure. We then present a sampling procedure to classify
     the \emph{critical-point} structure of the objective function
     $f: \R^n \rightarrow \R$ within local neighborhoods of a strict
-    local minimizer $x^*$. We present a set of test problems
-    selected from the \texttt{OptimizationProblems.jl} \cite{OptimizationProblems}
-    Julia package.
-    }
+    local minimizer $x^*$. Analytical expressions are provided for
+    each problems objective function and the accepted initial iterate
+    $\vct{x_0}$.
     \medskip
 
     % State Notation
-    \subsection{Preliminaries}    
-    \textcolor{Red}{
-        We assume the notation defined in the Appendix~\ref{notation}.
-    }
+    \subsection{Preliminaries}
+        We assume the notation defined in the Appendix ~\ref{notation}.
     \medskip
 
     % State Problem
-    \subsection{Problem}
+    \subsection{Continuous Unconstratined Optimization Problem}
     The general form of an \textbf{unconstrained optimization problem} is
     \begin{flalign}
         \min_{\vct{x} \in \R^n} f(\vct{x})
@@ -92,8 +91,9 @@
     A \emph{strict local minimizer} $\vct{x}^*$ of $f$ is a \emph{critical-point} such that
     $\nabla^2 f(\vct{x}^*) \succ 0$, i.e. the Hessian of $f$ is positive definite at $\vct{x}^*$.
     In general, we seek an \emph{optimal value} $\vct{x}^*$ satisfying the \emph{second-order}
-    optimality condition that $\nabla^2 f(\vct{x}^*)$ is semi-positive definite.
-        As defined in \cite{NocedalAndWright06}, we say an \emph{optimal-value} $\vct{x}^*$ is
+    optimality condition that $\nabla^2 f(\vct{x}^*)$ is semi-positive definite.\\
+    
+    As defined in \cite{NocedalAndWright06}, we say an \emph{optimal-value} $\vct{x}^*$ is
     \begin{itemize}
         \item \emph{global minimizer} if $f(\vct{x}^*) \leq f(\vct{x}) ~ \forall x \in \R^n$
         \item \emph{local minimizer} if there is a neighborhood $N$ of $\vct{x}^*$
@@ -117,7 +117,8 @@
         \item \emph{Necessary:} $\nabla f(x^*) = 0$ and $\nabla^2 f(x^*) \succeq 0 $ (positive semi-definite)
         \item \emph{Sufficient:} $\nabla f(x^*) = 0$ and $\nabla^2 f(x^*) \succ 0$ (positive definite).
     \end{itemize}
-    Consequently, \emph{strict local minimizers} are points where the objective function is concave up.
+    Consequently, \emph{strict local minimizers} are \emph{isolated local minimizers} and
+    such \emph{startionary points} correspond to the optimal solution $f^*$ being concave up.
     \medskip
 
     \subsection{Continous Models}
@@ -264,8 +265,8 @@
     \medskip
 
     % ------------------ Theory
-    \section{Theory}
     
+\section{Theory}
     Note that $\Omega$ is a bounded subset of $\R^n$, so its closure
     $\overline{\Omega} = \Omega \cup \partial \Omega$ is a compact subset
     of $\R^n$, by the Heine-Borel Theorem.
@@ -275,136 +276,136 @@
     is a smooth manifold with boundary $\partial \Omega$.
     The interior $\Omega$ is an open subset of $\R^n$ and is a smooth manifold.
 
-    \begin{definition}
-        \textcolor{blue}{
-            A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
-            differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
-            $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
-            The set of critical points of $f$ is denoted by $\text{crit}(f)$.
-        }
-    \end{definition}
+\begin{definition}
+    \textcolor{blue}{
+        A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
+        differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
+        $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
+        The set of critical points of $f$ is denoted by $\text{crit}(f)$.
+    }
+\end{definition}
 
-    \begin{definition}
-        \textcolor{blue}{
-            A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
-            the Hessian $H_p f$ is non-singular.
-        }
-    \end{definition}
+\begin{definition}
+    \textcolor{blue}{
+        A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+        the Hessian $H_p f$ is non-singular.
+    }
+\end{definition}
 
-    \begin{definition}
-        \textcolor{blue}{
-            The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
-            the dimension of the negative eigenspace of the Hessian $H_p f$.
-            \begin{itemize}
-                \item local minima at $\vct{x^*}$ have index $0$.
-                \item local maxima at $\vct{x^*}$ have index $n$.
-                \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
-            \end{itemize}
-            We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
-            critical points of index $i$.
-        }
-    \end{definition}
+\begin{definition}
+    \textcolor{blue}{
+        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
+        the dimension of the negative eigenspace of the Hessian $H_p f$.
+        \begin{itemize}
+            \item local minima at $\vct{x^*}$ have index $0$.
+            \item local maxima at $\vct{x^*}$ have index $n$.
+            \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
+        \end{itemize}
+        We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
+        critical points of index $i$.
+    }
+\end{definition}
 
-    \begin{definition}
-        \textcolor{blue}{
-            A \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
-            all critical points of $f$ are non-degenerate.
-        }
-    \end{definition}
+\begin{definition}
+    \textcolor{blue}{
+        A \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
+        all critical points of $f$ are non-degenerate.
+    }
+\end{definition}
 
-    \subsection{Morse Theory in a Metric Space}
+\subsection{Morse Theory in a Metric Space}
 
-    \begin{theorem}
-        \textcolor{Blue}{
-            Let $f$ be a Morse function on $\Omega$, then the Euler characteristic of $\Omega$ is
-            given by
-            $$
-                \chi(\Omega) = \sum_{i=0}^n (-1)^i c_i
-            $$
-            where $c_i$ is the number of critical points of index $i$.
-        }
-    \end{theorem}
-
-    \begin{remark}
-        The Euler characteristic $\chi(\Omega)$ is a topological invariant of the manifold $\Omega$
-        and is independent of the choice of Morse function $f$.
-        The Euler characteristic is a measure of the "shape" of the manifold and can be used to
-        distinguish between different topological spaces.
-        The Euler characteristic may be defined by the alternating sum of the Betti numbers
-        $b_i$ of the manifold $\Omega$
+\begin{theorem}
+    \textcolor{Blue}{
+        Let $f$ be a Morse function on $\Omega$, then the Euler characteristic of $\Omega$ is
+        given by
         $$
-            \chi(\Omega) = \sum_{i=0}^n (-1)^i b_i
+            \chi(\Omega) = \sum_{i=0}^n (-1)^i c_i
         $$
-        where $b_i$ is the $i$-th Betti number of the manifold $\Omega$.
-    \end{remark}
-
-    \begin{theorem}
-        \textcolor{ForestGreen}{
-            (Sard's theorem) Let $f$ be a Morse function on $\Omega$, then
-            the image $f(\text{crit}(f))$ has Lebesque measure zero in $\R$.
-        }
-    \end{theorem}
-
-    \begin{remark}
-        We state a particular instance of Sard's theorem for continous scalar-valued functions $f$,
-        which was first proved by Anothony P. Morse in 1939.
-        The theorem asserts that the image of the critical points of a Morse function is a set 
-        of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
-        do not form a dense subset of the manifold $\Omega$.
-        Consequently, selecting $\vct{x} \in \Omega$ at random will almost never yeild a critical
-        point of $f$.
-    \end{remark}
-
-    \begin{remark}
-        The property that $\vct{x^*} \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
-        not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
-    \end{remark}
-
-
-
-    \subsection{Signed Distance Function}
-    \textcolor{Red}{
-        TODO: Add signed distance function theory and cite ref
-        Stanley Osher and Ronald Fedkiw, Level Set Methods and Dynamic
-        Implicit Surfaces, Springer, 2003.
+        where $c_i$ is the number of critical points of index $i$.
     }
+\end{theorem}
 
-    \subsection{Time Marching Level Set Methods}
-    \textcolor{Red}{
-        More Osher and Fedkiw, Level Set Methods and Dynamic
-        Implicit Surfaces, Springer, 2003.
+\begin{remark}
+    The Euler characteristic $\chi(\Omega)$ is a topological invariant of the manifold $\Omega$
+    and is independent of the choice of Morse function $f$.
+    The Euler characteristic is a measure of the "shape" of the manifold and can be used to
+    distinguish between different topological spaces.
+    The Euler characteristic may be defined by the alternating sum of the Betti numbers
+    $b_i$ of the manifold $\Omega$
+    $$
+        \chi(\Omega) = \sum_{i=0}^n (-1)^i b_i
+    $$
+    where $b_i$ is the $i$-th Betti number of the manifold $\Omega$.
+\end{remark}
+
+\begin{theorem}
+    \textcolor{ForestGreen}{
+        (Sard's theorem) Let $f$ be a Morse function on $\Omega$, then
+        the image $f(\text{crit}(f))$ has Lebesque measure zero in $\R$.
     }
+\end{theorem}
 
-    \subsection{Saard's Theorem and the Morse Lemma}
+\begin{remark}
+    We state a particular instance of Sard's theorem for continous scalar-valued functions $f$,
+    which was first proved by Anothony P. Morse in 1939.
+    The theorem asserts that the image of the critical points of a Morse function is a set 
+    of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
+    do not form a dense subset of the manifold $\Omega$.
+    Consequently, selecting $\vct{x} \in \Omega$ at random will almost never yeild a critical
+    point of $f$.
+\end{remark}
 
-    \section{Alternative Approaches}
-    \subsection{Level Set Methods}
-    \textcolor{Red}{
-        TODO: Explain how level set methods would allow us
-        to classify the critical point structure of $f$.
-        And their role in low-dimensional topology.
-        Explain curse of dimensionality and how level set methods
-        can be used to classify the critical point structure of $f$.
-    }
+\begin{remark}
+    The property that $\vct{x^*} \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
+    not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
+\end{remark}
+
+
+
+    % \subsection{Signed Distance Function}
+    % \textcolor{Red}{
+    %     TODO: Add signed distance function theory and cite ref
+    %     Stanley Osher and Ronald Fedkiw, Level Set Methods and Dynamic
+    %     Implicit Surfaces, Springer, 2003.
+    % }
+
+    % \subsection{Time Marching Level Set Methods}
+    % \textcolor{Red}{
+    %     More Osher and Fedkiw, Level Set Methods and Dynamic
+    %     Implicit Surfaces, Springer, 2003.
+    % }
+
+    % \subsection{Saard's Theorem and the Morse Lemma}
+
+    % \section{Alternative Approaches}
+    % \subsection{Level Set Methods}
+    % \textcolor{Red}{
+    %     TODO: Explain how level set methods would allow us
+    %     to classify the critical point structure of $f$.
+    %     And their role in low-dimensional topology.
+    %     Explain curse of dimensionality and how level set methods
+    %     can be used to classify the critical point structure of $f$.
+    % }
     
-    \subsection{Discontinous Galerkin Methods / Transportation Methods}
-    \textcolor{Red}{
-        High dimensional sparse grid methods
-    }
+    % \subsection{Discontinous Galerkin Methods / Transportation Methods}
+    % \textcolor{Red}{
+    %     High dimensional sparse grid methods
+    % }
 
 
-    \subsection{Machine Learning}
-    \textcolor{Red}{
-        TODO: Explain how machine learning can be used to classify
-        the critical point structure of $f$.
-        Note, this is in combination with the level set methods
-        minimal surface methods approximation obtained via
-        dimensionality reduction.
-        \textbf{TODO:} Interesting to think about learning the critical
-        point structure of $f$ via a neural network in small dimensions..
-        Ecspecially trace data, to help us better understand why some
-        Quasi-Newton methods work better than others.
-    }
+    % \subsection{Machine Learning}
+    % \textcolor{Red}{
+    %     TODO: Explain how machine learning can be used to classify
+    %     the critical point structure of $f$.
+    %     Note, this is in combination with the level set methods
+    %     minimal surface methods approximation obtained via
+    %     dimensionality reduction.
+    %     \textbf{TODO:} Interesting to think about learning the critical
+    %     point structure of $f$ via a neural network in small dimensions..
+    %     Ecspecially trace data, to help us better understand why some
+    %     Quasi-Newton methods work better than others.
+    % }
 
     % \subsection*{Motivation}
     % \medskip
@@ -429,54 +430,57 @@
 \section{Apendix}
 
 \subsection*{Notation}
-    We will assume the following notation throughout \textbf{TODO: Add to Appendix}\
-    \textcolor{Black}{
-        \begin{itemize}
-            \item $\| \cdot \|$ denotes the usual $\ell_2$ norm for vectors $\vct{x}$ in $\mathbb{R}^n$ and $p = 2$ norm
-            for matrices in $\mathbb{R}^{n \times m}$. i.e.,
-            \begin{flalign*}
-                \|x\| & := \left(\sum_i x_i^2\right)^{1/2} \\
-                 \|A\| & := (\lambda_{\max}(A^\top A))^{1/2}
-            = \max(\sigma(A))
-            \end{flalign*}
-            \item $\sigma(A) := \{\text{singular values of } A\}$.
-            \item $A \in \mathbb{R}^{n\times n}$ $\implies ~ \sigma(A) = \{\text{eigenvalues of } A \text{ (i.e. spectrum)}\}$
-            \item $\sigma_{\max}(A) := \max(\sigma(A))$ and $\sigma_{\min}(A) := \min(\sigma(A))$.
-            \item $ A \in \mathbb{R}^{n\times n}$  $\implies \lambda_{\max}(A) := \sigma_{\max}(A)$ and $\lambda_{\min}(A) = \sigma_{\min}(A) $
-            \item $\langle \cdot, \cdot \rangle$ denotes the usual inner product on $\mathbb{R}^n$, i.e.,
-            $$
-                \langle \vct{x}, \vct{y} \rangle := \vct{x}^\top \vct{y} = \sum_{i=1}^n \vct{x}_i \vct{y}_i = \| \vct{x} \| \|\vct{y}\| \cos(\theta)
-            $$
-            where $\theta$ is the angle between $\vct{x}$ and $\vct{y}$.
-            \item $\mathcal{B}_r(\vct{x}) := \{ \vct{y} \in \mathbb{R}^n : \|\vct{y} - \vct{x}\| < r \}$ is the open ball of radius $r$ centered at $\vct{x} \in \R^n$.
-            \item $\text{crit}(f) = \{ \vct{x}^* \in \R^n : \nabla f(\vct{x}^*) = 0 \}$ is the set of critical points of $f$.
-        \end{itemize}
-    }
+    We assume the following notation throughout\
+    \begin{itemize}
+        \label{notation}
+        \item $\| \cdot \|$ denotes the usual $\ell_2$ norm for vectors $\vct{x}$ in $\mathbb{R}^n$ and $p = 2$ norm
+        for matrices in $\mathbb{R}^{n \times m}$. i.e.,
+        \begin{flalign*}
+            \|x\| & := \left(\sum_i x_i^2\right)^{1/2} \\
+                \|A\| & := (\lambda_{\max}(A^\top A))^{1/2}
+        = \max(\sigma(A))
+        \end{flalign*}
+        \item $\sigma(A) := \{\text{singular values of } A\}$.
+        \item $A \in \mathbb{R}^{n\times n}$ $\implies ~ \sigma(A) = \{\text{eigenvalues of } A \text{ (i.e. spectrum)}\}$
+        \item $\sigma_{\max}(A) := \max(\sigma(A))$ and $\sigma_{\min}(A) := \min(\sigma(A))$.
+        \item $ A \in \mathbb{R}^{n\times n}$  $\implies \lambda_{\max}(A) := \sigma_{\max}(A)$ and $\lambda_{\min}(A) = \sigma_{\min}(A) $
+        \item $\langle \cdot, \cdot \rangle$ denotes the usual inner product on $\mathbb{R}^n$, i.e.,
+        $$
+            \langle \vct{x}, \vct{y} \rangle := \vct{x}^\top \vct{y} = \sum_{i=1}^n \vct{x}_i \vct{y}_i = \| \vct{x} \| \|\vct{y}\| \cos(\theta)
+        $$
+        where $\theta$ is the angle between $\vct{x}$ and $\vct{y}$.
+        \item $\mathcal{B}_r(\vct{x}) := \{ \vct{y} \in \mathbb{R}^n : \|\vct{y} - \vct{x}\| < r \}$ is the open ball of 
+        radius $r$ centered at $\vct{x} \in \R^n$.
+        \item $\text{crit}(f) = \{ \vct{x}^* \in \R^n : \nabla f(\vct{x}^*) = 0 \}$ is the set of critical points of $f$.
+    \end{itemize}
 
 
-
-
-
-
-\newpage
+% ------------------ TEST PROBLEMS
 \subsection{Test Problems}
-\newpage
+
+\textbf{Generalized Rosenbrock function:}
+    \[
+    f(x) = \sum_{i=1}^{n-1} \left( c(x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right),
+    \]
+    \[
+    x_0 = [-1.2, 1, -1.2, 1, \dots, -1.2, 1], \quad c = 100.
+    \]
 
 
 
-
+% ------------------- Code Listings
 \subsection{Code Listings}
+
 Below are the code listings for the experiments conducted in this report.
+
 \lstset{language=julia}
 \begin{lstlisting}[language=julia, caption={Algorithm 16.5}]
-    # TODO: Add Code
+   # Example Code Listing
 \end{lstlisting}
 \newpage
 
 
-
-
-
+% ------------------ BIBLIOGRAPHY
 \bibliographystyle{alpha}
 \bibliography{../references}
 
