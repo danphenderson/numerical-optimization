@@ -2,16 +2,22 @@
 
 \input{../preamble.tex}
 
-% ----------------- TITLE
+% ----------------- Document TITLE
+% -----------------------------------------------------------------
+% ------------------
 \title{Classification of Smooth Unconstrained Optimization Problems}
 \author{Daniel Henderson}
 \date{\today}
 
-% ------------------ DOCUMENT
+% ------------------ DOCUMENT START
+% -----------------------------------------------------------------
+% ------------------
 \begin{document}
 \maketitle
 
 % ------------------ ABSTRACT
+% -----------------------------------------------------------------
+% ------------------
 \begin{abstract}
     \noindent
     \textcolor{Red}{
@@ -20,7 +26,7 @@
     \texttt{OptimizationProblems.jl}~\cite{OptimizationProblems} Julia package.
     For each problem, we review its origin, present the analytic form
     of the objective $f:\R^n\!\to\!\R$ and the standard starting point
-    $\vct{x}_0$.  We then introduce a sampling-based procedure to classify
+    $\vct{x}_0$.  We introduce a sampling-based procedure to classify
     the critical-point structure and verify the positive-definiteness of
     the Hessian in a neighborhood of a strict local minimizer.  Numerical
     experiments confirm that while some test functions exhibit strong
@@ -28,6 +34,7 @@
     can slow down standard schemes.  Our findings provide guidance for
     choosing and tuning first- and second-order methods on common
     benchmark problems.
+    \textbf{TODO: Update this with the final results.}
     }
     \noindent\textbf{Keywords:} Julia, Optimization, Benchmarking, Automatic Differentiation
 \end{abstract}
@@ -35,175 +42,269 @@
 
 
 % ------------------ TABLE OF CONTENTS
+% -----------------------------------------------------------------
+% ------------------
 \tableofcontents
 \newpage
 
 
-% ------------------ INTRODUCTION
+% ------------------ SECTION: INTRODUCTION
+% -----------------------------------------------------------------
+% ------------------
 \section{Introduction}
-    Our aim is to investigate the local convexity of standard
-    test problems from the Constrained and Unconstrained Optimization Test
-    Environment (CUTE)~\cite{CUTE}. We start with a brief review of continuous
-    smooth optimization problems.
-    We then present a set of test problems selected from the
-    \texttt{OptimizationProblems.jl} \cite{OptimizationProblems}
-    Julia package. Next, we provide a theoritical overview on 
-    the classification of an objective functions critical point
-    structure. We then present a sampling procedure to classify
-    the \emph{critical-point} structure of the objective function
-    $f: \R^n \rightarrow \R$ within local neighborhoods of a strict
-    local minimizer $x^*$. Analytical expressions are provided for
-    each problems objective function and the accepted initial iterate
-    $\vct{x_0}$.
+    \label{sec:intro}
+    \medskip
+    Understanding the local convexity of an objective function
+    near strict local minimizers is fundamental to the design 
+    and convergence analysis of smooth optimization algorithms. 
+    Strong local convexity near a minimizer often guarantees rapid convergence 
+    of gradient-based and Newton-type methods, whereas narrow or nonconvex regions 
+    can result in slow progress or convergence to saddle points. 
+    Standard benchmark suites such as the Constrained and Unconstrained Testing Environment 
+    (CUTE)~\cite{CUTE} offer a variety of smooth test functions with diverse convexity profiles, 
+    but a systematic comparison of their local convexity properties is lacking.
+    In this work, we analyze the local convexity of a smooth objective functions
+    within neighborhoods of strict local minimizers. We focus on a subset of objective functions
+    from the \emph{Constrained and Unconstrained Testing Environment} (CUTE)~\cite{CUTE}.\
+
     \medskip
 
-    % State Notation
+    Our contributions are:
+    \textcolor{Blue}{
+        \begin{itemize}
+            \item We review existing techniques for classifying critical points.
+            \item We present a sampling-based classification algorithm for determining the local convexity
+            characteristics of the objective function $f$ in a neighborhood of a strict local minimizer.
+            \item  \textbf{TODO:} Add other contributions
+        \end{itemize}
+    }\
+    
+    \medskip
+
+    Our work is organized as follows.
+    \begin{itemize}
+        \item Section~\ref{sec:theory} presents a theoretical framework for classifying critical points
+        using dynamical systems, Morse theory and spectral analysis of $\nabla^2 f(\vct{x}^*)$.
+        \item Section~\ref{sec:problems} describes our problem selection criteria and 
+        provide analytical expressions for the objective function $f$ and the
+        accepted $\vct{x}_0$ for each problem. We include a brief discussion of
+        their provenance and known properties from the literature. 
+        \item Section~\ref{sec:procedures} discuss our numerical experiments for determining
+        strict local minimizers $\vct{x}^*$ and details our sampling-based classification algorithm
+        for determining the local convexity characteristics of $f$ in a neighborhood of $\vct{x}^*$.
+        \item Section~\ref{sec:conclusion} summarizes our findings and concludes with practical 
+        recommendations and mentions future work. Concludes with a discussion of the implications of our findings,
+        and how they can be used to inform the design and tuning of optimization algorithms.
+    \end{itemize}
+
+    Our introduction proceeds as follows. We fix the notation used throughout this 
+    paper in ~\ref{intro:preliminaries}. The general problem is stated in \ref{intro:unc-problem}
+    and we discuss a \emph{continuous model}~\ref{intro:grad-flow} for solving the smooth minimization
+    problem. We rigoursly define a \emph{scheme}, discussing the properties of first and second order
+    schemes in detail. We conclude the introduction by listing the benchmark problems 
+    under study~\ref{intro:problems} and describing their origins in the literature.
+
+    % Intro - Preliminaries
     \subsection{Preliminaries}
-        We assume the notation defined in the Appendix ~\ref{notation}.
-    \medskip
+        \label{intro:preliminaries}
+        \medskip 
 
-    % State Problem
-    \subsection{Continuous Unconstratined Optimization Problem}
-    The general form of an \textbf{unconstrained optimization problem} is
-    \begin{flalign}
-        \min_{\vct{x} \in \R^n} f(\vct{x})
-        \label{eq:unconstrained-opt}
-    \end{flalign}
-    where $\vct{x} \in \R^n$ is the optimization variable and $f: \R^n \rightarrow \R$ is
-    a sufficiently smooth objective function.
-    We requre that $f \in C^2(\overline{\Omega}; \R)$, where
-    the domain $\Omega \subset \R^n$ is a bounded open subset of $\R^n$; i.e.,
-    $f$ is twice continuously differentiable at every point $\vct{x} \in \Omega$ and
-    it's derivatives may be continuously extended to the domains boundary $\partial \Omega$.
-    The \textbf{optimal solution} and \textbf{optimal value} 
-    of \eqref{eq:unconstrained-opt} is denoted by
-    $$
-        \vct{x}^* = \mathop{\mathrm{arg\,min}}_{\vct{x} \in K} f(\vct{x})
-        \quad \text{ and } \quad
-        \vct{f}^* = \mathop{\mathrm{min}}_{\vct{x} \in K} f(\vct{x}),
-    $$
-    where $\vct{x}^*$ satisfies the \emph{first-order} optimality condition that $\nabla f(\vct{x}^*) = 0$.\\
+        We use the notation defined in the Appendix~\ref{notation} as used by 
+        Nocedal and Wright~\cite{NocedalAndWright06}.
+        
+        Unless stated otherwise we assume $f: \R^n \rightarrow \R$ is twice 
+        continuously differentiable. Throughout we restrict our attention to
+        a bounded path-connected open subset $\Omega \subset \R^n$ chosen large 
+        enough to contain all iterates and flow trajectories considered in this 
+        study. We choose our domain of interest $\Omega$ so the boundary 
+        $\partial\Omega : = \overline{\Omega} \setminus \Omega$ is sufficiently
+        smooth, meaning that $f$ and its derivatives extend continuously to the boundary.
 
-    A \emph{critical-point} is a point satisfying the \emph{first-order} optimality condition.
-    Let $\vct{x^*}$ denote a critical-point, and note that $\vct{x}^*$ is either a local minimizer, 
-    local maximizer, or a saddle point of $f$.
-    The \emph{second-order} optimality condition asserts that $\nabla^2 f(\vct{x}^*) \succeq 0$.
-    A \emph{strict local minimizer} $\vct{x}^*$ of $f$ is a \emph{critical-point} such that
-    $\nabla^2 f(\vct{x}^*) \succ 0$, i.e. the Hessian of $f$ is positive definite at $\vct{x}^*$.
-    In general, we seek an \emph{optimal value} $\vct{x}^*$ satisfying the \emph{second-order}
-    optimality condition that $\nabla^2 f(\vct{x}^*)$ is semi-positive definite.\\
-    
-    As defined in \cite{NocedalAndWright06}, we say an \emph{optimal-value} $\vct{x}^*$ is
-    \begin{itemize}
-        \item \emph{global minimizer} if $f(\vct{x}^*) \leq f(\vct{x}) ~ \forall x \in \R^n$
-        \item \emph{local minimizer} if there is a neighborhood $N$ of $\vct{x}^*$
-        such that $f(\vct{x}^*) \leq f(\vct{x})$ for all $\vct{x} \in N$
-        \item \emph{strict local minimizer} if there is a neighborhood $N$ of $\vct{x}^*$
-        such that $f(\vct{x}^*) < f(x)$ for all $x \in N / \{ \vct{x}^*\}$
-        \item \emph{isolated local minimizer} if there is a neighborhood $N$ of $\vct{x}^*$
-        such that $\vct{x}^*$ is the only local minimizer in $N$
-        \item \emph{stationary point} if $\nabla f(x^*) = 0$ (any local minimizer is a stationary point)
-    \end{itemize}
-    \medskip
-    The \emph{first-order} optimiality condition asserts $\nabla f(x^*) = 0$,
-    which is equivalent to saying $\vct{x}^*$ is a \emph{stationary point}.
-    The second order optimality conditions assert that the Hessian of $f$
-    at $\vct{x}^*$ is semi-positive definite, which is
-    equivalent to saying that $\vct{x}^*$ \emph{local minimizer}.
-    Note, if $\nabla^2 f(x^*)$ is positive definite, we say that $\vct{x}^*$ is a \emph{strict local minimizer}.
-    So we arrive at the following necessary and sufficient conditions for a stationary point $\vct{x}^*$ 
-    to be a strict local minimizer
-    \begin{itemize}
-        \item \emph{Necessary:} $\nabla f(x^*) = 0$ and $\nabla^2 f(x^*) \succeq 0 $ (positive semi-definite)
-        \item \emph{Sufficient:} $\nabla f(x^*) = 0$ and $\nabla^2 f(x^*) \succ 0$ (positive definite).
-    \end{itemize}
-    Consequently, \emph{strict local minimizers} are \emph{isolated local minimizers} and
-    such \emph{startionary points} correspond to the optimal solution $f^*$ being concave up.
-    \medskip
+        \todo{Add assumptions boxes used in paper as neccesasary}
 
-    \subsection{Continous Models}
-    
-    Let us start by defining a \emph{continuous model} for the
-    general form of problem \ref{eq:unconstrained-opt}.
-    
-    \begin{definition}
-        Let the \textbf{gradient flow} of $f$ be a solution to the dynamical system defined as
-        \begin{flalign}
-            \vct{\gamma}'(t) = -\nabla f(\vct{\gamma}(t)) 
-        \label{eq:gradient-flow}
-        \end{flalign}
-        where the evolution of our phase space is driven by the negative gradient of $f$.
-        A \textbf{gradient flow line} of $f$ is an integral curve 
-        $\vct{\gamma} : [0, \infty) \rightarrow \Omega$ satisfying the above evolutionary 
-        ordinary-differential equation subject to $\vct{\gamma}(0) = \vct{x_0}$.
-    \end{definition}
+    % Intro - Unconstrained Optimization Problem
+    \subsection{Unconstrained Optimization Problem}
+        \medskip
+        \label{intro:unc-problem}
+        Consider the general form of a \textbf{smooth unconstrained optimization problem}
+        \begin{equation}
+            \min_{\vct{x} \in \mathbb{R}^n} f(\vct{x}), \label{eq:unconstrained-opt}
+        \end{equation}
+        where $\vct{x} \in \R^n$ is the optimization variable and $f: \R^n \rightarrow \R$ is
+        a twice continuously differentiable objective function.    
 
-    \medskip
-
-    Suppose that our initial point is a stationary-point, that is, 
-    $\vct{x_0} = \vct{x^*}$. Then we aim to show the constant \emph{gradient flow line} defined as
-    $\vct{\gamma}(t) = \vct{x}^* ~ \forall ~ t \in [0, \infty)$ satisfies $\eqref{eq:gradient-flow}$.
-    Notice that it ought to be that $\vct{\gamma}'(t) = \vct{0}$ for all time $t$ and
-    since $\vct{x}^*$ is a stationary point, we have that $\nabla f(\vct{x}^*) = \vct{0}$.
-    Therefore, we have that
-    \begin{flalign*}
-        \vct{\gamma}'(t) & = \vct{0} = -\nabla f(\vct{\gamma}(t)) = -\nabla f(\vct{x}^*) = \vct{0} ~\text{ and }~ \vct{\gamma}(t) = \vct{x}^* ~ \forall ~ t \in [0, t_f]
-    \end{flalign*}
-    So we've shown that $\vct{\gamma}(t)$ is a constant flow line of $f$.
-    Consequently, by the uniqueness of solutions for ordinary differential
-    equations, if any flow line contains a \emph{first-order} critical point $\vct{x}^*$,
-    it must be a constant flow line.
-
-    \textcolor{Red}{
-    \begin{lemma}
-        The function $f: \omega \rightarrow \R$ is nonincreasing
-        along any flow-line $\vct{\gamma}(t)$ and strictly decreasing
-        along flow lines not containing a critical point $x^*$.
-    \end{lemma}
-    \begin{proof}
-        Let $\vct{\gamma} : [0, t_f] \rightarrow \Omega$ be a flow line.
-        Consider the composition $f \circ \vct{\gamma} : [0, t_f] \rightarrow \R$,
-        its derivative is
+        If a solution of \eqref{eq:unconstrained-opt} exists, then we denote the 
+        \textbf{optimal value} and \textbf{optimal solution} as
         \begin{flalign*}
-            \dfrac{d}{dt}\big( f(\vct{\gamma}(t)) \big) & =
-                \langle \nabla_{\vct{\gamma(t)}}(f), \dfrac{d\vct{\gamma}}{dt} \rangle \\
-                 & = \langle \nabla_{\vct{\gamma(t)}}(f), - \nabla_{\gamma(t)}(f) \rangle \\
-                 & = - \langle \nabla_{\vct{\gamma(t)}}(f), \nabla_{\gamma(t)}(f) \rangle \\
-                 & = - | \nabla_{\vct{\gamma(t)}}(f) |^2 \\
-                 & \leq 0
+            \vct{x}^{*}\in\arg\min_{\vct{x}}f(\vct{x})
+            \quad \text{ and } \quad
+            f^* = \mathop{\mathrm{min}}_{\vct{x} \in \R^n} f(\vct{x}),
         \end{flalign*}
-        Therefore, $f'(\vct{\gamma(t)}) = 0$ iff $\vct{\gamma}(t)$ is on a critical point
-        of $f$. In particular, if $\vct{\gamma}(t)$ does not contain in its image
-        a critical point of $f$, then the above inequality implies that
-        $f$ is strictly decreasing along the integral curve $\vct{\gamma(t)}$.
-    \end{proof}
-    \begin{theorem}
-        For all $\vct{x}$ in the closed manifold $\overline{\Omega}$, there exists
-        uniquely $\vct{\gamma}_{\vct{x}}(t) : \R \rightarrow \overline{\Omega}$
-        such that $\vct{\gamma}_{\vct{x}}(0) = \vct{x}$
-        and the limits
-        $$
-            \lim_{t \to -\infty } \vct{\gamma}_{\vct{x}}(t) ~ \text{ and } ~ 
-            \lim_{t \to \infty } \vct{\gamma}_{\vct{x}}(t)
-        $$
-        exist and converge to \emph{critical-points} of $f$.
-    \end{theorem}         
-    Now it may be shown that the flow map operator $T : \overline{\Omega} \times \R \rightarrow \overline{\Omega}$
-    defined as $T(\vct{x}, t) : =  \vct{\gamma}_{\vct{x}}(t)$. This implies theoretically that we may
-    perform analysis of our phase space as constructed by a smooth union of integral curves.
-    Consequently, by our previous lemma, if the flow map $T$ contains a critical point $\vct{x}^*$ then
-    it ought to be that $T(\vct{x}^*, t) \equiv \text{ const } ~ \forall t$, otherwise,
-    $T$ is descending for all of time.
-    }
 
+        In practice we choose $\Omega$ to be the problem domain of interest.
+        By the standing assumptions of \ref{intro:preliminaries},
+        $\Omega$ is a bounded, path-connected, open subset of $\R^n$ so
+        the closure $\overline{\Omega}$ is a bounded and closed subset of
+        $\R^n$. The Heine-Borel theorem implies that the closure $\overline{\Omega}$ is compact.
+        Consequently, the extreme value theorem asserts that a continuous real-valued function $f$
+        obtains a maximum and minimum value on the compact set $\overline{\Omega}$, where continuity
+        of $f$ on $\overline\Omega$ is guaranteed by the standing $C^{2}$ assumption.
+        So by us choosing a problem domain of interest, we can guarantee an optimal solution
+        exists in $\overline{\Omega}$ and we can make global optimality claims about the optimal
+        value within our chosen domain. 
 
+        \medskip
+        
+        A point satisfying the first-order optimality condition is called a \emph{critical point}. 
+        Such a point can be a local minimizer, local maximizer, or saddle point. We classify critical 
+        points as follows (cf.~\cite{NocedalAndWright06}):
+        \begin{itemize}
+            \item A \emph{local minimizer} if there exists a neighborhood $N$ of $\vct{x}^*$ such that 
+            $f(\vct{x}^*) \leq f(\vct{x})$ for all $\vct{x} \in N$.
+            \item A \emph{strict local minimizer} if there exists a neighborhood $N$ of $\vct{x}^*$ 
+            such that $f(\vct{x}^*) < f(\vct{x})$ for all $\vct{x} \in N \setminus \{\vct{x}^*\}$.
+            \item An \emph{isolated local minimizer} if there exists a neighborhood $N$ of 
+            $\vct{x}^*$ such that $\vct{x}^*$ is the unique local minimizer in $N$.
+            \item A \emph{global minimizer} if $f(\vct{x}^*) \leq f(\vct{x})$ for all $\vct{x} \in \R^n$.
+        \end{itemize}
 
-    % Scheme for solving unconstrained optimization problem
+        Since we focus on nonlinear objective functions, global optimality generally cannot be 
+        guaranteed. However, local optimality of a critical point $\vct{x}^*$ is verified using 
+        the following conditions:
+        \begin{flalign*}
+            \text{Necessary:} \quad  & \nabla f(\vct{x}^*) = 0 ~ \text{ and } ~ \nabla^2 f(\vct{x}^*) \succeq 0\\
+            \text{Sufficient:} \quad & \nabla^2 f(\vct{x}^*) \succ 0. 
+        \end{flalign*}
+        The necessary condition for $\vct{x}^*$ to be a local minimizer of $f$ is that 
+        $\vct{x}^*$ satisfies the first-order and second-order optimality conditions.
+        The \emph{second-order} optimality condition states that the Hessian of $f$ 
+        is positive semidefinite at $\vct{x}^*$. If the Hessian is strictly positive
+        definite at $\vct{x}^*$, it is both a necessary and a sufficient condition that $\vct{x}^*$
+        is a strict local minimizer. It holds that strict local minimizers are isolated,
+        corresponding precisely to points where $f$ is strictly convex.\\
+    
+    % Intro - Continuous Model
+    \subsection{Continuous Model}
+        \label{intro:grad-flow}
+        \medskip
+
+        We reinterpret the minimization problem~\eqref{eq:unconstrained-opt} as the search for equilibria 
+        of the \emph{gradient flow} dynamical system. Interpreting our problem as a dynamical system 
+        allows us to:
+
+        \begin{itemize}
+            \item exploit geometric structure when analyzing the critical-point landscapes;
+            \item design time-discretisations of the gradient flow ODE~\eqref{eq:gradient-flow}
+            and construct error bounds using the continuous model;
+            \item leverage the stability theory of autonomous ODEs on compact manifolds.
+        \end{itemize}
+
+        In this section, we establish a link between the minimization of $f$ and the 
+        trajectories of a dynamical system.
+
+        \begin{definition}
+            \label{def:grad-flow}
+            The \emph{gradient‐flow} dynamical system is defined by the IVP 
+            \begin{equation}
+                \label{eq:gradient-flow}\tag{GF}
+                \vct{\gamma}'(t) = -\nabla f\bigl(\vct{\gamma}(t)\bigr) ~\text{ subject to } \vct{\gamma}(0) = \vct{x}_0 \in \overline\Omega
+            \end{equation}
+            An integral curve $\vct{\gamma}$ satisfying the \emph{gradient-flow} IVP is a gradient \emph{flow-line}, or, \emph{trajectory}.
+        \end{definition}
+
+        Suppose the initial point $\vct{x_0}$ is a critical point, then the gradient flow ODE 
+        is satisfied by the constant trajectory $\vct{\gamma}(t) = \vct{x}_0$ for any time $t$. 
+        Notice that constant $\vct{\gamma}(t)$ implies $\vct{\gamma}'(t) = \vct{0}$, substituting
+        into the gradient-flow ODE asserts that $-\nabla f(\vct{x}_0) = \vct{0}$, which holds true
+        since $\vct{x_0}$ is a critical point (i.e., $\nabla f(\vct{x}_0) = \vct{0}$).
+        Consequently, the existence of a solution holds when $\vct{x}_0$ is a critical point
+        and such points correspond to stationary equilibria in the gradient flow ODE phase space.
+        Now we show equation \eqref{eq:gradient-flow} is well-posed for all $\vct{x}_0 \in \overline{\Omega}$.
+
+        Let $\vct{\gamma}_{\vct{x_0}}$ be any gradient \emph{flow-line} starting at
+        some point $\vct{x_0}$ in $\overline{\Omega}$. Note that the trajectory $\vct{\gamma}_{\vct{x_0}}$ 
+        is driven by the steepest descent direction of the objective function $f$. But $f$ is bounded
+        below by the minimum value $f^*$, so the trajectory $\vct{\gamma}_{\vct{x_0}}$ cannot
+        escape the compact set $\overline{\Omega}$ in finite time. Indeed, we will show that the trajectory 
+        $\vct{\gamma}_{\vct{x_0}}$ is guaranteed to converge to a critical point of $f$ in $\overline{\Omega}$.
+        But first we must establish the IVP~\eqref{eq:gradient-flow} is well-posed for all $\vct{x}_0 \in \overline{\Omega}$.
+
+        \begin{theorem}[Existence]\label{thm:gf-existence}
+            For every $\vct{x_0}\in \overline{\Omega}$ the IVP \eqref{eq:gradient-flow} admits a solution
+            $\gamma_{\vct{x_0}}\in C^{1}\bigl([0,\infty);\overline{\Omega}\bigr)$
+            such that $\vct{\gamma}_{\vct{x_0}}(t) \in \overline{\Omega}$ for all $t\ge 0$. 
+        \end{theorem}
+
+        \begin{proof}[Sketch]
+            The gradient flow ODE \eqref{eq:gradient-flow} is a first-order, autonomous,
+            ordinary differential equation (ODE) on the compact manifold $\overline{\Omega}$.
+            To apply the Picard-Lindelöf theorem, it is sufficient to note $f \in C^{2}(\overline{\Omega})$
+            implies that $-\nabla f \in C^{1}(\overline{\Omega})$, and it follows that $\nabla f$ is
+            Lipschitz on $\overline{\Omega}$, (i.e., $f$ is $\ell$-smooth). Consequently, the gradient 
+            flow ODE \eqref{eq:gradient-flow} is well-posed for all interior initial conditions 
+            $\vct{x}_0 \in \Omega$ for some finite time $t^*$.\
+
+            \td{TODO: Consider cleanest way to show that the flow lines are contained in the sublevel sets.}
+        \end{proof}
+
+        The following lemma characterizes the monotonicity of $f$ along the trajectory $\vct{\gamma}_{\vct{x_0}}$.
+
+        \begin{lemma}\label{lem:monotone-flow-lines}
+            Along any trajectory $\vct{\gamma}_{x_0}(t)$ one has
+            \begin{equation}\label{eq:monotone-flow-lines}
+                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\|^{2}\;\le\;0, \quad t \ge 0.
+            \end{equation}
+            Hence $f\circ\vct{\gamma}_{x_0}$ is non‐increasing in $t$, and strictly decreasing whenever $\nabla f(\vct{\gamma}_{\vct{x_0}}(t))\neq0$.
+        \end{lemma}
+
+        \begin{proof}
+            Differentiating the composition $f\circ\vct{\gamma}_{\vct{x_0}}$ w.r.t. $t$ using 
+            the chain rule yields
+            \begin{flalign*}
+                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot 
+                    \frac{d}{dt}\vct{\gamma}_{\vct{x_0}}(t)\\
+                & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot \vct{\gamma}'_{\vct{x_0}}(t) \\
+                & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot \left(-\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\right)\\
+                & = \langle \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr), -\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \rangle\\
+                & = -\langle \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr), \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \rangle\\
+                & = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\|^{2} \\
+                & \leq 0.
+            \end{flalign*}
+            A direct consequence of the positive-definiteness property of a norm is that the final inequality
+            is strict for all points $\vct{\gamma}_{\vct{x_0}}(t)$ that aren't critical.
+        \end{proof}
+
+        \begin{theorem}
+            For all $\vct{x}_0 \in \overline{\Omega}$, the flow operator maps to a unique integral 
+            curve $\vct{\gamma}_{\vct{x}_0}(t)$ of the gradient flow ODE \eqref{eq:gradient-flow} such that
+            \begin{equation}\label{eq:flow-map-curve}
+                \vct{\gamma}_{\vct{x}_0}(t) = T(\vct{x}_0; t) : = \vct{x}_0 - \int_0^t \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(s)\bigr) ds
+            \end{equation}
+            and $\vct{\gamma}_{\vct{x}_0}(t)$ is a continuous map from $\R$ to the closure of the manifold
+            $\overline{\Omega}$, i.e., $\vct{\gamma}_{\vct{x}_0}(t) : \R \rightarrow \overline{\Omega}$.
+            $\vct{\gamma}_{\vct{x}}(t) : \R \rightarrow \overline{\Omega}$ such that $\vct{\gamma}_{\vct{x}}(0) = \vct{x}$
+            and the limits
+            $$
+                \lim_{t \to -\infty } \vct{\gamma}_{\vct{x}}(t) ~ \text{ and } ~ 
+                \lim_{t \to \infty } \vct{\gamma}_{\vct{x}}(t)
+            $$
+            exist and converge to \emph{critical-points} of $f$.
+        \end{theorem}
+
+        \td{
+            TODO: Complete the compact-domain formulation of the gradient flow dynamical system and demonstrate
+            that trajectories provably descend the objective and terminate at critical points inside $\overline{\Omega}$.
+        }\newpage
+    
+        
+    % Intro - Optimization Schemes
     \subsection{Optimization Schemes}
-    A \emph{scheme} for solving $\eqref{eq:unconstrained-opt}$ is a numerical
-    method for approximating the optimal solution $\vct{x}^*$. 
+        \label{intro:scheme}
+        \medskip
 
-    \textcolor{Red}{
+        We formally present a \emph{scheme} for solving \eqref{eq:unconstrained-opt} from some
+        starting point $\vct{x}_0 \in \Omega$.
+
         % Scheme for solving unconstrained optimization problem
         \begin{definition}
             A \textbf{scheme} for solving a general form \emph{unconstrained optimization problem}
@@ -218,7 +319,7 @@
                 $$
                     \left( T_h(\vct{x}) - \vct{x} \right) h^{-1} + \nabla f(\vct{x}) \rightarrow 0 \text{ as } h \rightarrow 0.
                 $$
-                implying that a single step approximates the continous gradient flow w/ local error
+                implying that a single step approximates the continuous gradient flow w/ local error
                 $\mathcal{O}(h^{p+1})$ where $p$ is the global order of the scheme.
                 \item \emph{Stability}: $\exists~ c > 0, h_0 > 0 ~:~ \forall h \in (0, h_0]$,
                 and for all $\vct{x_1}, \vct{x_2}$ in a \emph{neighborhood $N \subset K$}
@@ -243,6 +344,7 @@
                 $$
             \end{enumerate}
         \end{definition}
+
         The following iteration operators are examples of schemes for solving
         \eqref{eq:unconstrained-opt}.
         \begin{itemize}
@@ -260,9 +362,20 @@
             $\nabla^2 f \succeq \mu I \succeq 0$.
             \item \textbf{TODO} Make this a table
         \end{itemize}
-    }
+    
 
-    \medskip
+    % Intro - Benchmark Problems
+    \subsection{Benchmark Problems}
+        \label{intro:problems}
+        We select a subset of the \texttt{OptimizationProblems.jl}~\cite{OptimizationProblems}
+        Julia package that support automatic differentiation (AD) natively through operator
+        overloading. (TODO: Cite ForwardDiff.jl, Flux.jl, etc.) Each problem is implemented
+        as \texttt{ADNLPModel} instance, which is a wrapper around the \texttt{NLPModel} interface
+        whose backend AD engine is configurable to support forward-mode or reverse-mode.
+
+
+
+    
 
     % ------------------ Theory
     
@@ -276,9 +389,11 @@
     is a smooth manifold with boundary $\partial \Omega$.
     The interior $\Omega$ is an open subset of $\R^n$ and is a smooth manifold.
 
+    \td{Move the above bit to 1.3}
+
 \begin{definition}
     \textcolor{blue}{
-        A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
+        A point $\vct{x}^* \in \Omega$ is a \textbf{critical point} of $f$ if the
         differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
         $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
         The set of critical points of $f$ is denoted by $\text{crit}(f)$.
@@ -287,19 +402,19 @@
 
 \begin{definition}
     \textcolor{blue}{
-        A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+        A point $\vct{x}^* \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
         the Hessian $H_p f$ is non-singular.
     }
 \end{definition}
 
 \begin{definition}
     \textcolor{blue}{
-        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
+        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x}^*$ is defined to be
         the dimension of the negative eigenspace of the Hessian $H_p f$.
         \begin{itemize}
-            \item local minima at $\vct{x^*}$ have index $0$.
-            \item local maxima at $\vct{x^*}$ have index $n$.
-            \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
+            \item local minima at $\vct{x}^*$ have index $0$.
+            \item local maxima at $\vct{x}^*$ have index $n$.
+            \item saddle points at $\vct{x}^*$ have index $k$ where $0 < k < n$.
         \end{itemize}
         We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
         critical points of index $i$.
@@ -347,7 +462,7 @@
 \end{theorem}
 
 \begin{remark}
-    We state a particular instance of Sard's theorem for continous scalar-valued functions $f$,
+    We state a particular instance of Sard's theorem for continuous scalar-valued functions $f$,
     which was first proved by Anothony P. Morse in 1939.
     The theorem asserts that the image of the critical points of a Morse function is a set 
     of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
@@ -357,7 +472,7 @@
 \end{remark}
 
 \begin{remark}
-    The property that $\vct{x^*} \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
+    The property that $\vct{x}^* \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
     not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
 \end{remark}
 
@@ -388,7 +503,7 @@
     %     can be used to classify the critical point structure of $f$.
     % }
     
-    % \subsection{Discontinous Galerkin Methods / Transportation Methods}
+    % \subsection{Discontinuous Galerkin Methods / Transportation Methods}
     % \textcolor{Red}{
     %     High dimensional sparse grid methods
     % }
@@ -455,6 +570,134 @@
     \end{itemize}
 
 
+\subsection*{Definitions}
+    \label{sec:definitions}
+    
+    % Lipschitz
+    \begin{definition}
+        $f$ is \textbf{$L$-Lipschitz} if $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+        \; \exists~ L \geq 0 ~:~  \| f(\vct{x_1}) - f(\vct{x_2})\| 
+        \leq L\|\vct{x_1} - \vct{x_2}\|
+        $$
+    \end{definition}
+
+    % L-Lipschitz gradient
+    \begin{definition} 
+        $f$ has \textbf{$\ell$-Lipschitz gradient}, or, $f$ is \textbf{$\ell$-smooth} if
+        $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+            \exists~ \ell \geq 0 ~:~ \|\nabla f(\vct{x_1}) - \nabla f(\vct{x_2})\| 
+            \leq \ell\|\vct{x_1} - \vct{x_2}\|
+        $$
+    \end{definition}
+
+    % Rho Lipschitz Hessian
+    \begin{definition}
+        $f$ has \textbf{$\rho$-Lipschitz Hessian} if $\forall ~ \vct{x_1},\vct{x_2}$
+        $$
+            \; \exists~ \rho \geq 0 ~:~ \|\nabla^2 f(\vct{x_1}) - \nabla^2 f(\vct{x_2})\| 
+            \leq \rho\|\vct{x_1} - \vct{x_2}\|
+        $$
+    \end{definition}
+
+    % Convexity
+    \begin{definition}
+        $f$ is \textbf{convex} if $\forall ~ \vct{x_1},\vct{x_2}$
+        \begin{flalign*}
+            f(\vct{x_2}) & \geq f(\vct{x_1}) + \langle  \vct{x_2} - \vct{x_1}, \nabla f(\vct{x_1}) \rangle\\
+                        & = f(\vct{x_1}) + \nabla f(\vct{x_1})^T(\vct{x_2} - \vct{x_1}) 
+        \end{flalign*}
+    \end{definition}
+
+    % Strictly Convex
+    \begin{definition}
+        $f$ is \textbf{strictly convex} if
+        \begin{flalign*}
+            \exists~ \mu > 0 ~ : ~ & \nabla^2 f \succeq \mu I \\ 
+            & \iff \lambda_{\min}(\nabla^2 f) \geq \mu > 0 
+        \end{flalign*}
+    \end{definition}
+
+    % Alpha strong convexity
+    \begin{definition}
+        $f$ is \textbf{$\alpha$-strongly convex} if $\forall ~ \vct{x_1},\vct{x_2} \exists~ \alpha > 0$ s.t.
+        \begin{flalign*}
+            & f(\vct{x_2}) \geq f(\vct{x_1}) + \langle \nabla f(\vct{x_1}), \vct{x_2} - \vct{x_1} \rangle + 
+            \frac{\alpha}{2}\|\vct{x_2} - \vct{x_1} \|^2\\
+            & \iff \lambda_{\min}(\nabla^2 f (\vct{x})) \geq - \alpha. 
+        \end{flalign*}
+    \end{definition}
+
+    % First-order stationary point
+    \begin{definition}
+        $\vct{x^*}$ is a \textbf{first-order stationary point}
+        if $\| \nabla f(x^*) \| = 0$.
+    \end{definition}
+
+    % Eps-first-order stationary point
+    \begin{definition}
+        $\vct{x^*}$ is an \textbf{$\eps$-first-order stationary point} 
+        if $\|\nabla f(x^*)\| \leq \eps$. 
+    \end{definition}
+
+    % Second-order stationary point
+    \begin{definition}
+        $\vct{x}^* \in \R^n$ is a \textbf{second-order stationary point} if 
+        $\| \nabla f(x^*) \| = 0\text{ and } \nabla^2 f(x^*) \succeq 0$.
+    \end{definition}
+
+    % Eps-second-order stationary point
+    \begin{definition}
+        if $f$ has $\rho$-Lipschitz Hessian, $\vct{x}^* \in \R^n$ is a
+        \textbf{$\eps$-second-order stationary point} if 
+        $$
+            \| \nabla f(x^*) \| \leq \eps \text{ and }\nabla^2 f(x^*) \succeq -\sqrt{\rho \eps}
+        $$
+        \begin{remark}
+            Note that the Hessian is not required to be positive definite, 
+            but it is required to have a small eigenvalue. 
+        \end{remark}
+    \end{definition}
+
+
+    \begin{definition}
+        \textcolor{blue}{
+            A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
+            differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
+            $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
+            The set of critical points of $f$ is denoted by $\text{crit}(f)$.
+        }
+    \end{definition}
+
+    \begin{definition}
+        A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+        the Hessian $H_p f$ is non-singular.
+    \end{definition}
+
+    \begin{definition}
+        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
+        the dimension of the negative eigenspace of the Hessian $H_p f$.
+        \begin{itemize}
+            \item local minima at $\vct{x^*}$ have index $0$.
+            \item local maxima at $\vct{x^*}$ have index $n$.
+            \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
+        \end{itemize}
+        We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
+        critical points of index $i$.
+    \end{definition}
+
+    \begin{remark}
+        For each objective function $f$ we are interested in determining the
+        critical points of $f$ 
+    \end{remark}
+
+    \begin{remark}
+        The \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
+        all critical points of $f$ are non-degenerate.
+    \end{remark}
+
+
 % ------------------ TEST PROBLEMS
 \subsection{Test Problems}
 
@@ -475,7 +718,7 @@ Below are the code listings for the experiments conducted in this report.
 
 \lstset{language=julia}
 \begin{lstlisting}[language=julia, caption={Algorithm 16.5}]
-   # Example Code Listing
+   # TODO: Add Code Listings
 \end{lstlisting}
 \newpage
 

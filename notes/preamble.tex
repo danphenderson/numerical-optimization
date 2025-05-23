@@ -21,13 +21,35 @@
 \usepackage{fancybox}
 \usepackage{todonotes}
 \usepackage[dvipsnames]{xcolor}
-
+\usepackage{mdframed}      % boxed theorems
+\usepackage{thmtools}      % couples well with mdframed
 \captionsetup[lstlisting]{font={small}, labelfont={bf}, labelsep=colon}
 \renewcommand{\lstlistingname}{Code}
+% Define a theorem style that uses mdframed for the box
+\declaretheoremstyle[
+  headfont=\normalfont\bfseries,
+  mdframed={
+    linewidth=0.5pt,
+    roundcorner=4pt,
+    backgroundcolor={gray!5},
+    innertopmargin=6pt,
+    innerbottommargin=6pt,
+    innerleftmargin=8pt,
+    innerrightmargin=8pt
+  }
+]{boxed}
+
+% Create the “assumption” environment, numbered within each section
+\declaretheorem[
+  name=Assumption,
+  style=boxed,
+  numberwithin=section
+]{assumption}
+
+
 
 % Page setup
 \geometry{letterpaper, margin=1in}
-
 \setlength{\parindent}{0pt}
 \linespread{1.25}
 \renewcommand{\arraystretch}{1.25} % Adjust as needed
@@ -47,7 +69,12 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
+% TODO notes
+\newcommand{\td}[1]{\todo[inline, color=red!20, size=\small]{#1}}
+\newcommand{\note}[1]{\todo[inline, color=blue!20, size=\small]{#1}}
+\newcommand{\remeber}[1]{\todo[inline, color=green!20, size=\small]{#1}}
 
+% Sets and number systems
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\C}{\mathbb{C}}

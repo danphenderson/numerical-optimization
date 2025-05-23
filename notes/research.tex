@@ -75,7 +75,7 @@
     }
     \end{definition}
 
-    % L-Liaafpschitz gradient
+    % L-Lipschitz gradient
     \begin{definition} 
     \textcolor{blue}{
         $f$ has \textbf{$\ell$-Lipschitz gradient}, or, $f$ is \textbf{$\ell$-smooth} if
@@ -339,10 +339,8 @@
     \medskip 
 
     \begin{theorem}
-        \textcolor{Red}{
             For a Morse function $f$ on $\Omega$, the gradient of $f$ is either zero or
             orthogonal to the tangent space of the level set $L_c$ at $\vct{x} \in L_c$.
-        }
     \end{theorem}
 
     The above theorem implies that at a stationary point $\vct{x^*}$, a
@@ -458,24 +456,20 @@
     \end{definition}
 
     \begin{definition}
-        \textcolor{blue}{
-            A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
-            the Hessian $H_p f$ is non-singular.
-        }
+        A point $\vct{x^*} \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+        the Hessian $H_p f$ is non-singular.
     \end{definition}
 
     \begin{definition}
-        \textcolor{blue}{
-            The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
-            the dimension of the negative eigenspace of the Hessian $H_p f$.
-            \begin{itemize}
-                \item local minima at $\vct{x^*}$ have index $0$.
-                \item local maxima at $\vct{x^*}$ have index $n$.
-                \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
-            \end{itemize}
-            We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
-            critical points of index $i$.
-        }
+        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x^*}$ is defined to be
+        the dimension of the negative eigenspace of the Hessian $H_p f$.
+        \begin{itemize}
+            \item local minima at $\vct{x^*}$ have index $0$.
+            \item local maxima at $\vct{x^*}$ have index $n$.
+            \item saddle points at $\vct{x^*}$ have index $k$ where $0 < k < n$.
+        \end{itemize}
+        We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
+        critical points of index $i$.
     \end{definition}
 
     \begin{remark}
@@ -484,10 +478,8 @@
     \end{remark}
 
     \begin{remark}
-        \textcolor{blue}{
-            The \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
-            all critical points of $f$ are non-degenerate.
-        }
+        The \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
+        all critical points of $f$ are non-degenerate.
     \end{remark}
 
     \begin{theorem}
