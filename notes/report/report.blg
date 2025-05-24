@@ -6,45 +6,45 @@ Database file #1: ../references.bib
 Warning--entry type for "OptimizationProblems" isn't style-file defined
 --line 21 of file ../references.bib
 Warning--I didn't find a database entry for "CUTE"
-You've used 2 entries,
+You've used 3 entries,
             2543 wiz_defined-function locations,
-            574 strings with 4965 characters,
-and the built_in function-call counts, 723 in all, are:
-= -- 65
-> -- 44
+            584 strings with 5191 characters,
+and the built_in function-call counts, 1146 in all, are:
+= -- 111
+> -- 63
 < -- 0
-+ -- 15
-- -- 15
-* -- 46
-:= -- 131
-add.period$ -- 6
-call.type$ -- 2
-change.case$ -- 13
-chr.to.int$ -- 2
-cite$ -- 2
-duplicate$ -- 25
-empty$ -- 51
-format.name$ -- 17
-if$ -- 143
++ -- 21
+- -- 21
+* -- 79
+:= -- 201
+add.period$ -- 10
+call.type$ -- 3
+change.case$ -- 19
+chr.to.int$ -- 3
+cite$ -- 3
+duplicate$ -- 39
+empty$ -- 81
+format.name$ -- 24
+if$ -- 228
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 13
-num.names$ -- 6
-pop$ -- 22
+missing$ -- 3
+newline$ -- 19
+num.names$ -- 9
+pop$ -- 24
 preamble$ -- 1
-purify$ -- 15
+purify$ -- 22
 quote$ -- 0
-skip$ -- 22
+skip$ -- 35
 stack$ -- 0
-substring$ -- 14
-swap$ -- 2
+substring$ -- 46
+swap$ -- 3
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 20
 warning$ -- 0
-while$ -- 6
-width$ -- 3
-write$ -- 27
+while$ -- 11
+width$ -- 4
+write$ -- 42
 (There were 2 warnings)

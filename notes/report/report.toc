@@ -1,11 +1,18 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Preliminaries}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.1}Preliminaries}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Unconstrained Optimization Problem}{3}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Continuous Model}{4}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Optimization Schemes}{6}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}Benchmark Problems}{8}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Theory}{8}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Morse Theory in a Metric Space}{8}{subsection.2.1}%
-\contentsline {section}{\numberline {3}Apendix}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Test Problems}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Code Listings}{12}{subsection.3.2}%
+\contentsline {subsection}{\numberline {1.4}Optimization Schemes}{7}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Benchmark Problems}{9}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Morse Theory}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Morse Theory in a Metric Space}{9}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Problem Selection and Analysis}{11}{section.3}%
+\contentsline {section}{\numberline {4}Numerical Experiments}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Experimental Setup}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Results and Discussion}{11}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{11}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Future Work}{11}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Apendix}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Definitions}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Test Problems}{14}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Code Listings}{14}{subsection.6.3}%

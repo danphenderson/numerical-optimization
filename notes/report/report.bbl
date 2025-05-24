@@ -1,5 +1,11 @@
 \begin{thebibliography}{NW06}
 
+\bibitem[KS09]{Kok2009}
+Schalk Kok and Carl Sandrock.
+\newblock Locating and characterizing the stationary points of the extended rosenbrock function.
+\newblock {\em Evolutionary Computation}, 17(3):437--453, 2009.
+\newblock © 2009 by the Massachusetts Institute of Technology.
+
 \bibitem[MOS]{OptimizationProblems}
 Tangi Migot, Dominique Orban, and Abel~Soares Siqueira.
 \newblock Optimizationproblems.jl: A collection of optimization problems in julia.

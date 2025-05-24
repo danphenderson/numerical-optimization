@@ -20,23 +20,18 @@
 % ------------------
 \begin{abstract}
     \noindent
-    \textcolor{Red}{
-    We study the local convexity properties of a benchmark suite of smooth,
-    unconstrained minimization problems drawn from the
+    We study the local convexity properties of a benchmark suite of smooth, 
+    unconstrained minimization problems drawn from the 
     \texttt{OptimizationProblems.jl}~\cite{OptimizationProblems} Julia package.
     For each problem, we review its origin, present the analytic form
     of the objective $f:\R^n\!\to\!\R$ and the standard starting point
     $\vct{x}_0$.  We introduce a sampling-based procedure to classify
-    the critical-point structure and verify the positive-definiteness of
+    the critical-point structure and verify the positive definiteness of
     the Hessian in a neighborhood of a strict local minimizer.  Numerical
     experiments confirm that while some test functions exhibit strong
     local convexity, others contain narrow regions of non-convexity that
-    can slow down standard schemes.  Our findings provide guidance for
-    choosing and tuning first- and second-order methods on common
-    benchmark problems.
-    \textbf{TODO: Update this with the final results.}
-    }
-    \noindent\textbf{Keywords:} Julia, Optimization, Benchmarking, Automatic Differentiation
+    can slow down standard schemes, e.g. \todo{add "tacking" ref.}
+    \noindent\textbf{Keywords:} benchmarking, numerical optimization, stationary points, saddle points,
 \end{abstract}
 
 
@@ -54,55 +49,60 @@
 \section{Introduction}
     \label{sec:intro}
     \medskip
+
     Understanding the local convexity of an objective function
     near strict local minimizers is fundamental to the design 
     and convergence analysis of smooth optimization algorithms. 
-    Strong local convexity near a minimizer often guarantees rapid convergence 
-    of gradient-based and Newton-type methods, whereas narrow or nonconvex regions 
-    can result in slow progress or convergence to saddle points. 
-    Standard benchmark suites such as the Constrained and Unconstrained Testing Environment 
-    (CUTE)~\cite{CUTE} offer a variety of smooth test functions with diverse convexity profiles, 
-    but a systematic comparison of their local convexity properties is lacking.
-    In this work, we analyze the local convexity of a smooth objective functions
-    within neighborhoods of strict local minimizers. We focus on a subset of objective functions
-    from the \emph{Constrained and Unconstrained Testing Environment} (CUTE)~\cite{CUTE}.\
-
+    Strong local convexity near a minimizer often guarantees rapid 
+    convergence of gradient-based and Newton-type methods. In 
+    contrast, narrow or nonconvex regions can result in slow progress 
+    or convergence to saddle points. We select benchmark problems from the
+    \emph{Constrained and Unconstrained Testing Environment} SIF (CUTE)~\cite{CUTE}.
+    We sample the objective of each problem to reveal long, 
+    narrow valleys of weak/zero curvature surrounding strict minimizers.
+    Additinally, we analyze the spectral pattern of the Hessian of $f$ at
+    critical points obtained from seeding standard schemes with randomly
+    sampled starting regions surrounding each problems initial iterate.
+    Moreover, we replicate the findings of Kok et al. for the generalized
+    Rosenbrock problem~\cite{Kok2009} and extend their analysis to 
+    a larger set of benchmark problems.
+  
     \medskip
 
     Our contributions are:
-    \textcolor{Blue}{
-        \begin{itemize}
-            \item We review existing techniques for classifying critical points.
-            \item We present a sampling-based classification algorithm for determining the local convexity
-            characteristics of the objective function $f$ in a neighborhood of a strict local minimizer.
-            \item  \textbf{TODO:} Add other contributions
-        \end{itemize}
-    }\
+    \begin{itemize}
+        \item literature survey of known techniques for classifying critical points.
+        \item a sampling-based classification algorithm for sampling the curvature
+        within a neighborhood of $\eps$-first-order stationary points. 
+        \item systematically compares the local convexity profiles of standard
+        benchmark problems in continuous optimization. \todo{ref artificial article}
+        \item supplemental material containing analytical expressions $f$, and the
+        accepted initial iterate $\vct{x}_0$, as well as a discussion of
+        each problem's provenance and known properties from the literature. 
+    \end{itemize}
     
     \medskip
 
-    Our work is organized as follows.
-    \begin{itemize}
-        \item Section~\ref{sec:theory} presents a theoretical framework for classifying critical points
-        using dynamical systems, Morse theory and spectral analysis of $\nabla^2 f(\vct{x}^*)$.
-        \item Section~\ref{sec:problems} describes our problem selection criteria and 
-        provide analytical expressions for the objective function $f$ and the
-        accepted $\vct{x}_0$ for each problem. We include a brief discussion of
-        their provenance and known properties from the literature. 
-        \item Section~\ref{sec:procedures} discuss our numerical experiments for determining
-        strict local minimizers $\vct{x}^*$ and details our sampling-based classification algorithm
-        for determining the local convexity characteristics of $f$ in a neighborhood of $\vct{x}^*$.
-        \item Section~\ref{sec:conclusion} summarizes our findings and concludes with practical 
-        recommendations and mentions future work. Concludes with a discussion of the implications of our findings,
-        and how they can be used to inform the design and tuning of optimization algorithms.
-    \end{itemize}
+    \textbf{Introduction overview.} Section~\ref{intro:preliminaries} establishes the notation adopted throughout the manuscript.  
+    Section~\ref{intro:unc-problem} formulates the smooth unconstrained optimization problem, while Section~\ref{intro:grad-flow} 
+    recasts it as a gradient-flow dynamical system, proves well-posedness, and shows that its equilibria coincide with the stationary
+    points of the objective. Further phase-space analysis yields a constructive method for solving the original problem.  
+    The concept of an \emph{optimization scheme} is then formalized, accompanied by illustrative examples that recover 
+    classical results for gradient descent. Finally, Section~\ref{intro:problems} enumerates the benchmark test functions
+    considered in this study.
 
-    Our introduction proceeds as follows. We fix the notation used throughout this 
-    paper in ~\ref{intro:preliminaries}. The general problem is stated in \ref{intro:unc-problem}
-    and we discuss a \emph{continuous model}~\ref{intro:grad-flow} for solving the smooth minimization
-    problem. We rigoursly define a \emph{scheme}, discussing the properties of first and second order
-    schemes in detail. We conclude the introduction by listing the benchmark problems 
-    under study~\ref{intro:problems} and describing their origins in the literature.
+    \medskip
+
+    \textbf{Organization of the paper.} Section~\ref{sec:theory} develops a theoretical framework for classifying critical 
+    points using dynamical systems, Morse theory, and spectral analysis of $\nabla^2 f(\vct{x}^*)$. Section~\ref{sec:problems} 
+    details our problem selection criteria and introduces the benchmark problems under study. In Section~\ref{sec:experiments}, 
+    we present numerical experiments for each problem, describe our methodology for determining strict local minimizers $\vct{x}^*$,
+    and outline our sampling-based convexity classification algorithm. Finally, Section~\ref{sec:conclusion} summarizes our findings, 
+    offers practical recommendations, and discusses directions for future work.
+
+    \medskip
+
+    \newpage
 
     % Intro - Preliminaries
     \subsection{Preliminaries}
@@ -111,21 +111,36 @@
 
         We use the notation defined in the Appendix~\ref{notation} as used by 
         Nocedal and Wright~\cite{NocedalAndWright06}.
-        
-        Unless stated otherwise we assume $f: \R^n \rightarrow \R$ is twice 
-        continuously differentiable. Throughout we restrict our attention to
-        a bounded path-connected open subset $\Omega \subset \R^n$ chosen large 
-        enough to contain all iterates and flow trajectories considered in this 
-        study. We choose our domain of interest $\Omega$ so the boundary 
-        $\partial\Omega : = \overline{\Omega} \setminus \Omega$ is sufficiently
-        smooth, meaning that $f$ and its derivatives extend continuously to the boundary.
 
-        \todo{Add assumptions boxes used in paper as neccesasary}
+        \medskip
+
+        \begin{assumption}[Standing Assumptions]
+            \label{assumption:standing}
+            \begin{enumerate}\
+                \item \textbf{Domain.} $\Omega \subset \R^n$ is path-connected, bounded, and open, and its
+                boundary $\partial\Omega$ is a $C^{k}$ ($k\ge1$) embedded hypersurface.
+                \item \textbf{Manifold structure.} The closure $\overline{\Omega}=\Omega\cup\partial\Omega$ is
+                compact and carries the structure of a $C^{k}$ manifold with boundary~$\partial\Omega$.
+                \item \textbf{Objective function.} The objective satisfies $f\in C^{k}(\overline{\Omega})$ 
+                with $k \ge 2$, so, $f$, $\nabla f$, and $\nabla^{2}f$ extend continuously to~$\partial\Omega$. 
+            \end{enumerate}
+        \end{assumption}
+        
+        \todo{
+            TODO
+            - Add $\rho$-Hessian Lipschitz and $\ell$-smooth assumptions? 
+            - Critical Point Non-Degeneracy? 
+            - Path-Connectedness of $\Omega$? Allows us to assume that $f$ is convex
+              of on sublevel sets... needed for morse theory and further results in dynamical systems,
+              e.g., gradient flow retracts sub-level sets onto unstable manifolds..
+        }
 
     % Intro - Unconstrained Optimization Problem
     \subsection{Unconstrained Optimization Problem}
-        \medskip
         \label{intro:unc-problem}
+
+        \medskip 
+
         Consider the general form of a \textbf{smooth unconstrained optimization problem}
         \begin{equation}
             \min_{\vct{x} \in \mathbb{R}^n} f(\vct{x}), \label{eq:unconstrained-opt}
@@ -140,18 +155,16 @@
             \quad \text{ and } \quad
             f^* = \mathop{\mathrm{min}}_{\vct{x} \in \R^n} f(\vct{x}),
         \end{flalign*}
+        respectively. The optimal value $f^*$ is the minimum value of $f$ over the entire domain $\R^n$.\\    
 
-        In practice we choose $\Omega$ to be the problem domain of interest.
-        By the standing assumptions of \ref{intro:preliminaries},
-        $\Omega$ is a bounded, path-connected, open subset of $\R^n$ so
-        the closure $\overline{\Omega}$ is a bounded and closed subset of
-        $\R^n$. The Heine-Borel theorem implies that the closure $\overline{\Omega}$ is compact.
-        Consequently, the extreme value theorem asserts that a continuous real-valued function $f$
-        obtains a maximum and minimum value on the compact set $\overline{\Omega}$, where continuity
-        of $f$ on $\overline\Omega$ is guaranteed by the standing $C^{2}$ assumption.
-        So by us choosing a problem domain of interest, we can guarantee an optimal solution
-        exists in $\overline{\Omega}$ and we can make global optimality claims about the optimal
-        value within our chosen domain. 
+        In practice, we choose $\Omega$ in accordance with our standing assumptions~\ref{assumption:standing} 
+        to contain all iterates and gradient-flow trajectories under consideration.
+        By Heine–Borel, the closed and bounded set $\overline{\Omega}$ is compact, so the
+        extreme-value theorem guarantees that the continuous real-valued function $f$ 
+        attains its maximum and minimum on~$\overline{\Omega}$; where continuity of $f$ on 
+        $\overline\Omega$ is guaranteed by the standing $C^k$ assumption of $f$. So by our 
+        choice of $\Omega$, we can make global optimality claims about the optimal value 
+        within our chosen domain. 
 
         \medskip
         
@@ -171,10 +184,12 @@
         Since we focus on nonlinear objective functions, global optimality generally cannot be 
         guaranteed. However, local optimality of a critical point $\vct{x}^*$ is verified using 
         the following conditions:
+        
         \begin{flalign*}
             \text{Necessary:} \quad  & \nabla f(\vct{x}^*) = 0 ~ \text{ and } ~ \nabla^2 f(\vct{x}^*) \succeq 0\\
             \text{Sufficient:} \quad & \nabla^2 f(\vct{x}^*) \succ 0. 
         \end{flalign*}
+
         The necessary condition for $\vct{x}^*$ to be a local minimizer of $f$ is that 
         $\vct{x}^*$ satisfies the first-order and second-order optimality conditions.
         The \emph{second-order} optimality condition states that the Hessian of $f$ 
@@ -209,7 +224,7 @@
                 \label{eq:gradient-flow}\tag{GF}
                 \vct{\gamma}'(t) = -\nabla f\bigl(\vct{\gamma}(t)\bigr) ~\text{ subject to } \vct{\gamma}(0) = \vct{x}_0 \in \overline\Omega
             \end{equation}
-            An integral curve $\vct{\gamma}$ satisfying the \emph{gradient-flow} IVP is a gradient \emph{flow-line}, or, \emph{trajectory}.
+            An integral curve $\vct{\gamma}:[0,\infty)\to\overline{\Omega}$ satisfying the \emph{gradient-flow} IVP is a gradient \emph{flow-line}, or, \emph{trajectory}.
         \end{definition}
 
         Suppose the initial point $\vct{x_0}$ is a critical point, then the gradient flow ODE 
@@ -230,9 +245,8 @@
         But first we must establish the IVP~\eqref{eq:gradient-flow} is well-posed for all $\vct{x}_0 \in \overline{\Omega}$.
 
         \begin{theorem}[Existence]\label{thm:gf-existence}
-            For every $\vct{x_0}\in \overline{\Omega}$ the IVP \eqref{eq:gradient-flow} admits a solution
-            $\gamma_{\vct{x_0}}\in C^{1}\bigl([0,\infty);\overline{\Omega}\bigr)$
-            such that $\vct{\gamma}_{\vct{x_0}}(t) \in \overline{\Omega}$ for all $t\ge 0$. 
+            For every $\vct{x_0}\in \overline{\Omega}$ the IVP \eqref{eq:gradient-flow} admits a
+            unique solution $\vct{\gamma}_{\vct{x}_0}\in C^{1}\bigl([0,\infty);\overline{\Omega}\bigr)$.
         \end{theorem}
 
         \begin{proof}[Sketch]
@@ -259,7 +273,7 @@
         The following lemma characterizes the monotonicity of $f$ along the trajectory $\vct{\gamma}_{\vct{x_0}}$.
 
         \begin{lemma}\label{lem:monotone-flow-lines}
-            Along any trajectory $\vct{\gamma}_{x_0}(t)$ one has
+            Along any trajectory $\vct{\gamma}_{\vct{x}_0}(t)$ one has
             \begin{equation}\label{eq:monotone-flow-lines}
                 \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\|^{2}\;\le\;0, \quad t \ge 0.
             \end{equation}
@@ -308,16 +322,6 @@
             the relationship between the two and their synonymous use in the literature.
         }
         \newpage
-    
-        
-
-
-
-
-
-
-
-
 
 
     % Intro - Optimization Schemes
@@ -473,13 +477,18 @@
         as \texttt{ADNLPModel} instance, which is a wrapper around the \texttt{NLPModel} interface
         whose backend AD engine is configurable to support forward-mode or reverse-mode.
 
+        \todo{todo:
+            - ref overleaf document and introduction section
+            - enumerate the problems
+        }
 
 
+% ------------------ Theory    
+\section{Morse Theory}
+    \label{sec:theory}
     
+    \medskip
 
-    % ------------------ Theory
-    
-\section{Theory}
     Note that $\Omega$ is a bounded subset of $\R^n$, so its closure
     $\overline{\Omega} = \Omega \cup \partial \Omega$ is a compact subset
     of $\R^n$, by the Heine-Borel Theorem.
@@ -487,46 +496,38 @@
     so we can apply the theory of smooth manifolds.
     The closure $\overline{\Omega}$ is a compact subset of $\R^n$ and
     is a smooth manifold with boundary $\partial \Omega$.
-    The interior $\Omega$ is an open subset of $\R^n$ and is a smooth manifold.
+    The interior $\Omega$ is an open subset of $\R^n$ and is a smooth manifold.\\
 
     \td{Move the above bit to 1.3}
 
-\begin{definition}
-    \textcolor{blue}{
-        A point $\vct{x}^* \in \Omega$ is a \textbf{critical point} of $f$ if the
-        differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
-        $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
-        The set of critical points of $f$ is denoted by $\text{crit}(f)$.
-    }
-\end{definition}
+    \begin{definition}
+            A point $\vct{x}^* \in \Omega$ is a \textbf{critical point} of $f$ if the
+            differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
+            $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
+            The set of critical points of $f$ is denoted by $\text{crit}(f)$.
+    \end{definition}
 
-\begin{definition}
-    \textcolor{blue}{
-        A point $\vct{x}^* \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
-        the Hessian $H_p f$ is non-singular.
-    }
-\end{definition}
+    \begin{definition}
+            A point $\vct{x}^* \in \Omega$ is a \textbf{non-degenerate critical point} of $f$ if
+            the Hessian $H_p f$ is non-singular.
+    \end{definition}
 
-\begin{definition}
-    \textcolor{blue}{
-        The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x}^*$ is defined to be
-        the dimension of the negative eigenspace of the Hessian $H_p f$.
-        \begin{itemize}
-            \item local minima at $\vct{x}^*$ have index $0$.
-            \item local maxima at $\vct{x}^*$ have index $n$.
-            \item saddle points at $\vct{x}^*$ have index $k$ where $0 < k < n$.
-        \end{itemize}
-        We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
-        critical points of index $i$.
-    }
-\end{definition}
+    \begin{definition}
+            The \textbf{index} of a \emph{non-degenerate critical point} $\vct{x}^*$ is defined to be
+            the dimension of the negative eigenspace of the Hessian $H_p f$.
+            \begin{itemize}
+                \item local minima at $\vct{x}^*$ have index $0$.
+                \item local maxima at $\vct{x}^*$ have index $n$.
+                \item saddle points at $\vct{x}^*$ have index $k$ where $0 < k < n$.
+            \end{itemize}
+            We reserve the integers $c_0, c_1, \dots, c_i, \dots, c_n$ to denote the number of
+            critical points of index $i$.
+    \end{definition}
 
-\begin{definition}
-    \textcolor{blue}{
+    \begin{definition}
         A \textbf{Morse function} is a smooth function $f : \Omega \rightarrow \R$ such that
         all critical points of $f$ are non-degenerate.
-    }
-\end{definition}
+    \end{definition}
 
 \subsection{Morse Theory in a Metric Space}
 
@@ -640,9 +641,46 @@
     % and allow for variable dimensions.
     % }
 
+
+\newpage 
+
+% ------------------ PROBLEMS
+\section{Problem Selection and Analysis}
+    \label{sec:problems}
+    \medskip
+    \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+
+% ------------------ Numerical Experiments
+\section{Numerical Experiments}
+    \label{sec:experiments}
+    \medskip
+    \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+    \subsection{Experimental Setup}
+        \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+    \subsection{Results and Discussion}
+        \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+% ------------------ Conclusion
+\section{Conclusion}
+    \label{sec:conclusion}
+    \medskip
+    \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+    \subsection{Future Work}
+        \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+
 % ------------------ APPENDIX
 \newpage
 \section{Apendix}
+
+% ------------------ BIBLIOGRAPHY
+\bibliographystyle{alpha}
+\bibliography{../references}
+
 
 \subsection*{Notation}
     We assume the following notation throughout\
@@ -670,7 +708,7 @@
     \end{itemize}
 
 
-\subsection*{Definitions}
+\subsection{Definitions}
     \label{sec:definitions}
     
     % Lipschitz
@@ -823,8 +861,5 @@ Below are the code listings for the experiments conducted in this report.
 \newpage
 
 
-% ------------------ BIBLIOGRAPHY
-\bibliographystyle{alpha}
-\bibliography{../references}
 
 \end{document}
