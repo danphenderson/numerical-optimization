@@ -1,6 +1,9 @@
 \documentclass[10pt]{article}
 
 \input{../preamble.tex}
+\usepackage{booktabs}
+\usepackage{caption}
+
 
 % ----------------- Document TITLE
 % -----------------------------------------------------------------
@@ -9,11 +12,13 @@
 \author{Daniel Henderson}
 \date{\today}
 
+
 % ------------------ DOCUMENT START
 % -----------------------------------------------------------------
 % ------------------
 \begin{document}
 \maketitle
+
 
 % ------------------ ABSTRACT
 % -----------------------------------------------------------------
@@ -30,7 +35,8 @@
     the Hessian in a neighborhood of a strict local minimizer.  Numerical
     experiments confirm that while some test functions exhibit strong
     local convexity, others contain narrow regions of non-convexity that
-    can slow down standard schemes, e.g. \todo{add "tacking" ref.}
+    can slow down standard schemes, e.g. (TODO: add "tacking" ref. here and complete
+    results statement)
     \noindent\textbf{Keywords:} benchmarking, numerical optimization, stationary points, saddle points,
 \end{abstract}
 
@@ -61,8 +67,8 @@
     We sample the objective of each problem to reveal long, 
     narrow valleys of weak/zero curvature surrounding strict minimizers.
     Additinally, we analyze the spectral pattern of the Hessian of $f$ at
-    critical points obtained from seeding standard schemes with randomly
-    sampled starting regions surrounding each problems initial iterate.
+    critical points obtained from seeding standard schemes from randomly
+    sampled starting locations surrounding each problems initial iterate.
     Moreover, we replicate the findings of Kok et al. for the generalized
     Rosenbrock problem~\cite{Kok2009} and extend their analysis to 
     a larger set of benchmark problems.
@@ -75,7 +81,7 @@
         \item a sampling-based classification algorithm for sampling the curvature
         within a neighborhood of $\eps$-first-order stationary points. 
         \item systematically compares the local convexity profiles of standard
-        benchmark problems in continuous optimization. \todo{ref artificial article}
+        benchmark problems in continuous optimization. (ref artificial article)
         \item supplemental material containing analytical expressions $f$, and the
         accepted initial iterate $\vct{x}_0$, as well as a discussion of
         each problem's provenance and known properties from the literature. 
@@ -126,7 +132,7 @@
             \end{enumerate}
         \end{assumption}
         
-        \todo{
+        \td{
             TODO
             - Add $\rho$-Hessian Lipschitz and $\ell$-smooth assumptions? 
             - Critical Point Non-Degeneracy? 
@@ -184,7 +190,6 @@
         Since we focus on nonlinear objective functions, global optimality generally cannot be 
         guaranteed. However, local optimality of a critical point $\vct{x}^*$ is verified using 
         the following conditions:
-        
         \begin{flalign*}
             \text{Necessary:} \quad  & \nabla f(\vct{x}^*) = 0 ~ \text{ and } ~ \nabla^2 f(\vct{x}^*) \succeq 0\\
             \text{Sufficient:} \quad & \nabla^2 f(\vct{x}^*) \succ 0. 
@@ -227,100 +232,98 @@
             An integral curve $\vct{\gamma}:[0,\infty)\to\overline{\Omega}$ satisfying the \emph{gradient-flow} IVP is a gradient \emph{flow-line}, or, \emph{trajectory}.
         \end{definition}
 
-        Suppose the initial point $\vct{x_0}$ is a critical point, then the gradient flow ODE 
+        \medskip
+
+        Suppose the initial point $\vct{x}_0$ is a critical point, then the gradient flow ODE 
         is satisfied by the constant trajectory $\vct{\gamma}(t) = \vct{x}_0$ for any time $t$. 
         Notice that constant $\vct{\gamma}(t)$ implies $\vct{\gamma}'(t) = \vct{0}$, substituting
         into the gradient-flow ODE asserts that $-\nabla f(\vct{x}_0) = \vct{0}$, which holds true
-        since $\vct{x_0}$ is a critical point (i.e., $\nabla f(\vct{x}_0) = \vct{0}$).
+        since $\vct{x}_0$ is a critical point (i.e., $\nabla f(\vct{x}_0) = \vct{0}$).
         Consequently, the existence of a solution holds when $\vct{x}_0$ is a critical point
         and such points correspond to stationary equilibria in the gradient flow ODE phase space.
         Now we show equation \eqref{eq:gradient-flow} is well-posed for all $\vct{x}_0 \in \overline{\Omega}$.
 
-        Let $\vct{\gamma}_{\vct{x_0}}$ be any gradient \emph{flow-line} starting at
-        some point $\vct{x_0}$ in $\overline{\Omega}$. Note that the trajectory $\vct{\gamma}_{\vct{x_0}}$ 
+        \medskip
+
+        Let $\vct{\gamma}_{\vct{x}_0}$ be any gradient \emph{flow-line} starting at
+        some point $\vct{x}_0$ in $\overline{\Omega}$. Note that the trajectory $\vct{\gamma}_{\vct{x}_0}$ 
         is driven by the steepest descent direction of the objective function $f$. But $f$ is bounded
-        below by the minimum value $f^*$, so the trajectory $\vct{\gamma}_{\vct{x_0}}$ cannot
+        below by the minimum value $f^*$, so the trajectory $\vct{\gamma}_{\vct{x}_0}$ cannot
         escape the compact set $\overline{\Omega}$ in finite time. Indeed, we will show that the trajectory 
-        $\vct{\gamma}_{\vct{x_0}}$ is guaranteed to converge to a critical point of $f$ in $\overline{\Omega}$.
+        $\vct{\gamma}_{\vct{x}_0}$ is guaranteed to converge to a critical point of $f$ in $\overline{\Omega}$.
         But first we must establish the IVP~\eqref{eq:gradient-flow} is well-posed for all $\vct{x}_0 \in \overline{\Omega}$.
 
         \begin{theorem}[Existence]\label{thm:gf-existence}
-            For every $\vct{x_0}\in \overline{\Omega}$ the IVP \eqref{eq:gradient-flow} admits a
-            unique solution $\vct{\gamma}_{\vct{x}_0}\in C^{1}\bigl([0,\infty);\overline{\Omega}\bigr)$.
+            For every $\vct{x}_0\in \overline{\Omega}$ the IVP \eqref{eq:gradient-flow} admits a
+            unique solution $\vct{\gamma}_{\vct{x}_0}\in C^{1}\bigl([0,\infty);\overline{\Omega}\bigr)$
+            that exists for all time $t\ge0$.
         \end{theorem}
 
         \begin{proof}[Sketch]
-            The gradient flow ODE \eqref{eq:gradient-flow} is a first-order, autonomous,
-            ordinary differential equation (ODE) on the compact manifold $\overline{\Omega}$.
-            To apply the Picard-Lindelöf theorem, it is sufficient to note $f \in C^{2}(\overline{\Omega})$
-            implies that $-\nabla f \in C^{1}(\overline{\Omega})$, and it follows that $\nabla f$ is
-            Lipschitz on $\overline{\Omega}$, (i.e., $f$ is $\ell$-smooth). Consequently, the gradient 
-            flow ODE \eqref{eq:gradient-flow} is well-posed for all interior initial conditions 
-            $\vct{x}_0 \in \Omega$ for some finite time $t^*$.\
-            \td{
-                TODO: 
-                - Consider cleanest way to introduce the geometric approach without getting to deep into the
-                topological / differential geometry of manifolds.
-                - The simplest approach to "well-posedness" seems to be restricting our initial condition to
-                the $\Omega$, as we assume for the input of a scheme, then show that the flow lines are contained in
-                the closure of the manifold $\overline{\Omega}$ by invoking the monotonicity of $f$ along the flow lines
-                and the fact that the image of $f(\overline{\Omega})$ is a compact convex (and path-connected?) set.
-                - Define level sets, sub level sets, and the signed distance function, then introduce the alternative 
-                continuous model describing the flow of geodesics. Incorporate aspects of the Morse Theory section.
-            }
+            Our standing assumptions imply that $-\nabla f$ is globally Lipschitz on the compact set $\overline{\Omega}$,
+            i.e., $-f$ is $\ell$-smooth since $\nabla f$ is continuous on $\overline{\Omega}$. (ref appendix for
+            $\ell$-smoothness definition). The Picard-Lindelöf theorem guarantees the existence of a unique
+            solution $\vct{\gamma}_{\vct{x}_0}$ to the IVP \eqref{eq:gradient-flow} for some finite amount of time.
+            The following Theorem~\ref{thm:flow-props} shows that the solution exists for all time $t\ge0$,
+            namely, that the trajectory $\vct{\gamma}_{\vct{x}_0}(t)$ and remains in the compact set $\overline{\Omega}$ for all $t\ge0$.
         \end{proof}
 
-        The following lemma characterizes the monotonicity of $f$ along the trajectory $\vct{\gamma}_{\vct{x_0}}$.
+        \begin{remark}
+            In our proof of Theorem~\ref{thm:gf-existence} we assumed $f$ and $-\nabla f$ are defined 
+            on all of $\mathbb R^n$, so that trajectories are well defined globally; we only 
+            observe them on our chosen domain $\overline\Omega$. 
+            We commit such theoretical shortcuts knowingly, as our shortcut is pathed when we introduce the
+            assumption that $\Omega$ is path-connected, which ensures convexity of $f$ on the sublevel set
+            $L_{f(\vct{x}_0)}^-$, so that the gradient flow ODE is well-defined on the entire sublevel set.
+        \end{remark}
 
-        \begin{lemma}\label{lem:monotone-flow-lines}
+        The following lemma characterizes the monotonicity of $f$ along the trajectory $\vct{\gamma}_{\vct{x}_0}$.
+
+        \begin{lemma}\label{lem:monotone-flow}
             Along any trajectory $\vct{\gamma}_{\vct{x}_0}(t)$ one has
-            \begin{equation}\label{eq:monotone-flow-lines}
-                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\|^{2}\;\le\;0, \quad t \ge 0.
+            \begin{equation}\label{eq:monotone-flow}
+                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr)\|^{2}\;\le\;0, \quad t \ge 0.
             \end{equation}
-            Hence $f\circ\vct{\gamma}_{x_0}$ is non‐increasing in $t$, and strictly decreasing whenever $\nabla f(\vct{\gamma}_{\vct{x_0}}(t))\neq0$.
+            Hence $f\circ\vct{\gamma}_{x_0}$ is non‐increasing in $t$, and strictly decreasing whenever $\nabla f(\vct{\gamma}_{\vct{x}_0}(t))\neq0$.
         \end{lemma}
 
         \begin{proof}
-            Differentiating the composition $f\circ\vct{\gamma}_{\vct{x_0}}$ w.r.t. $t$ using 
+            Differentiating the composition $f\circ\vct{\gamma}_{\vct{x}_0}$ w.r.t. $t$ using 
             the chain rule yields
             \begin{flalign*}
-                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot 
-                    \frac{d}{dt}\vct{\gamma}_{\vct{x_0}}(t)\\
-                & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot \vct{\gamma}'_{\vct{x_0}}(t) \\
-                & = \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \cdot \left(-\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\right)\\
-                & = \langle \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr), -\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \rangle\\
-                & = -\langle \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr), \nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr) \rangle\\
-                & = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x_0}}(t)\bigr)\|^{2} \\
+                \frac{d}{dt}f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) & = \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) \cdot 
+                    \frac{d}{dt}\vct{\gamma}_{\vct{x}_0}(t)\\
+                & = \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) \cdot \vct{\gamma}'_{\vct{x}_0}(t) \\
+                & = \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) \cdot \left(-\nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr)\right)\\
+                & = \langle \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr), -\nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) \rangle\\
+                & = -\langle \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr), \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr) \rangle\\
+                & = -\|\nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(t)\bigr)\|^{2} \\
                 & \leq 0.
             \end{flalign*}
             A direct consequence of the positive-definiteness property of a norm is that the final inequality
-            is strict for all points $\vct{\gamma}_{\vct{x_0}}(t)$ that aren't critical.
+            is strict for all points $\vct{\gamma}_{\vct{x}_0}(t)$ that aren't critical.
         \end{proof}
 
-        \begin{theorem}
-            For all $\vct{x}_0 \in \overline{\Omega}$, the flow operator maps to a unique integral 
-            curve $\vct{\gamma}_{\vct{x}_0}(t)$ of the gradient flow ODE \eqref{eq:gradient-flow} such that
-            \begin{equation}\label{eq:flow-map-curve}
-                \vct{\gamma}_{\vct{x}_0}(t) = T(\vct{x}_0; t) : = \vct{x}_0 - \int_0^t \nabla f\bigl(\vct{\gamma}_{\vct{x}_0}(s)\bigr) ds
-            \end{equation}
-            and $\vct{\gamma}_{\vct{x}_0}(t)$ is a continuous map from $\R$ to the closure of the manifold
-            $\overline{\Omega}$, i.e., $\vct{\gamma}_{\vct{x}_0}(t) : \R \rightarrow \overline{\Omega}$.
-            $\vct{\gamma}_{\vct{x}}(t) : \R \rightarrow \overline{\Omega}$ such that $\vct{\gamma}_{\vct{x}}(0) = \vct{x}$
-            and the limits
-            $$
-                \lim_{t \to -\infty } \vct{\gamma}_{\vct{x}}(t) ~ \text{ and } ~ 
-                \lim_{t \to \infty } \vct{\gamma}_{\vct{x}}(t)
-            $$
-            exist and converge to \emph{critical-points} of $f$.
+        \begin{theorem}[Properties of the gradient flow]\label{thm:flow-props}
+            Let $\vct{x}_0\in\overline{\Omega}$ and let
+            $\vct{\gamma}_{\vct{x}_0}:[0,\infty)\to\overline{\Omega}$
+            be the unique solution of \eqref{eq:gradient-flow}. Then
+            \begin{enumerate}
+            \item\label{item:continuity}
+                    The flow map $(\vct{x}_0,t)\mapsto\vct{\gamma}_{\vct{x}_0}(t)$
+                    is continuous in both variables.
+            \item\label{item:accum}
+                    Every accumulation point of $\vct{\gamma}_{\vct{x}_0}(t)$ as $t\to\infty$
+                    belongs to $\operatorname{crit}(f)$.
+            \end{enumerate}
         \end{theorem}
 
-        \td{
-            TODO:
-            - Complete the compact-domain formulation of the gradient flow dynamical system and demonstrate
-            that trajectories provably descend the objective and terminate at critical points inside $\overline{\Omega}$.
-            -For completeness, connect connect "critical points" to the "stationary points" of the gradient flow ODE and explain
-            the relationship between the two and their synonymous use in the literature.
-        }
+        \begin{proof}
+            Suppose, to the contrary, that some accumulation point $\vct{x}^{*}$ satisfies
+            $\nabla f(\vct{x}^{*})\neq 0$. FIXME: After re-structuring assumptions; reference
+            prior remark.
+        \end{proof}
+
         \newpage
 
 
@@ -342,71 +345,97 @@
             \end{equation}
             starting from an initial point $\vct{x}_0 \in \overline{\Omega}$. The scheme is well-defined such that the 
             triplet $(\vct{x}_0, h, T_h)$ satisfy:
-            \begin{enumerate}
-                \item Consistency: the iteration operator $T_h$ is \emph{consistent} with the \eqref{eq:gradient-flow} ODE
-                    if the following limit holds:
+            \begin{itemize}
+                \item Consistency: $T_{h}$ is \emph{consistent of order $p\!\ge1$} with the flow~\eqref{eq:gradient-flow} if
                     $$
-                        \frac{\left(T_h(\vct{x}) - \vct{x}\right)}{h} + \nabla f(\vct{x}) \rightarrow 0 \text{ as } h \rightarrow 0
-                        \text{ for all } \vct{x} \in \overline{\Omega},
+                        \bigl\|T_{h}(\vct{x})-\vct{x}+h\,\nabla f(\vct{x})\bigr\|
+                        \;=\;\mathcal{O}\!\bigl(h^{p+1}\bigr)
+                        \quad\text{as }h\to0,\;
+                        \forall\,\vct{x}\in\overline{\Omega}.
                     $$
                     A consistent scheme approximates the continuous gradient flow w/ a local error of
                     $\mathcal{O}(h^{p+1})$ committed at each step $k$; where $p$ is the global order.
                     Consistent schemes reproduce the exact optimality condition in the limit as $h \to 0$.
-   
-                \item Stability: let $\vct{x}^*$ be a strict local minimizer of $f$. The operator $T_h$ is 
-                    \emph{stable}, or \emph{locally contractive}, at $\vct{x}^*$ if there exist constants 
-                    $c>0$ and $h_0 \le \frac{2}{L}$, and an open neighborhood $N\subset \overline{\Omega}$ 
-                    with $x^*\in N$, such that
+                \item Stability: Let $\vct{x}^{*}\in\operatorname{crit}(f)$ be a \emph{strict} local minimizer.
+                    The family $\{T_{h}\}$ is \emph{stable} at $\vct{x}^{*}$ if
                     $$
-                        \| T_h(x) - T_h(y) \| \le \bigl(1 - c h \bigr)\, \| x - y \| \quad\forall~x,y\in N,~\forall~ h \in (0, h_0].
+                        \exists\,c>0,\;h_{\max}>0,\;
+                        \forall\,h\in(0,h_{\max}]:
+                        \qquad
+                        \rho\bigl(DT_{h}(\vct{x}^{*})\bigr)\le 1-ch,
                     $$
-                    Equivalently, by the mean-value theorem, the Jacobian of $T_h$ must satisfy the following uniform spectral-radius bound
+                    where $\rho(\cdot)$ denotes the spectral radius.  Equivalently,
                     $$
-                        \rho\!\bigl(D~T_h(\vct{x}^*)\bigr) ~ \le ~ 1 - ch \quad \forall~ h \in(0,h_0]
+                        \|T_{h}(\vct{x})-T_{h}(\vct{y})\|\le(1-ch)\|\vct{x}-\vct{y}\|
                     $$
-                    where $\rho(\cdot)$ denotes the spectral radius.  In either form, the contraction factor
-                    $1 - c h$ lies strictly inside $(0, 1)$, so that the iterates produced by the scheme remain 
-                    in $N$ and satisfy
-                    $$
-                        \|\vct{x}_{k+1} - \vct{x}^*\| \le (1  - ch) \|\vct{x}_k - \vct{x}^*\|,
-                    $$
-                    implying convergence whenever $h\in(0,h_0]$ is fixed.
-            \end{enumerate}
-            If a scheme is order-$p$ consistent and stable in a neighborhood of a strict local minimizer,
-            then consistent of order $p$ and stable within a neighborhood of a strict local minimizer, then 
-            $\vct{x_k} \rightarrow \vct{x}^*$ as $k\to\infty$ and the scheme is said to be \emph{convergent}.
+                    for all $\vct{x},\vct{y}$ in some neighborhood of $\vct{x}^{*}$.
+                    A stable scheme is contractive in a neighborhood of $\vct{x}^{*}$, 
+                    meaning that the distance between iterates shrinks by at least a 
+                    factor of $1-ch$ at each step $k$.
+            \end{itemize}
         \end{definition}
 
-        The following iteration operators are examples of schemes for solving
-        \eqref{eq:unconstrained-opt}.
-        \begin{itemize}
-            \item \textbf{Gradient Descent (GD)}: $T_h(\vct{x}) = \vct{x} - h \nabla f(\vct{x})$
-            is first-order $(p = 1)$ and contractive when $\nabla^2 f \succeq \mu I \succeq 0$.
-            \item \textbf{Newton's Method (NM)}: $T_h(\vct{x}) = \vct{x} - h \nabla^2 f(\vct{x})^{-1} \nabla f(\vct{x})$
-            is second-order $(p = 2)$ and contractive when $\nabla^2 f \succeq \mu I \succeq 0$.
-            \item \textbf{Trust Region (TR)}: $T_h(\vct{x}) = \vct{x} + \arg \min_{\vct{\tau}} m_{\vct{x}}(\vct{\tau})$
-            where $m_{\vct{x}}(\vct{\tau}) = f(\vct{x}) + \langle \nabla f(\vct{x}), \vct{\tau} \rangle +
-            \frac{1}{2} \langle \vct{\tau}, \nabla^2 f(\vct{x}) \vct{\tau} \rangle$ is the quadratic approximation
-            of $f$ at $\vct{x}$ and $\|\vct{\tau}\| \leq \Delta$ is the trust region constraint.
-            \item \textbf{Quasi-Newton (QN)}: $T_h(\vct{x}) = \vct{x} - h B \nabla f(\vct{x})$ where
-            $B \approx \nabla^2 f^{-1}(\vct{x})$ is a positive-definite approximation of the Hessian.
-            the quasi-newton method is a first-order $(p = 1)$ scheme and contractive when
-            $\nabla^2 f \succeq \mu I \succeq 0$.
-            \item \textbf{TODO} Make this a table
-        \end{itemize}
+        \medskip 
+            
+        If a scheme is order-$p$ consistent and locally contractive at a strict
+        minimizer $\vct{x}^{*}$, then for any fixed $h\in(0,h_{\max}]$
+        the iterates satisfy
+        $$
+            \|\vct{x}_{k}-\vct{x}^{*}\|\le(1-ch)^{k}\|\vct{x}_{0}-\vct{x}^{*}\|,
+        $$
+        and hence $\vct{x}_{k}\to\vct{x}^{*}$ as $k\to\infty$.
 
         \medskip
 
-        \todo{
-            TODO: numerics disscusion, introduce the $\eps$ order stationary points.
+        Table~\ref{tab:schemes} summarises four standard choices for $T_{h}$,
+        stating their consistency order and the conditions under which local 
+        contractivity holds; see, e.g., Nocedal-Wright~\cite{NocedalAndWright06}
+        for detailed discussions of these schemes.
+
+        \medskip
+        \begin{minipage}{0.8\textwidth}
+        \centering
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}{@{}l l c c@{}}
+            \toprule
+            \textbf{Scheme} & 
+            \textbf{Iteration operator $T_{h}(\vct{x})$} & 
+            \textbf{Order $p$} & 
+            \textbf{Stability near $\vct{x}^{*}$} \\ \midrule
+            Gradient descent (GD) &
+            $\vct{x}-h\,\nabla f(\vct{x})$ &
+            1 &
+            $\nabla^{2}f(\vct{x}^{*})\succeq \mu I\succ0,\; 0<h\le 1/\ell$ \\[3pt]
+
+            Newton (NM) &
+            $\vct{x}-h\,\nabla^{2}\!f(\vct{x})^{-1}\nabla f(\vct{x})$ &
+            2 &
+            $\nabla^{2}f(\vct{x}^{*})\succ0,\; 0<h\le 1$ \\[3pt]
+
+            Quasi–Newton (QN) &
+            $\vct{x}-h\,B_{k}\nabla f(\vct{x})$ \quad
+            ($B_{k}\!\to\nabla^{2}\!f(\vct{x}^{*})^{-1}$) &
+            1 &
+            Same as NM once $B_{k}\succ0$ and $\|B_{k}\|$ is bounded \\[3pt]
+
+            Trust region (TR) &
+            $\displaystyle
+            \vct{x}+\arg\min_{\|\vct{\tau}\|\le\Delta}
+            m_{\vct{x}}(\vct{\tau})$ &
+            2 &
+            Same as NM for sufficiently small $\Delta$ \\ \bottomrule
+        \end{tabular}
+        \captionof{table}{
+            Representative optimization schemes for problem~\eqref{eq:unconstrained-opt}. 
+            ($\ell$ denotes the Lipschitz constant of $\nabla f$ on $\overline{\Omega}$).
         }
+        \label{tab:schemes}
+        \end{minipage} 
+        
+        
+        \newpage
 
         \subsubsection*{Analysis of Gradient Descent (GD)}
-
-            \remeber{}{
-                TODO: use the following notes and provide an example of the analysis of GD.
-                Relate the step choices below to the Wolfe conditions, cite Nocedal and Wright.
-            }
 
             \begin{theorem} Assume $f$ is $\ell$-smooth and $\alpha$-strongly convex and that $\eps > 0$.
                 If we iterate the gradient descent \emph{scheme} with $h = h_0 = \frac{1}{\ell}$ held fixed, i.e.,
@@ -445,7 +474,7 @@
             \begin{theorem}
                 Assume $f$ is $\ell$-smooth, then for any $\eps > 0$, if we iterate
                 the GD scheme with $h = h_0 = \frac{1}{\ell}$ held fixed starting from
-                $\vct{x}_0 \in \Omega$ where $\Omega$ is a neighborhood of $x^*$,
+                $\vct{x}_0 \in \Omega$ where $\Omega$ is a neighborhood of $\vct{x}^*$,
                 then the number of iterations $K$ required to achieve the stopping condition
                 $\| \nabla f(\vct{x}_k) \| \leq \eps$ is at most
                 $$
@@ -477,7 +506,7 @@
         as \texttt{ADNLPModel} instance, which is a wrapper around the \texttt{NLPModel} interface
         whose backend AD engine is configurable to support forward-mode or reverse-mode.
 
-        \todo{todo:
+        \td{todo:
             - ref overleaf document and introduction section
             - enumerate the problems
         }
@@ -529,161 +558,129 @@
         all critical points of $f$ are non-degenerate.
     \end{definition}
 
-\subsection{Morse Theory in a Metric Space}
+    \subsection{Morse Theory in a Metric Space}
 
-\begin{theorem}
-    \textcolor{Blue}{
-        Let $f$ be a Morse function on $\Omega$, then the Euler characteristic of $\Omega$ is
-        given by
+    \begin{theorem}
+            Let $f$ be a Morse function on $\Omega$, then the Euler characteristic of $\Omega$ is
+            given by
+            $$
+                \chi(\Omega) = \sum_{i=0}^n (-1)^i c_i
+            $$
+            where $c_i$ is the number of critical points of index $i$.
+    \end{theorem}
+
+    \begin{remark}
+        The Euler characteristic $\chi(\Omega)$ is a topological invariant of the manifold $\Omega$
+        and is independent of the choice of Morse function $f$.
+        The Euler characteristic is a measure of the "shape" of the manifold and can be used to
+        distinguish between different topological spaces.
+        The Euler characteristic may be defined by the alternating sum of the Betti numbers
+        $b_i$ of the manifold $\Omega$
         $$
-            \chi(\Omega) = \sum_{i=0}^n (-1)^i c_i
+            \chi(\Omega) = \sum_{i=0}^n (-1)^i b_i
         $$
-        where $c_i$ is the number of critical points of index $i$.
-    }
-\end{theorem}
+        where $b_i$ is the $i$-th Betti number of the manifold $\Omega$.
+    \end{remark}
 
-\begin{remark}
-    The Euler characteristic $\chi(\Omega)$ is a topological invariant of the manifold $\Omega$
-    and is independent of the choice of Morse function $f$.
-    The Euler characteristic is a measure of the "shape" of the manifold and can be used to
-    distinguish between different topological spaces.
-    The Euler characteristic may be defined by the alternating sum of the Betti numbers
-    $b_i$ of the manifold $\Omega$
-    $$
-        \chi(\Omega) = \sum_{i=0}^n (-1)^i b_i
-    $$
-    where $b_i$ is the $i$-th Betti number of the manifold $\Omega$.
-\end{remark}
-
-\begin{theorem}
-    \textcolor{ForestGreen}{
+    \begin{theorem}
         (Sard's theorem) Let $f$ be a Morse function on $\Omega$, then
         the image $f(\text{crit}(f))$ has Lebesque measure zero in $\R$.
+    \end{theorem}
+
+    \begin{remark}
+        We state a particular instance of Sard's theorem for continuous scalar-valued functions $f$,
+        which was first proved by Anothony P. Morse in 1939.
+        The theorem asserts that the image of the critical points of a Morse function is a set 
+        of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
+        do not form a dense subset of the manifold $\Omega$.
+        Consequently, selecting $\vct{x} \in \Omega$ at random will almost never yeild a critical
+        point of $f$.
+    \end{remark}
+
+    \begin{remark}
+        The property that $\vct{x}^* \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
+        not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
+    \end{remark}
+
+    \begin{theorem}
+        For a Morse function $f$ on $\Omega$, the gradient of $f$ is either zero or
+        orthogonal to the tangent space of the level set $L_c$ at $\vct{x} \in L_c$.
+    \end{theorem}
+
+    The above theorem implies that at a stationary point $\vct{x^*}$, a
+    level set $L_{\vct{x^*}}$ is reduced to a single point
+    when $\vct{x^*}$ is a local minimum or maximum. 
+    Otherwise, the level set may have a singularity
+    such as a self-intersection or a cusp.
+
+    \subsection*{Signed Distance Function}
+    \td{
+        TODO: Add signed distance function theory notes and cite ref.
+        The only reason to do this is to talk about geodesics,
+        height parameterized flows, mean curvature flow, minimal
+        surfaces and links to dimensionality reduction.
+        Ref: Chapter 6? Stanley Osher and Ronald Fedkiw, Level 
+        Set Methods and Dynamic Implicit Surfaces, Springer, 2003.
     }
-\end{theorem}
 
-\begin{remark}
-    We state a particular instance of Sard's theorem for continuous scalar-valued functions $f$,
-    which was first proved by Anothony P. Morse in 1939.
-    The theorem asserts that the image of the critical points of a Morse function is a set 
-    of measure zero in $\R$. This means that the critical points of a Morse function are "rare" in the sense that they
-    do not form a dense subset of the manifold $\Omega$.
-    Consequently, selecting $\vct{x} \in \Omega$ at random will almost never yeild a critical
-    point of $f$.
-\end{remark}
-
-\begin{remark}
-    The property that $\vct{x}^* \in \Omega$ being a \emph{critical point} of a Morse function $f$ is
-    not dependent of the metric of $\Omega \subset \R^n$ (and consequently, the norm induced by the metric)
-\end{remark}
-
-
-
-    % \subsection{Signed Distance Function}
-    % \textcolor{Red}{
-    %     TODO: Add signed distance function theory and cite ref
-    %     Stanley Osher and Ronald Fedkiw, Level Set Methods and Dynamic
-    %     Implicit Surfaces, Springer, 2003.
-    % }
-
-    % \subsection{Time Marching Level Set Methods}
-    % \textcolor{Red}{
-    %     More Osher and Fedkiw, Level Set Methods and Dynamic
-    %     Implicit Surfaces, Springer, 2003.
-    % }
-
-    % \subsection{Saard's Theorem and the Morse Lemma}
-
-    % \section{Alternative Approaches}
-    % \subsection{Level Set Methods}
-    % \textcolor{Red}{
-    %     TODO: Explain how level set methods would allow us
-    %     to classify the critical point structure of $f$.
-    %     And their role in low-dimensional topology.
-    %     Explain curse of dimensionality and how level set methods
-    %     can be used to classify the critical point structure of $f$.
-    % }
+    \textbf{Time Marching Level Set Methods}
+        TODO: Explain how level set methods would allow us
+        to classify the critical point structure of $f$.
+        And their role in low-dimensional topology.
+        Explain curse of dimensionality and how level set methods
+        can be used to classify the critical point structure of $f$.
+        Chapter 7? Osher and Fedkiw, Level Set Methods and Dynamic
+        Implicit Surfaces, Springer, 2003.
     
-    % \subsection{Discontinuous Galerkin Methods / Transportation Methods}
-    % \textcolor{Red}{
-    %     High dimensional sparse grid methods
-    % }
+    \textbf{Discontinuous Galerkin Methods / Transportation Methods}
+        High dimensional sparse grid methods ... dependant on the sturcture
+        of $f$. Reference recent work in optimal transport theory.
 
+    \subsection{Machine Learning}
+        Universal nonlinear approximation theorems and PINNS/Deep Learning
+        methods. Have the luxury of economies of scale, however, they
+        still suffer from the curse of dimensionality. Ref recent work
+        on learning approximate level set flows in up to a dimension of 100.
+        \textbf{TODO:} Interesting to think about learning the critical
+        point structure of $f$ via a neural network in small dimensions..
+        Ecspecially trace data, to help us better understand why some
+        Quasi-Newton methods work better than others.
 
-    % \subsection{Machine Learning}
-    % \textcolor{Red}{
-    %     TODO: Explain how machine learning can be used to classify
-    %     the critical point structure of $f$.
-    %     Note, this is in combination with the level set methods
-    %     minimal surface methods approximation obtained via
-    %     dimensionality reduction.
-    %     \textbf{TODO:} Interesting to think about learning the critical
-    %     point structure of $f$ via a neural network in small dimensions..
-    %     Ecspecially trace data, to help us better understand why some
-    %     Quasi-Newton methods work better than others.
-    % }
-
-    % \subsection*{Motivation}
-    % \medskip
-    % \textcolor{Red}{
-    % We construct a test set of standard unconstrained optimization problems with orgins
-    % in the \emph{Constrained and Unconstrained Testing Environment} \cite{CUTE} (CUTE).
-    % The latest evolution of \cite{CUTE} is \emph{CUTEest} \cite{CUTEst}, which is implemented
-    % in native Julia code within the \texttt{OptimizationProblems.jl} \cite{OptimizationProblems}
-    % Julia package. The \texttt{OptimizationProblems.jl} package is a collection of
-    % optimization problems, we are interested in unconstrained problems that support
-    % automatic differentiation (AD) and allow for variable dimensions.   
-    % Our motivation is to design a procedure to classify the 
-    % \emph{critical-point} structure of the objective function $f$.\\
-    % The \texttt{OptimizationProblems.jl} Julia Langauge package exposes a collection
-    % of unconstrained minimization test problems written in native Julia code. 
-    % We select a subset of these problems that support Automatic Differentiation (AD)
-    % and allow for variable dimensions.
-    % }
-
-
-\newpage 
-
-% ------------------ PROBLEMS
-\section{Problem Selection and Analysis}
-    \label{sec:problems}
     \medskip
-    \todo{reference introduction section, use old markdown file as a guide for this section.}
+
+    % ------------------ PROBLEMS
+    \section{Problem Selection Criterion and Software Stack}
+        \label{sec:problems}
+        \medskip
 
 
-% ------------------ Numerical Experiments
-\section{Numerical Experiments}
-    \label{sec:experiments}
-    \medskip
-    \todo{reference introduction section, use old markdown file as a guide for this section.}
+    % ------------------ Numerical Experiments
+    \section{Numerical Experiments}
+        \label{sec:experiments}
+        \medskip
+        An uniformed sampling of the problem space $\Omega$ is performed
+        in Code Listings~\ref{lst:problem-sampling}.
 
-    \subsection{Experimental Setup}
-        \todo{reference introduction section, use old markdown file as a guide for this section.}
+    % ------------------ Conclusion
+    \section{Conclusion}
+        \label{sec:conclusion}
+        \medskip
+        \td{reference introduction section.}
+        \medskip
 
-    \subsection{Results and Discussion}
-        \todo{reference introduction section, use old markdown file as a guide for this section.}
+    % ------------------ APPENDIX
+    \newpage
+    \section{Apendix}
 
-% ------------------ Conclusion
-\section{Conclusion}
-    \label{sec:conclusion}
-    \medskip
-    \todo{reference introduction section, use old markdown file as a guide for this section.}
-
-    \subsection{Future Work}
-        \todo{reference introduction section, use old markdown file as a guide for this section.}
-
-
-% ------------------ APPENDIX
-\newpage
-\section{Apendix}
-
-% ------------------ BIBLIOGRAPHY
-\bibliographystyle{alpha}
-\bibliography{../references}
+    % ------------------ BIBLIOGRAPHY
+    \bibliographystyle{alpha}
+    \bibliography{../references}
 
 
 \subsection*{Notation}
-    We assume the following notation throughout\
+    
+    We assume the following notation throughout
+
     \begin{itemize}
         \label{notation}
         \item $\| \cdot \|$ denotes the usual $\ell_2$ norm for vectors $\vct{x}$ in $\mathbb{R}^n$ and $p = 2$ norm
@@ -711,6 +708,8 @@
 \subsection{Definitions}
     \label{sec:definitions}
     
+    \td{TODO: integrated into article as needed. At a minimum labled and references}
+
     % Lipschitz
     \begin{definition}
         $f$ is \textbf{$L$-Lipschitz} if $\forall ~ \vct{x_1},\vct{x_2}$
@@ -798,14 +797,11 @@
         \end{remark}
     \end{definition}
 
-
     \begin{definition}
-        \textcolor{blue}{
-            A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
-            differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
-            $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
-            The set of critical points of $f$ is denoted by $\text{crit}(f)$.
-        }
+        A point $\vct{x^*} \in \Omega$ is a \textbf{critical point} of $f$ if the
+        differentiable map $df_p: T_p \Omega \rightarrow \R$ is zero. (Here
+        $T_p \Omega$ is a tangent space of the Manifold $M$ at $p$.) 
+        The set of critical points of $f$ is denoted by $\text{crit}(f)$.
     \end{definition}
 
     \begin{definition}
@@ -839,24 +835,271 @@
 % ------------------ TEST PROBLEMS
 \subsection{Test Problems}
 
-\textbf{Generalized Rosenbrock function:}
-    \[
-    f(x) = \sum_{i=1}^{n-1} \left( c(x_{i+1} - x_i^2)^2 + (1 - x_i)^2 \right),
-    \]
-    \[
-    x_0 = [-1.2, 1, -1.2, 1, \dots, -1.2, 1], \quad c = 100.
-    \]
-
-
+\include{test-set}
 
 % ------------------- Code Listings
 \subsection{Code Listings}
 
-Below are the code listings for the experiments conducted in this report.
+The following code is available in the source code 
+repository~\hyperlink{repository}{https://github.com/danphenderson/numerical-optimization/blob/main/julia/saddles.jl}
+\lstset{basicstyle=\ttfamily, columns=fullflexible, keepspaces=true, breaklines=true}
 
 \lstset{language=julia}
-\begin{lstlisting}[language=julia, caption={Algorithm 16.5}]
-   # TODO: Add Code Listings
+\begin{lstlisting}[language=julia, caption={Algorithm 16.5}, label={lst:problem-sampling}]
+using CSV, DataFrames, OptimizationProblems, ADNLPModels, NLPModels
+using Random, Arpack, Optim, LineSearches
+using LinearAlgebra, Statistics, Distributions
+
+Random.seed!(1234)
+
+
+function get_test_set(n::Int=40)
+    """
+    List of unconstrained scalable ADNLPModels within OptimizationProblems.jl
+    """
+    # meta = OptimizationProblems.meta
+    # names_pb_vars = meta[
+    # (meta.variable_nvar .== true) .& (meta.ncon .== 0) .& (5 .<= meta.nvar .<= 100),
+    #     [:nvar, :name]
+    # ]
+    # test_set_generator = (
+    #     eval(Meta.parse("ADNLPProblems.$(pb[:name])(n=$n)")) for pb in eachrow(names_pb_vars)
+    # )
+    # return [p for p in test_set_generator]
+    return [
+	"genrose",
+	"arglina",
+	"freuroth",
+	"eg2",
+	"cosine",
+	"arglinb",
+	"arglinc",
+	"argtrig",
+	"arwhead",
+	"bdqrtic",
+	"brownal",
+	"broyden3d",
+	"chnrosnb_mod",
+	"cragglvy",
+	"cragglvy2",
+	"curly10",
+	"curly10",
+	"curly20",
+	"curly30",
+	"dixon3dq",
+	"dqdrtic",
+	"dqrtic",
+	"edensch",
+	"engval1",
+	"errinros_mod",
+	"extrosnb",
+	"fletcbv2",
+	"fletcbv3_mod",
+	"fletchcr",
+	"genhumps",
+	"genrose_nash",
+	"indef_mod",
+	"integreq",
+	"liarwhd",
+	"morebv",
+	"noncvxu2",
+	"noncvxun",
+	"nondia",
+	"nondquar",
+	"penalty1",
+	"penalty2",
+	"penalty3",
+	"power",
+	"quartc",
+	"sbrybnd",
+	"schmvett",
+	"scosine",
+	"sinquad",
+	"tointgss",
+	"tquartic",
+	"tridia",
+	"vardim"];
+end
+
+function get_problem(name::String, n::Int=40)
+    """
+    Get a problem by name
+    """
+    return eval(Meta.parse("ADNLPProblems.$(name)(n=$n)"))
+end
+
+function get_optim_options()
+    """
+    Using really stict conditions in low dimensions.
+
+    Tacking earlier in routine may be obpuscated by extra
+    iterations to obtain terminal convergence.
+    """
+    return Optim.Options(
+        iterations = 10000000,
+        g_abstol = eps(),       
+        store_trace = false, # Trace has a lot of useful stuff...
+        show_trace = false,
+        extended_trace = false,
+    )
+end
+
+function build_sample_box(problem::ADNLPModel)
+    """ 
+    Box centered around the minimizer
+    """
+    x0 = problem.meta.x0
+    scale_vector = 2 .* abs.(x0)
+    scale_vector[scale_vector .<= 1.0] .= 1.0
+    return scale_vector
+end
+
+function pull_sample(problem, box::Vector)
+    """
+    Pulls a sample uniformly from the box box surrounding x0
+    """
+    return rand.(Uniform.(-box, box))
+end
+
+function bfgs_linesearch()
+    """
+    Define the algorithm for the optimization
+    """
+    return BFGS(;
+        alphaguess = LineSearches.InitialStatic(),
+        linesearch = LineSearches.HagerZhang(),
+        initial_invH = x -> Matrix{eltype(x)}(I, length(x), length(x)),
+        manifold = Flat(),
+    )
+end
+
+function gradiant_descent_linesearch()
+    """
+    Defines the Quasi-Newton algorithm for the optimization.
+
+    P is our H. Currently P = \nabla^2 f(x) = I and we fallback
+    to gradient descent. 
+    
+    TODO: Accept P as an argument.
+    """
+    GradientDescent(; 
+        alphaguess = LineSearches.InitialHagerZhang(),
+        linesearch = LineSearches.HagerZhang(),
+        P = nothing,
+        precondprep = (P, x) -> nothing
+    )
+end
+
+function newton_trust_region()
+    """
+    Defines the Newton Trust Region algorithm for the optimization.
+    """
+    return NewtonTrustRegion(; initial_delta = 1.0,
+        delta_hat = 100.0,
+        eta = 0.1,
+        rho_lower = 0.25,
+        rho_upper = 0.75)
+end
+
+function eigs_hess(problem::ADNLPModel, x_cp::Vector)
+    H = hess(problem, x_cp)
+    λ, _ = eigs(H, nev=problem.meta.nvar - 1, maxiter=10000, which=:LM)
+    λmin, _ = eigs(H, nev=1, maxiter=10000, which=:SR)
+    push!(λ, pop!(λmin))
+    return λ
+end
+
+function run_sample(problem::ADNLPModel, sample::Vector)
+    """
+    Run the optimization algorithm on the problem
+    """
+    # Define objective and in-place gradient aligning with optim's interface.
+    x0 = sample
+    f(x) = obj(problem, x)
+    g!(G, x) = grad!(problem, x, G)
+    h!(H, x) = hess!(problem, x, H)
+
+    # Run the optimization
+    res = Optim.optimize(
+        f, 
+        g!, 
+        x0, 
+        bfgs_linesearch(),
+        get_optim_options()
+    )
+
+    # Reset problem counters.
+    NLPModels.reset!(problem)
+    return res
+end
+
+function run(problem)
+    box = build_sample_box(problem)
+    df = DataFrame(
+        "initial_objective" => Vector{Float64}(),
+        "final_objective" => Vector{Float64}(), 
+        "g_residual" => Vector{Float64}(),
+        "is_saddle" => Vector{Bool}(),
+        "pos_curvature_directions" => Vector{Int}(),
+        "neg_curvature_directions" => Vector{Int}(),
+        "zero_curvature_directions" => Vector{Int}(),
+        "max_lambda" => Vector{Float64}(),
+        "min_lambda" => Vector{Float64}(),
+        "median_lambda" => Vector{Float64}(),
+        "iterations" => Vector{Int}(),
+        "critical_point" => Vector{Vector{Float64}}(),  
+    )
+    for _ in 1:1000
+        sample = pull_sample(problem, box)
+        fx0 = obj(problem, sample)
+        try
+            res = run_sample(problem, sample)
+            if !res.f_converged
+                continue
+            end
+            λ = eigs_hess(problem, res.minimizer)
+            push!(df, (
+                initial_objective = fx0,
+                final_objective = res.minimum,
+                g_residual = res.g_residual,
+                is_saddle = λ[end] < 0,
+                pos_curvature_directions = sum(λ .> 0),
+                neg_curvature_directions = sum(λ .< 0),
+                zero_curvature_directions = sum(abs.(λ) .< 1e-12),
+                max_lambda = maximum(λ),
+                min_lambda = minimum(λ),
+                median_lambda = median(λ),
+                iterations = res.iterations,
+                critical_point = res.minimizer,
+            ))
+        catch
+            continue
+        end
+    end
+    return df
+end
+
+function unique_critical_points(df::DataFrame)
+    """
+    Compares the critical points locations to determine
+    the number of unique critical points.
+    """
+    critical_points = df.critical_point
+    critical_points = [round.(x, digits=4, base=2) for x in critical_points] # HACK d
+    return length(unique(critical_points))
+end
+
+function run_all()
+    test_set = get_test_set()
+    mkpath("public/saddles/dim-40")
+    for pb in test_set
+        problem = get_problem(pb, 40)
+        df = run(problem)
+        CSV.write("public/saddles/dim-40/$(pb).csv", df)
+        println("$(pb) has $(unique_critical_points(df)) unique critical points.")
+        println("   $(pb) total saddles $(sum(df.is_saddle))")
+    end
+end
 \end{lstlisting}
 \newpage
 
