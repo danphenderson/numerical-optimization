@@ -243,8 +243,17 @@
             Lipschitz on $\overline{\Omega}$, (i.e., $f$ is $\ell$-smooth). Consequently, the gradient 
             flow ODE \eqref{eq:gradient-flow} is well-posed for all interior initial conditions 
             $\vct{x}_0 \in \Omega$ for some finite time $t^*$.\
-
-            \td{TODO: Consider cleanest way to show that the flow lines are contained in the sublevel sets.}
+            \td{
+                TODO: 
+                - Consider cleanest way to introduce the geometric approach without getting to deep into the
+                topological / differential geometry of manifolds.
+                - The simplest approach to "well-posedness" seems to be restricting our initial condition to
+                the $\Omega$, as we assume for the input of a scheme, then show that the flow lines are contained in
+                the closure of the manifold $\overline{\Omega}$ by invoking the monotonicity of $f$ along the flow lines
+                and the fact that the image of $f(\overline{\Omega})$ is a compact convex (and path-connected?) set.
+                - Define level sets, sub level sets, and the signed distance function, then introduce the alternative 
+                continuous model describing the flow of geodesics. Incorporate aspects of the Morse Theory section.
+            }
         \end{proof}
 
         The following lemma characterizes the monotonicity of $f$ along the trajectory $\vct{\gamma}_{\vct{x_0}}$.
@@ -292,57 +301,76 @@
         \end{theorem}
 
         \td{
-            TODO: Complete the compact-domain formulation of the gradient flow dynamical system and demonstrate
+            TODO:
+            - Complete the compact-domain formulation of the gradient flow dynamical system and demonstrate
             that trajectories provably descend the objective and terminate at critical points inside $\overline{\Omega}$.
-        }\newpage
+            -For completeness, connect connect "critical points" to the "stationary points" of the gradient flow ODE and explain
+            the relationship between the two and their synonymous use in the literature.
+        }
+        \newpage
     
         
+
+
+
+
+
+
+
+
+
+
     % Intro - Optimization Schemes
     \subsection{Optimization Schemes}
         \label{intro:scheme}
         \medskip
 
-        We formally present a \emph{scheme} for solving \eqref{eq:unconstrained-opt} from some
-        starting point $\vct{x}_0 \in \Omega$.
+        We introduce a \emph{scheme} for solving a \emph{unconstrained optimization problem} based on the \emph{gradient flow}
+        dynamical system~\ref{def:grad-flow}.
 
-        % Scheme for solving unconstrained optimization problem
         \begin{definition}
-            A \textbf{scheme} for solving a general form \emph{unconstrained optimization problem}
-            is a one-parameter family of iteration operators:
-            $$
-                T_h : \R^n \rightarrow \R^n ~ \text{ where } ~\vct{x}_{k+1} = T_h(\vct{x}_k), ~ h \in (0, h_0]
-            $$
-            where $h_0$ is a constant and $h$ is the step size. The scheme is well-defined such that
-            the triplet $(\vct{x}_0, h, T_h)$ satisfy
+            An \textbf{optimization scheme} is a one-parameter family of iteration operators
+            $T_h : \overline{\Omega} \rightarrow \overline{\Omega}$, indexed by a step size 
+            $h \in (0, h_0]$ where $h_0$ is constant, that generates an iterative sequence using the rule
+            \begin{equation}
+                \label{eq:scheme}
+                \vct{x}_{k+1} = T_h(\vct{x}_k) \text{ for } k = 0, 1, 2, \ldots
+            \end{equation}
+            starting from an initial point $\vct{x}_0 \in \overline{\Omega}$. The scheme is well-defined such that the 
+            triplet $(\vct{x}_0, h, T_h)$ satisfy:
             \begin{enumerate}
-                \item \emph{Consistency}: $\forall \vct{x} \in K$ 
-                $$
-                    \left( T_h(\vct{x}) - \vct{x} \right) h^{-1} + \nabla f(\vct{x}) \rightarrow 0 \text{ as } h \rightarrow 0.
-                $$
-                implying that a single step approximates the continuous gradient flow w/ local error
-                $\mathcal{O}(h^{p+1})$ where $p$ is the global order of the scheme.
-                \item \emph{Stability}: $\exists~ c > 0, h_0 > 0 ~:~ \forall h \in (0, h_0]$,
-                and for all $\vct{x_1}, \vct{x_2}$ in a \emph{neighborhood $N \subset K$}
-                around an \emph{optimal solution} $\vct{x}^*$
-                $$
-                    \| T_h(\vct{x_1}) - T_h(\vct{x_2}) \| \leq (1 - ch) \| \vct{x_1} - \vct{x_2} \|
-                $$
-                where $c$ is a constant that depends on the scheme and $h$ is the step size.
-                Or, equivalently, the scheme is \emph{stable} if
-                $\exists~ c > 0, h_0 > 0 ~:~ \forall h \in (0, h_0]$,
-                and for all $\vct{x}$ in a \emph{neighborhood} about $\vct{x}^*$,
-                each step results in a strict decrease of by atleast a factor of $1 - ch$, i.e.,
-                $$
-                \| J(T_h(\vct{x})) \| \leq (1 - ch)
-                $$
-                where $J(T_h(\vct{x}))$ is the Jacobian of the scheme.
-                \item \emph{Convergence}: $\forall~ \vct{x_0} \in N \subset K$, s.t. $N$ is some neighborhood
-                around a strict minimizer $x^*$. and $\forall \eps > 0$ 
-                $$
-                    \exists~ K \in \mathbb{N} ~:~ \forall k ~ > K, \vct{x}_k \in N \text{ and } 
-                    d(\vct{x}_k, \vct{x}^*) \leq \eps.
-                $$
+                \item Consistency: the iteration operator $T_h$ is \emph{consistent} with the \eqref{eq:gradient-flow} ODE
+                    if the following limit holds:
+                    $$
+                        \frac{\left(T_h(\vct{x}) - \vct{x}\right)}{h} + \nabla f(\vct{x}) \rightarrow 0 \text{ as } h \rightarrow 0
+                        \text{ for all } \vct{x} \in \overline{\Omega},
+                    $$
+                    A consistent scheme approximates the continuous gradient flow w/ a local error of
+                    $\mathcal{O}(h^{p+1})$ committed at each step $k$; where $p$ is the global order.
+                    Consistent schemes reproduce the exact optimality condition in the limit as $h \to 0$.
+   
+                \item Stability: let $\vct{x}^*$ be a strict local minimizer of $f$. The operator $T_h$ is 
+                    \emph{stable}, or \emph{locally contractive}, at $\vct{x}^*$ if there exist constants 
+                    $c>0$ and $h_0 \le \frac{2}{L}$, and an open neighborhood $N\subset \overline{\Omega}$ 
+                    with $x^*\in N$, such that
+                    $$
+                        \| T_h(x) - T_h(y) \| \le \bigl(1 - c h \bigr)\, \| x - y \| \quad\forall~x,y\in N,~\forall~ h \in (0, h_0].
+                    $$
+                    Equivalently, by the mean-value theorem, the Jacobian of $T_h$ must satisfy the following uniform spectral-radius bound
+                    $$
+                        \rho\!\bigl(D~T_h(\vct{x}^*)\bigr) ~ \le ~ 1 - ch \quad \forall~ h \in(0,h_0]
+                    $$
+                    where $\rho(\cdot)$ denotes the spectral radius.  In either form, the contraction factor
+                    $1 - c h$ lies strictly inside $(0, 1)$, so that the iterates produced by the scheme remain 
+                    in $N$ and satisfy
+                    $$
+                        \|\vct{x}_{k+1} - \vct{x}^*\| \le (1  - ch) \|\vct{x}_k - \vct{x}^*\|,
+                    $$
+                    implying convergence whenever $h\in(0,h_0]$ is fixed.
             \end{enumerate}
+            If a scheme is order-$p$ consistent and stable in a neighborhood of a strict local minimizer,
+            then consistent of order $p$ and stable within a neighborhood of a strict local minimizer, then 
+            $\vct{x_k} \rightarrow \vct{x}^*$ as $k\to\infty$ and the scheme is said to be \emph{convergent}.
         \end{definition}
 
         The following iteration operators are examples of schemes for solving
@@ -362,6 +390,78 @@
             $\nabla^2 f \succeq \mu I \succeq 0$.
             \item \textbf{TODO} Make this a table
         \end{itemize}
+
+        \medskip
+
+        \todo{
+            TODO: numerics disscusion, introduce the $\eps$ order stationary points.
+        }
+
+        \subsubsection*{Analysis of Gradient Descent (GD)}
+
+            \remeber{}{
+                TODO: use the following notes and provide an example of the analysis of GD.
+                Relate the step choices below to the Wolfe conditions, cite Nocedal and Wright.
+            }
+
+            \begin{theorem} Assume $f$ is $\ell$-smooth and $\alpha$-strongly convex and that $\eps > 0$.
+                If we iterate the gradient descent \emph{scheme} with $h = h_0 = \frac{1}{\ell}$ held fixed, i.e.,
+                $$
+                    T_{h}(\vct{x}_k) = \vct{x}_k - \frac{1}{\ell} \nabla f(\vct{x}_k),
+                $$
+                then $d(x_k, x^*) \leq \eps$ for all $k > K$ where $K$ is chosen to satisfy
+                $$
+                    \frac{2\ell}{\alpha} \cdot \log\left(\frac{d(x_0, x^*)}{\eps}\right) \leq K.
+                $$
+            \end{theorem}
+
+            \begin{remark}
+                Under \emph{$\ell$-smoothness} and \emph{$\alpha$-strong convexity} assumptions
+                in a neighborhood $\Omega$ about $\vct{x}^*$, it may be shown directly from 
+                the above theorem above that the \emph{GD scheme} converges linearly to 
+                the optimal solution $\vct{x}^*$ at a rate of
+                $$
+                    \frac{d(\vct{x}_k, \vct{x}^*)}{d(\vct{x}_{k-1}, \vct{x}^*)} \leq 1 - \frac{\alpha}{\ell}
+                $$
+                where $d(\vct{x}_k, \vct{x}^*)$ is the distance between the current iterate $\vct{x}_k$ and 
+                the optimal solution $\vct{x}^*$. The convergence rate is linear in the sense that the 
+                distance between the current iterate and the optimal solution decreases by a factor of 
+                $1 - \frac{\alpha}{\ell}$ at each iteration. (Ref: TODO)
+            \end{remark}
+
+            \begin{remark}
+                Convergence to a first-order stationary point trivally
+                implies convergence to a $\eps$-first-order stationary point.
+                Similarly, convergence to a second-order stationary point trivially
+                implies convergence to a $\eps$-second-order stationary point.
+            \end{remark}
+
+            \medskip
+
+            \begin{theorem}
+                Assume $f$ is $\ell$-smooth, then for any $\eps > 0$, if we iterate
+                the GD scheme with $h = h_0 = \frac{1}{\ell}$ held fixed starting from
+                $\vct{x}_0 \in \Omega$ where $\Omega$ is a neighborhood of $x^*$,
+                then the number of iterations $K$ required to achieve the stopping condition
+                $\| \nabla f(\vct{x}_k) \| \leq \eps$ is at most
+                $$
+                    \left\lceil \frac{\ell}{\eps^{2}} \, (f(\vct{x}_0) - f(\vct{x}^*)) \right\rceil
+                $$
+            \end{theorem}
+
+            \begin{remark}
+                \textbf{TODO and Questions}
+                \begin{itemize}
+                    \item State how we use theorems in when performing analysis from
+                    the results of our experimewts.
+                    \item What is the relationship between $\ell$ and $\alpha$?
+                    \item In practice do we know how to compute $\ell$ and $\alpha$?
+                    \item What is the relationship between $\ell$ and $\rho$?
+                    \item In practice do we know how to compute $\ell$ and $\rho$?
+                \end{itemize}
+            \end{remark}
+
+        \medskip
     
 
     % Intro - Benchmark Problems

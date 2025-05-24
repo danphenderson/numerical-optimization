@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 MAY 2025 13:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  23 MAY 2025 16:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1010,20 +1010,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--185
 [3]
 Package hyperref Info: bookmark level for unknown definition defaults to 0 on input line 206.
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on input line 232.
-Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 252.
 
 
 [4]
+Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input line 261.
 
-[5
 pdfTeX warning (ext4): destination with the same identifier (name{equation.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.297         }\newpage
-                       ]
+<to be read again> 
+                   \relax 
+l.263             \begin{equation}
+                                  \label{eq:monotone-flow-lines}
+pdfTeX warning (ext4): destination with the same identifier (name{equation.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.263             \begin{equation}
+                                  \label{eq:monotone-flow-lines}
+pdfTeX warning (ext4): destination with the same identifier (name{equation.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.263             \begin{equation}
+                                  \label{eq:monotone-flow-lines}
+pdfTeX warning (ext4): destination with the same identifier (name{equation.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.263             \begin{equation}
+                                  \label{eq:monotone-flow-lines}
+
+[5]
 
 [6]
-Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 445.
+Package hyperref Info: bookmark level for unknown remark defaults to 0 on input line 419.
 
 
 [7]
@@ -1033,12 +1049,14 @@ Package hyperref Info: bookmark level for unknown remark defaults to 0 on input 
 [9]
 
 [10]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 720.
+
+[11]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 820.
 
 
-[11] (./report.bbl)
+[12] (./report.bbl)
 
-[12] (./report.aux)
+[13] (./report.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1051,18 +1069,18 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 4B2DA75D4EF86ACF2D492F6F938809E8;1533.
  ) 
 Here is how much of TeX's memory you used:
- 29581 strings out of 473190
- 557730 string characters out of 5715801
- 1040446 words of memory out of 5000000
- 52191 multiletter control sequences out of 15000+600000
+ 29605 strings out of 473190
+ 558203 string characters out of 5715801
+ 1044668 words of memory out of 5000000
+ 52206 multiletter control sequences out of 15000+600000
  575261 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 122i,13n,124p,621b,1252s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 122i,13n,124p,932b,1252s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmbsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on report.pdf (12 pages, 380285 bytes).
+Output written on report.pdf (13 pages, 388964 bytes).
 PDF statistics:
- 396 PDF objects out of 1000 (max. 8388607)
- 312 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
+ 411 PDF objects out of 1000 (max. 8388607)
+ 326 compressed objects within 4 object streams
+ 102 named destinations out of 1000 (max. 500000)
  101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

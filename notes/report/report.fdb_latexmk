@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex report"] 1748033668.34609 "report.aux" "report.bbl" "report" 1748033669.61051 0
+["bibtex report"] 1748041371.23728 "report.aux" "report.bbl" "report" 1748041372.53784 0
   "../references.bib" 1747868113.0139 1328 4758e7edf58657701de8ce796eab9107 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/base/alpha.bst" 1292289607 23907 a5f93555796fb564b924339521f10a7c ""
-  "report.aux" 1748033669.31038 8607 945c2adaaec6ca2058ad3012098f71e6 "pdflatex"
+  "report.aux" 1748041372.23144 10758 597a85cb66d23940881c30a8a0d52277 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1748033668.46474 "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" "report.pdf" "report" 1748033669.61065 0
-  "../preamble.tex" 1747997467.93838 6469 78212950f465e22e8721e9a38f644d9a ""
-  "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" 1748033667.99289 35760 cfe0922ea2d14f3bd2fb504fc4a9ba4f ""
+["pdflatex"] 1748041371.34015 "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" "report.pdf" "report" 1748041372.53798 0
+  "../preamble.tex" 1748033953.49998 6469 78212950f465e22e8721e9a38f644d9a ""
+  "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" 1748041371.74925 41182 6233b31a80799850e1b819acf11e1763 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -269,11 +269,11 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1742577759 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "report.aux" 1748033669.31038 8607 945c2adaaec6ca2058ad3012098f71e6 "pdflatex"
-  "report.bbl" 1748033668.46105 489 858767527ab912f7e239a29b5be59807 "bibtex report"
-  "report.out" 1748033669.31145 1533 4b2da75d4ef86acf2d492f6f938809e8 "pdflatex"
-  "report.tex" 1748033667.99289 35760 cfe0922ea2d14f3bd2fb504fc4a9ba4f ""
-  "report.toc" 1748033669.31167 880 a52fa9c01bd958711b20d02b13437155 "pdflatex"
+  "report.aux" 1748041372.23144 10758 597a85cb66d23940881c30a8a0d52277 "pdflatex"
+  "report.bbl" 1748041371.33654 489 858767527ab912f7e239a29b5be59807 "bibtex report"
+  "report.out" 1748041372.23258 1533 4b2da75d4ef86acf2d492f6f938809e8 "pdflatex"
+  "report.tex" 1748041371.74925 41182 6233b31a80799850e1b819acf11e1763 ""
+  "report.toc" 1748041372.23277 881 bd4a2d005cb51f7caaa828b349194d72 "pdflatex"
   (generated)
   "report.aux"
   "report.log"
