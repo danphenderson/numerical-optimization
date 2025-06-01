@@ -1,17 +1,38 @@
-\begin{thebibliography}{NW06}
+\begin{thebibliography}{1}
 
-\bibitem[KS09]{Kok2009}
+\bibitem{bongartz1995cute}
+Ingrid Bongartz, Andrew~R. Conn, Nick I.~M. Gould, and Philippe~L. Toint.
+\newblock Cute: Constrained and unconstrained testing environment.
+\newblock {\em ACM Transactions on Mathematical Software}, 21(1):123--160, 1995.
+
+\bibitem{gould2015cutest}
+N.~I.~M. Gould, D.~Orban, and Ph.~L. Toint.
+\newblock {CUTEst}: a constrained and unconstrained testing environment with safe threads for mathematical optimization.
+\newblock {\em Computational Optimization and Applications}, 60(3):545--557, 2015.
+
+\bibitem{HallMorseNotes}
+Stephen~F. Hall.
+\newblock Morse theory.
+\newblock \url{https://stanford.edu/~sfh/morse.pdf}, 2011.
+\newblock Lecture notes, Stanford University.
+
+\bibitem{Kok2009}
 Schalk Kok and Carl Sandrock.
 \newblock Locating and characterizing the stationary points of the extended rosenbrock function.
 \newblock {\em Evolutionary Computation}, 17(3):437--453, 2009.
 \newblock © 2009 by the Massachusetts Institute of Technology.
 
-\bibitem[MOS]{OptimizationProblems}
+\bibitem{lee2017first}
+Jason~D. Lee, Ioannis Panageas, Georgios Piliouras, Max Simchowitz, Michael~I. Jordan, and Benjamin Recht.
+\newblock First-order methods almost always avoid saddle points.
+\newblock {\em arXiv preprint arXiv:1710.07406}, 2017.
+
+\bibitem{OptimizationProblems}
 Tangi Migot, Dominique Orban, and Abel~Soares Siqueira.
 \newblock Optimizationproblems.jl: A collection of optimization problems in julia.
 \newblock If you use this software, please cite it using the metadata from this file.
 
-\bibitem[NW06]{NocedalAndWright06}
+\bibitem{NocedalAndWright06}
 Jorge Nocedal and Stephen~J. Wright.
 \newblock {\em Numerical Optimization}.
 \newblock Springer, New York, NY, USA, second edition, 2006.

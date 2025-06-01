@@ -16,15 +16,23 @@
 \usepackage{caption}
 \usepackage{witharrows}
 \usepackage{graphicx}
-\usepackage{xcolor}
 \usepackage{amsopn}
 \usepackage{fancybox}
 \usepackage{todonotes}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{mdframed}      % boxed theorems
 \usepackage{thmtools}      % couples well with mdframed
+\usepackage{booktabs}
+\usepackage{url}        % already loaded by hyperref, but harmless
+\usepackage{capt-of}    % if you prefer \captionof
+\usepackage{amsfonts} % for \mathbb
+\usepackage{bm} 
+
+
 \captionsetup[lstlisting]{font={small}, labelfont={bf}, labelsep=colon}
 \renewcommand{\lstlistingname}{Code}
+
+
 % Define a theorem style that uses mdframed for the box
 \declaretheoremstyle[
   headfont=\normalfont\bfseries,
@@ -49,7 +57,7 @@
 
 
 % Page setup
-\geometry{letterpaper, margin=1in}
+\geometry{letterpaper, margin=0.5in}
 \setlength{\parindent}{0pt}
 \linespread{1.25}
 \renewcommand{\arraystretch}{1.25} % Adjust as needed
@@ -99,6 +107,9 @@
 \DeclareMathOperator{\detm}{det} % Determinant
 \DeclareMathOperator{\rank}{rank} % Rank
 \DeclareMathOperator{\nullity}{nullity} % Nullity
+\DeclareMathOperator{\ind}{index}
+\DeclareMathOperator{\crit}{crit}
+\newcommand{\OmegaBar}{\overline{\Omega}}
 \newcommand{\blockmat}[2]{\begin{pmatrix} #1 & #2 \end{pmatrix}} % Block matrix with 2 columns
 \newcommand{\augmatr}[2]{\left(\begin{array}{#1|#1}#2\end{array}\right)}
 \newcommand{\bmfour}[4]{\left( \begin{array}{c|c} #1 & #2 \\ \hline #3 & #4 \end{array} \right)} % 2x2 block matrix with lines
