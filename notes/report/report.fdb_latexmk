@@ -1,16 +1,16 @@
 # Fdb version 4
-["bibtex report"] 1748763225.67113 "report.aux" "report.bbl" "report" 1748763227.30775 0
+["bibtex report"] 1748988298.69453 "report.aux" "report.bbl" "report" 1748988707.75805 0
   "../references.bib" 1748756425.66293 4022 a3e0071f985d13f74794718eda0c2fb2 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "report.aux" 1748763226.91589 12864 cb7f7d4bfaf1416a909b30be7eacfeb3 "pdflatex"
-  "test-set.aux" 1748763226.83008 1312 12c4c67e8521aa5f5406233f03e6f183 "pdflatex"
+  "report.aux" 1748988707.40318 12864 6fdea4325b7291843b3dd9608d5d93ee "pdflatex"
+  "test-set.aux" 1748988707.28287 1312 12c4c67e8521aa5f5406233f03e6f183 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1748763225.78865 "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" "report.pdf" "report" 1748763227.30803 0
+["pdflatex"] 1748988706.19615 "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" "report.pdf" "report" 1748988707.75823 0
   "../preamble.tex" 1748762455.3155 6758 38361ecbb71b5f4d989c352e1b0a985c ""
-  "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" 1748763223.99969 57188 24f7e9a02af9860e74446fb11924da9e ""
+  "/Users/johndoe/Desktop/numerical-optimization/notes/report/report.tex" 1748988705.97304 57137 364d0d2bc15f95d51aafaea6701a03ce ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -273,12 +273,12 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1742577759 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "report.aux" 1748763226.91589 12864 cb7f7d4bfaf1416a909b30be7eacfeb3 "pdflatex"
-  "report.bbl" 1748763225.78487 1697 93b5845f9c8a6425d3f03ef3ed4e3290 "bibtex report"
-  "report.out" 1748763226.91759 1844 9e7e43b6e5484528182260cda415edea "pdflatex"
-  "report.tex" 1748763223.99969 57188 24f7e9a02af9860e74446fb11924da9e ""
-  "report.toc" 1748763226.91786 1094 329df2a4b78be9fa4e90ff04281ab8f7 "pdflatex"
-  "test-set.aux" 1748763226.83008 1312 12c4c67e8521aa5f5406233f03e6f183 "pdflatex"
+  "report.aux" 1748988707.40318 12864 6fdea4325b7291843b3dd9608d5d93ee "pdflatex"
+  "report.bbl" 1748988298.80229 1697 93b5845f9c8a6425d3f03ef3ed4e3290 "bibtex report"
+  "report.out" 1748988707.4049 1844 9e7e43b6e5484528182260cda415edea "pdflatex"
+  "report.tex" 1748988705.97304 57137 364d0d2bc15f95d51aafaea6701a03ce ""
+  "report.toc" 1748988707.40513 1094 329df2a4b78be9fa4e90ff04281ab8f7 "pdflatex"
+  "test-set.aux" 1748988707.28287 1312 12c4c67e8521aa5f5406233f03e6f183 "pdflatex"
   "test-set.tex" 1748049009.69307 9896 7ebbe1f20e23fcfe948d0218c04822a2 ""
   (generated)
   "report.aux"

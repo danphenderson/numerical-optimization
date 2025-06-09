@@ -35,8 +35,7 @@
     the Hessian in a neighborhood of a strict local minimizer.  Numerical
     experiments confirm that while some test functions exhibit strong
     local convexity, others contain narrow regions of non-convexity that
-    can slow down standard schemes, e.g. (TODO: add "tacking" ref. here and complete
-    results statement) 
+    can slow down standard schemes.
     \noindent\textbf{Keywords:} benchmarking, numerical optimization, stationary points, saddle points,
 \end{abstract}
 
@@ -505,15 +504,16 @@
         
         \begin{assumption}
             \label{assumption:analytic}
-            Suppose $f \in C^\infty(\OmegaBar; \R)$ is analytic on $\OmegaBar$
+            Suppose $f$ is analytic on $\OmegaBar$
         \end{assumption}
 
         \medskip
 
-        The assumption that $f$ is analytic implies that the Taylor series expansion of $f$ converges
-        to $f$ in a neighborhood of every point in $\OmegaBar$. As we aim to show, assumption~\ref{assumption:analytic}
+        The assumption that $f$ is analytic implies that $f \in C^\infty(\OmegaBar; \R)$.
+        Taylor series expansion of $f$ converges to $f$ in a neighborhood of every point 
+        in $\OmegaBar$. As we aim to show, assumption~\ref{assumption:analytic}
         leads to the strict saddle point condition that all critical points of $f$ are isolated.
-        This is a key property of Morse theory, which allows us to classify the critical points of $f$
+        This is a key property of Morse functions, which are smooth functions with non-degenerate critical points.
 
         \medskip
         
